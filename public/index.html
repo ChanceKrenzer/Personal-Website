@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══════════════════════════════════════════
+     SEO META TAGS
+     TODO: Update the URL below to your actual deployed domain.
+     These tags tell Google, social platforms, and AI crawlers who you are.
+═══════════════════════════════════════════ -->
+<title>Chance Krenzer — Aerospace & Mechanical Engineer | CWRU</title>
+<meta name="description" content="Aerospace and Mechanical Engineering student at Case Western Reserve University. Specialized in drone design, CAD (SolidWorks), ANSYS simulation, embedded systems, and defense applications.">
+<meta name="keywords" content="Chance Krenzer, aerospace engineer, mechanical engineer, CWRU, Case Western Reserve, drone design, SolidWorks, ANSYS, quadcopter, robotics, defense engineering">
+<meta name="author" content="Chance Krenzer">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://chancekrenzer.com/">
+
+<!-- Open Graph (Facebook, LinkedIn previews) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chancekrenzer.com/">
+<meta property="og:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
+<meta property="og:description" content="CWRU engineering student building drones, robots, and defense hardware. SolidWorks, ANSYS, embedded systems.">
+<!-- TODO: Create a 1200×630px preview image and update the path below -->
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og-preview.jpg">
+<meta property="og:site_name" content="Chance Krenzer Portfolio">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
+<meta name="twitter:description" content="CWRU engineering student building drones, robots, and defense hardware.">
+<meta name="twitter:image" content="https://chancekrenzer.com/Assets/og-preview.jpg">
+
+<!-- Structured Data (JSON-LD) — helps Google understand who you are -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Chance Krenzer",
+  "url": "https://chancekrenzer.com",
+  "email": "chance.krenzer@gmail.com",
+  "telephone": "+18182687308",
+  "jobTitle": "Aerospace & Mechanical Engineering Student",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "Case Western Reserve University"
+  },
+  "sameAs": [
+    "https://linkedin.com/in/chance-krenzer",
+    "https://github.com/ChanceKrenzer"
+  ],
+  "description": "Aerospace and Mechanical Engineering student at CWRU specializing in drone design, CAD, simulation, and defense applications."
+}
+</script>
+
+<!-- EmailJS SDK — powers the contact form -->
+<!-- TODO: Sign up at https://emailjs.com (free), then replace YOUR_PUBLIC_KEY below -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init({ publicKey: 'U2F9KA8NrbCgg3Rku' });
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════
+     DESIGN TOKENS
+  ═══════════════════════════════════════════ */
+  :root {
+    --bg:        #060606;
+    --surface:   #111111;
+    --border:    #252525;
+    --border-hi: #383838;
+    --text:      #f5f5f5;
+    --muted:     #c0c0c0;
+    --faint:     #777777;
+    --white:     #ffffff;
+    --glow:      #c8e6ff;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+
+    --radius: 4px;
+    --transition: 200ms ease;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESET
+  ═══════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button { cursor: pointer; background: none; border: none; color: inherit; font: inherit; }
+
+  /* ═══════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 52px;
+    height: 66px;
+    background: rgba(6,6,6,0.93);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo img { height: 46px; width: auto; display: block; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  /* ═══════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════ */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 66px 52px 0;
+    overflow: hidden;
+  }
+
+  /* ── Animated dot grid canvas ── */
+  #dot-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    animation: gridFade 1.8s ease 0.3s forwards;
+  }
+  @keyframes gridFade { to { opacity: 1; } }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.6s ease 0.5s forwards;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(58px, 8vw, 104px);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.7s ease 0.65s forwards;
+  }
+  .hero-name span { display: block; color: var(--faint); font-weight: 300; }
+  .hero-bio {
+    margin-top: 40px;
+    max-width: 580px;
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--muted);
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.7s ease 0.85s forwards;
+  }
+  .hero-bio strong { color: var(--text); font-weight: 500; }
+  .hero-cta {
+    margin-top: 48px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1s forwards;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    font-size: 13px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    transition: all var(--transition);
+  }
+  .btn-primary { background: var(--white); color: var(--bg); }
+  .btn-primary:hover { background: #d8d8d8; }
+  .btn-ghost { border: 1px solid var(--border-hi); color: var(--muted); }
+  .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ═══════════════════════════════════════════
+     SECTION SHELL
+  ═══════════════════════════════════════════ */
+  section {
+    padding: 116px 52px;
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 4vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+  .section-subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    margin-bottom: 68px;
+    max-width: 540px;
+    line-height: 1.75;
+  }
+  .divider {
+    max-width: 1160px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .kw {
+    color: var(--white);
+    font-weight: 500;
+    text-shadow: 0 0 22px rgba(200, 230, 255, 0.72);
+  }
+
+  /* ═══════════════════════════════════════════
+     SKILLS
+  ═══════════════════════════════════════════ */
+  #skills .skills-list { display: flex; flex-direction: column; gap: 56px; }
+  .skill-block {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 36px;
+    align-items: start;
+  }
+  .skill-block-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding-top: 4px;
+  }
+  .skill-icon { width: 52px; height: 52px; object-fit: contain; opacity: 0.9; }
+  .skill-icon-placeholder {
+    width: 52px; height: 52px;
+    border: 1px solid var(--border-hi);
+    border-radius: 6px;
+    background: var(--surface);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+  .skill-block-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .skill-block-body { font-size: 17px; color: var(--muted); line-height: 1.85; }
+  .skill-block-divider { height: 1px; background: var(--border); }
+
+  /* ═══════════════════════════════════════════
+     PROJECTS
+  ═══════════════════════════════════════════ */
+  #projects .projects-list { display: flex; flex-direction: column; gap: 108px; }
+  .project-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    cursor: pointer;
+  }
+  .project-row:nth-child(odd)  .project-image-col { order: 1; }
+  .project-row:nth-child(odd)  .project-text-col  { order: 2; }
+  .project-row:nth-child(even) .project-text-col  { order: 1; }
+  .project-row:nth-child(even) .project-image-col { order: 2; }
+  .project-img-wrap {
+    aspect-ratio: 4/3;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color var(--transition);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-row:hover .project-img-wrap { border-color: var(--border-hi); }
+  .project-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .project-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .project-img-placeholder span {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-align: center;
+  }
+  .project-img-placeholder svg { opacity: 0.2; }
+  .project-text-col { display: flex; flex-direction: column; gap: 16px; }
+  .project-type-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .project-row-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--white);
+    line-height: 1.15;
+    transition: color var(--transition);
+  }
+  .project-row:hover .project-row-title { color: var(--glow); }
+  .project-row-desc { font-size: 17px; color: var(--muted); line-height: 1.8; }
+  .project-tech-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .tech-pill {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border-hi);
+    border-radius: 2px;
+    color: var(--faint);
+  }
+  .project-open-hint {
+    font-size: 14px;
+    color: var(--faint);
+    margin-top: 4px;
+    transition: color var(--transition);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .project-row:hover .project-open-hint { color: var(--muted); }
+
+  /* ═══════════════════════════════════════════
+     GALLERY
+  ═══════════════════════════════════════════ */
+  #gallery .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .gallery-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.82));
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+  }
+  .gallery-placeholder-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    text-align: center;
+    padding: 16px;
+    line-height: 1.8;
+  }
+
+  /* ═══════════════════════════════════════════
+     CONTACT
+  ═══════════════════════════════════════════ */
+  #contact .contact-links { display: flex; flex-direction: column; }
+  .contact-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+    transition: all var(--transition);
+    text-decoration: none;
+    gap: 16px;
+  }
+  .contact-link-item:first-child { border-top: 1px solid var(--border); }
+  .contact-link-item:hover .contact-link-name  { color: var(--white); }
+  .contact-link-item:hover .contact-link-arrow { color: var(--white); transform: translate(3px, -3px); }
+  .contact-link-left { display: flex; align-items: baseline; gap: 24px; }
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    min-width: 72px;
+  }
+  .contact-link-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: -0.01em;
+    transition: color var(--transition);
+  }
+  .contact-link-arrow { color: var(--faint); font-size: 18px; transition: all var(--transition); flex-shrink: 0; }
+
+  /* ═══════════════════════════════════════════
+     PROJECT MODAL
+  ═══════════════════════════════════════════ */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(8px);
+    padding: 52px 24px;
+    overflow-y: auto;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    width: 100%;
+    max-width: 740px;
+    background: var(--surface);
+    border: 1px solid var(--border-hi);
+    border-radius: 8px;
+    overflow: hidden;
+    animation: modalIn 0.22s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .modal-header {
+    padding: 36px 40px 30px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .modal-title { font-family: var(--font-display); font-size: 26px; font-weight: 700; letter-spacing: -0.03em; color: var(--white); }
+  .modal-type { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-top: 7px; }
+  .modal-close { font-size: 22px; color: var(--muted); transition: color var(--transition); flex-shrink: 0; padding: 4px; line-height: 1; }
+  .modal-close:hover { color: var(--white); }
+  .modal-body { padding: 36px 40px; display: flex; flex-direction: column; gap: 32px; }
+  .modal-section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-bottom: 12px; }
+  .modal-img-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .modal-img-placeholder { font-family: var(--font-mono); font-size: 11px; color: var(--faint); letter-spacing: 0.08em; }
+  .modal-desc { font-size: 17px; color: var(--muted); line-height: 1.85; }
+  .modal-footer { padding: 24px 40px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ═══════════════════════════════════════════
+     CONTACT FORM MODAL
+  ═══════════════════════════════════════════ */
+  #contact-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(10px);
+    padding: 52px 24px;
+    overflow-y: auto;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  #contact-modal-backdrop.open { display: flex; }
+  .contact-modal {
+    width: 100%;
+    max-width: 560px;
+    background: var(--surface);
+    border: 1px solid var(--border-hi);
+    border-radius: 8px;
+    overflow: hidden;
+    animation: modalIn 0.22s ease;
+  }
+  .contact-modal-header {
+    padding: 32px 36px 26px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .contact-modal-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--white); }
+  .contact-modal-sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-top: 6px; }
+  .contact-modal-body { padding: 32px 36px; display: flex; flex-direction: column; gap: 22px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .form-input, .form-textarea {
+    background: var(--bg);
+    border: 1px solid var(--border-hi);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color var(--transition);
+    width: 100%;
+    resize: none;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--faint); }
+  .form-input:focus, .form-textarea:focus { border-color: var(--muted); }
+  .form-textarea { min-height: 130px; }
+
+  .contact-modal-footer {
+    padding: 20px 36px 28px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-send {
+    background: var(--white);
+    color: var(--bg);
+    padding: 13px 28px;
+    font-size: 13px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .btn-send:hover { background: #d8d8d8; }
+  .btn-send:disabled { background: var(--border-hi); color: var(--faint); cursor: not-allowed; }
+  .form-status {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--faint);
+    transition: color var(--transition);
+  }
+  .form-status.success { color: #6bcf7f; }
+  .form-status.error   { color: #f87171; }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--faint); }
+
+  /* ═══════════════════════════════════════════
+     SCROLL REVEAL
+  ═══════════════════════════════════════════ */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════ */
+  @media (max-width: 760px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 11px; }
+    section { padding: 76px 20px; }
+    #hero { padding: 66px 20px 0; }
+    .skill-block { grid-template-columns: 1fr; gap: 16px; }
+    .project-row { grid-template-columns: 1fr; gap: 28px; }
+    .project-row:nth-child(odd) .project-image-col,
+    .project-row:nth-child(odd) .project-text-col,
+    .project-row:nth-child(even) .project-text-col,
+    .project-row:nth-child(even) .project-image-col { order: unset; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
+    .modal-header, .modal-body, .modal-footer { padding-left: 20px; padding-right: 20px; }
+    .contact-modal-header, .contact-modal-body, .contact-modal-footer { padding-left: 20px; padding-right: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, #dot-canvas { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav>
+  <a class="nav-logo" href="#hero" aria-label="Chance Krenzer">
+    <img src="Assets/Logo.png" alt="Chance Krenzer">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="Assets/Resume.pdf" target="_blank" rel="noopener">Resume ↗</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <!-- Animated dot grid canvas -->
+  <canvas id="dot-canvas"></canvas>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Aerospace &amp; Mechanical Engineering · CWRU Class of 2029</p>
+    <h1 class="hero-name">
+      Chance
+      <span>Krenzer</span>
+    </h1>
+
+    <p class="hero-bio">
+      I am a <strong>Mechanical and Aerospace Engineering</strong> student at <strong>Case Western Reserve University '29</strong>. I am interested in <strong>drones</strong>, <strong>planes</strong> and <strong>robotics</strong> and their applications in Defense. I work with <strong>SolidWorks</strong> and <strong>ANSYS</strong> for CAD and simulations for my projects. I also compete on the <strong>Varsity Track and Field</strong> team, mainly running the 800m.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <!-- This button now opens the contact form popup instead of mailto -->
+      <button class="btn btn-ghost" id="open-contact-modal">Get in Touch</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     SKILLS
+══════════════════════════════════════════ -->
+<section id="skills">
+  <p class="section-label reveal">Skills</p>
+  <h2 class="section-title reveal">What I Know</h2>
+
+  <div class="skills-list">
+
+    <div class="skill-block reveal">
+      <div class="skill-block-left">
+        <div class="skill-icon-placeholder">CAD<br>ICON</div>
+        <p class="skill-block-name">Computer-Aided Design</p>
+      </div>
+      <p class="skill-block-body">
+        My primary design environment is <span class="kw">SolidWorks</span>, where I work almost exclusively in <span class="kw">parametric modeling</span> — building parts driven by global variables so designs can be rapidly iterated without breaking assemblies. I've designed everything from drone frames and motor mounts to payload release mechanisms and precision fabrication jigs. I also use <span class="kw">PDM</span> for version control on team projects and am comfortable working across <span class="kw">part, assembly, and drawing</span> workflows.
+      </p>
+    </div>
+
+    <div class="skill-block-divider"></div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-left">
+        <div class="skill-icon-placeholder">SIM<br>ICON</div>
+        <p class="skill-block-name">Simulation &amp; Analysis</p>
+      </div>
+      <p class="skill-block-body">
+        I use simulation as a core part of my design loop, not an afterthought. In <span class="kw">SolidWorks FEA</span> I validate structural designs under real load cases — for example, verifying drone arms can withstand motor-induced forces while keeping weight minimal. For aerodynamics, I've run <span class="kw">SolidWorks Flow Simulation</span> to iterate on frame geometry for drag reduction on high-speed builds. I've also worked with <span class="kw">ANSYS</span> on
+        [your ANSYS context here].
+      </p>
+    </div>
+
+    <div class="skill-block-divider"></div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-left">
+        <div class="skill-icon-placeholder">FAB<br>ICON</div>
+        <p class="skill-block-name">Fabrication &amp; Manufacturing</p>
+      </div>
+      <p class="skill-block-body">
+        I'm comfortable taking a design from a digital file to a finished physical part. I regularly use a <span class="kw">CNC waterjet</span> for precision metal cutting, a <span class="kw">mill and lathe</span> for turned and milled aluminum components, and both <span class="kw">MIG and TIG welding</span> for structural joints. On the additive side, I use <span class="kw">FDM 3D printing</span> (primarily PETG and PLA) for structural prototypes and final parts. I also work with <span class="kw">laser cutters</span> and do fine-pitch <span class="kw">soldering</span> for electronics work.
+      </p>
+    </div>
+
+    <div class="skill-block-divider"></div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-left">
+        <div class="skill-icon-placeholder">CODE<br>ICON</div>
+        <p class="skill-block-name">Programming</p>
+      </div>
+      <p class="skill-block-body">
+        I genuinely enjoy coding — there's something satisfying about writing logic that talks directly to hardware. My strongest languages are <span class="kw">Python</span> for scripting, data processing, and automation; <span class="kw">Java</span> for structured, object-oriented work; and <span class="kw">MATLAB</span> for simulation and numerical analysis. I've also written low-level <span class="kw">C</span> for embedded systems and flight control software in <span class="kw">Arduino</span>, including a hand-tuned <span class="kw">PID controller</span> for a custom drone.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════════ -->
+<section id="projects">
+  <p class="section-label reveal">Projects</p>
+  <h2 class="section-title reveal">What I've Built</h2>
+  <p class="section-subtitle reveal">Hardware, software, and everything in between. Click any project to open the full breakdown.</p>
+
+  <div class="projects-list">
+
+    <div class="project-row reveal"
+      data-name="High Speed Quadcopter"
+      data-type="Aerospace / CAD"
+      data-date="2025 – Present"
+      data-github=""
+      data-img=""
+      data-desc="TODO: Write your description here. Wrap key words like @@SolidWorks@@, @@CFD@@, or @@ANSYS@@ with @@ to make them glow in the popup.">
+      <div class="project-image-col">
+        <div class="project-img-wrap">
+          <div class="project-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Add image<br>images/high-speed-quad.jpg</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-text-col">
+        <p class="project-type-tag">Aerospace / CAD · 2025 – Present</p>
+        <h3 class="project-row-title">High Speed Quadcopter</h3>
+        <p class="project-row-desc">Led a team building toward 500 kph. Parametric frame design, CFD flow simulation for drag optimization, ANSYS structural analysis, and full electronics BoM management.</p>
+        <div class="project-tech-row">
+          <span class="tech-pill">SolidWorks</span>
+          <span class="tech-pill">CFD</span>
+          <span class="tech-pill">ANSYS</span>
+          <span class="tech-pill">Parametric CAD</span>
+          <span class="tech-pill">Team Lead</span>
+        </div>
+        <p class="project-open-hint">↗ Click for full details</p>
+      </div>
+    </div>
+
+    <div class="project-row reveal"
+      data-name="VTOL Payload Mechanism"
+      data-type="Mechanical Design"
+      data-date="2025 — 1st Place Championship"
+      data-github=""
+      data-img=""
+      data-desc="TODO: Write your description here. Wrap key words like @@payload mechanism@@, @@CNC waterjet@@, or @@carbon fiber@@ with @@ to make them glow.">
+      <div class="project-image-col">
+        <div class="project-img-wrap">
+          <div class="project-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Add image<br>images/vtol-payload.jpg</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-text-col">
+        <p class="project-type-tag">Mechanical Design · 2025 — 1st Place</p>
+        <h3 class="project-row-title">VTOL Payload Mechanism</h3>
+        <p class="project-row-desc">Autonomous payload pickup &amp; release designed for alignment-error tolerance. Precision epoxy jig for carbon fiber arm assembly. First place championship finish.</p>
+        <div class="project-tech-row">
+          <span class="tech-pill">CNC Waterjet</span>
+          <span class="tech-pill">SolidWorks</span>
+          <span class="tech-pill">Carbon Fiber</span>
+          <span class="tech-pill">X8 Config</span>
+        </div>
+        <p class="project-open-hint">↗ Click for full details</p>
+      </div>
+    </div>
+
+    <div class="project-row reveal"
+      data-name="ESP32 Drone"
+      data-type="Hardware / Embedded"
+      data-date="Dec 2025 – Feb 2026"
+      data-github=""
+      data-img=""
+      data-desc="TODO: Write your description here. Wrap key words like @@PID controller@@, @@ESP32@@, or @@SolidWorks FEA@@ with @@ to make them glow.">
+      <div class="project-image-col">
+        <div class="project-img-wrap">
+          <div class="project-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Add image<br>images/esp32-drone.jpg</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-text-col">
+        <p class="project-type-tag">Hardware / Embedded · Dec 2025 – Feb 2026</p>
+        <h3 class="project-row-title">ESP32 Drone</h3>
+        <p class="project-row-desc">Custom drone from scratch — motor driver PCB, IMU, 3D-printed PETG frame with FEA validation, and a hand-tuned PID flight controller written in Arduino.</p>
+        <div class="project-tech-row">
+          <span class="tech-pill">ESP32</span>
+          <span class="tech-pill">Arduino</span>
+          <span class="tech-pill">PID Control</span>
+          <span class="tech-pill">SolidWorks</span>
+          <span class="tech-pill">PCB Design</span>
+        </div>
+        <p class="project-open-hint">↗ Click for full details</p>
+      </div>
+    </div>
+
+    <div class="project-row reveal"
+      data-name="EMG Robotic Hand"
+      data-type="Robotics / Biomechanics"
+      data-date="Nov 2025 — 4th Place"
+      data-github=""
+      data-img=""
+      data-desc="TODO: Write your description here. Wrap key words like @@EMG@@, @@SolidWorks@@, or @@wireless@@ with @@ to make them glow.">
+      <div class="project-image-col">
+        <div class="project-img-wrap">
+          <div class="project-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Add image<br>images/robotic-hand.jpg</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-text-col">
+        <p class="project-type-tag">Robotics / Biomechanics · Nov 2025 — 4th Place</p>
+        <h3 class="project-row-title">EMG Robotic Hand</h3>
+        <p class="project-row-desc">Wireless EMG-controlled robotic hand built at CWRU Hackathon. Custom TX/RX firmware, SolidWorks fingers with mechanical mates, 4th place finish.</p>
+        <div class="project-tech-row">
+          <span class="tech-pill">EMG Sensing</span>
+          <span class="tech-pill">Wireless RF</span>
+          <span class="tech-pill">SolidWorks</span>
+          <span class="tech-pill">Servo Control</span>
+        </div>
+        <p class="project-open-hint">↗ Click for full details</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════ -->
+<section id="gallery">
+  <p class="section-label reveal">Gallery</p>
+  <h2 class="section-title reveal">Photos</h2>
+  <p class="section-subtitle reveal">The build process, competition moments, and finished hardware.</p>
+
+  <div class="gallery-grid reveal">
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo1.jpg</p>
+    </div>
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo2.jpg</p>
+    </div>
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo3.jpg</p>
+    </div>
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo4.jpg</p>
+    </div>
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo5.jpg</p>
+    </div>
+    <div class="gallery-item">
+      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo6.jpg</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-label reveal">Contact</p>
+  <h2 class="section-title reveal">Get in Touch</h2>
+  <p class="section-subtitle reveal">Open to internships, research collaborations, and interesting build projects.</p>
+
+  <div class="contact-links reveal">
+    <!-- This item now opens the form popup -->
+    <button class="contact-link-item" style="width:100%; text-align:left; background:none; border:none; cursor:pointer;" id="open-contact-modal-2">
+      <div class="contact-link-left">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-name">Send me a message</span>
+      </div>
+      <span class="contact-link-arrow">↗</span>
+    </button>
+
+    <a class="contact-link-item" href="https://linkedin.com/in/chance-krenzer" target="_blank" rel="noopener">
+      <div class="contact-link-left">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-name">linkedin.com/in/chance-krenzer</span>
+      </div>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+
+    <a class="contact-link-item" href="https://github.com/ChanceKrenzer" target="_blank" rel="noopener">
+      <div class="contact-link-left">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-name">github.com/ChanceKrenzer</span>
+      </div>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+
+    <a class="contact-link-item" href="tel:8182687308">
+      <div class="contact-link-left">
+        <span class="contact-link-label">Phone</span>
+        <span class="contact-link-name">818-268-7308</span>
+      </div>
+      <span class="contact-link-arrow">↗</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Chance Krenzer</p>
+  <p>Aerospace &amp; Mechanical Engineering · CWRU</p>
+</footer>
+
+<!-- ══════════════════════════════════════════
+     PROJECT DETAIL MODAL
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <p class="modal-type" id="modal-type"></p>
+        <h2 class="modal-title" id="modal-title"></h2>
+      </div>
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <p class="modal-section-label">Photo</p>
+        <div class="modal-img-wrap" id="modal-img-wrap">
+          <p class="modal-img-placeholder" id="modal-img-placeholder">No image added yet</p>
+        </div>
+      </div>
+      <div>
+        <p class="modal-section-label">Description</p>
+        <p class="modal-desc" id="modal-desc"></p>
+      </div>
+    </div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CONTACT FORM MODAL
+     EMAILJS SETUP INSTRUCTIONS:
+     1. Go to https://emailjs.com and create a free account
+     2. Add an Email Service (Gmail works great) — note your Service ID
+     3. Create an Email Template. Use these template variables:
+          {{from_name}}   — sender's name (not used here, but good to have)
+          {{reply_to}}    — sender's email address
+          {{message}}     — the message body
+        Set the "To email" in the template to: chance.krenzer@gmail.com
+     4. Note your Template ID
+     5. Go to Account > API Keys and copy your Public Key
+     6. Replace the three placeholders below with your real IDs
+══════════════════════════════════════════ -->
+<div id="contact-modal-backdrop" role="dialog" aria-modal="true" aria-label="Contact form">
+  <div class="contact-modal">
+    <div class="contact-modal-header">
+      <div>
+        <h2 class="contact-modal-title">Send a Message</h2>
+        <p class="contact-modal-sub">Goes directly to chance.krenzer@gmail.com</p>
+      </div>
+      <button class="modal-close" id="contact-modal-close" aria-label="Close">✕</button>
+    </div>
+    <div class="contact-modal-body">
+      <div class="form-group">
+        <label class="form-label" for="contact-email">Your email</label>
+        <input class="form-input" type="email" id="contact-email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="contact-message">Message</label>
+        <textarea class="form-textarea" id="contact-message" placeholder="What's on your mind?" required></textarea>
+      </div>
+    </div>
+    <div class="contact-modal-footer">
+      <button class="btn-send" id="contact-send-btn">Send ↗</button>
+      <span class="form-status" id="form-status"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+  /* ── Scroll reveal ───────────────────────── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Keyword highlighting ─────────────────── */
+  function highlightDesc(raw) {
+    return raw.replace(/@@(.+?)@@/g, '<span class="kw">$1</span>');
+  }
+
+  /* ══════════════════════════════════════════
+     ANIMATED DOT GRID — flowing perlin-style waves
+     Uses two slowly drifting sine waves layered
+     together so the brightness shifts feel organic
+     and continuous rather than discrete ripple
+     events. Mouse adds a subtle local glow.
+     Click still spawns a gentle ripple.
+  ══════════════════════════════════════════ */
+  (function() {
+    const canvas  = document.getElementById('dot-canvas');
+    const ctx     = canvas.getContext('2d');
+    const SPACING = 32;
+    const BASE_R  = 0.85;
+    const MAX_R   = 2.0;
+
+    let W, H, cols, rows;
+    let mouse  = { x: -9999, y: -9999 };
+    let clicks = [];   // { cx, cy, age }   — user click ripples
+    let t      = 0;   // global time counter
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+      cols = Math.ceil(W / SPACING) + 2;
+      rows = Math.ceil(H / SPACING) + 2;
+    }
+
+    /* Smooth value noise: two overlapping sine planes moving at different
+       angles and speeds so the pattern never repeats visibly. */
+    function flowBrightness(x, y, time) {
+      // Wave A — slow diagonal drift, large scale
+      const a = Math.sin((x * 0.009 + y * 0.006) + time * 0.28) * 0.5 + 0.5;
+      // Wave B — slightly different angle, medium scale
+      const b = Math.sin((x * 0.013 - y * 0.010) + time * 0.19 + 1.4) * 0.5 + 0.5;
+      // Wave C — fast tiny ripple for life
+      const c = Math.sin((x * 0.022 + y * 0.018) + time * 0.41 + 2.8) * 0.5 + 0.5;
+      // Blend: A drives the big shape, B + C add texture
+      return a * 0.55 + b * 0.30 + c * 0.15;
+    }
+
+    function draw() {
+      t += 0.016; // ~1 second per 60 frames
+      ctx.clearRect(0, 0, W, H);
+
+      // Age out click ripples
+      clicks = clicks.filter(r => r.age < 1.0);
+      clicks.forEach(r => r.age += 0.008); // ~125 frames to fade
+
+      for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+          const x = c * SPACING;
+          const y = r * SPACING;
+
+          // Base flowing brightness — range roughly 0.04–0.13
+          const flow = flowBrightness(x, y, t);
+          let brightness = 0.04 + flow * 0.09;
+          let extraR = flow * (MAX_R - BASE_R) * 0.35;
+
+          // Mouse proximity glow — subtle, soft falloff
+          const mdx = x - mouse.x, mdy = y - mouse.y;
+          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (mDist < 100) {
+            const mt = (1 - mDist / 100);
+            const soft = mt * mt; // ease in
+            brightness += soft * 0.18;
+            extraR     += soft * 0.8;
+          }
+
+          // Click ripples — a single outward ring, slow and dim
+          clicks.forEach(rip => {
+            const dx   = x - rip.cx, dy = y - rip.cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const front = rip.age * 600;          // px travelled
+            const delta = Math.abs(dist - front);
+            const sigma = 50;
+            const wave  = Math.exp(-(delta * delta) / (2 * sigma * sigma));
+            const decay = Math.max(0, 1 - rip.age);
+            brightness += wave * decay * 0.16;
+            extraR     += wave * decay * 0.7;
+          });
+
+          brightness = Math.min(brightness, 0.30);
+          const dotR = BASE_R + Math.min(extraR, MAX_R - BASE_R);
+
+          ctx.beginPath();
+          ctx.arc(x, y, dotR, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${brightness})`;
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    const heroEl = document.getElementById('hero');
+    heroEl.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    heroEl.addEventListener('mouseleave', () => {
+      mouse.x = -9999; mouse.y = -9999;
+    });
+    heroEl.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      clicks.push({ cx: e.clientX - rect.left, cy: e.clientY - rect.top, age: 0 });
+    });
+
+    draw();
+  })();
+
+  /* ── Project modal ───────────────────────── */
+  const backdrop   = document.getElementById('modal');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(card) {
+    const name   = card.dataset.name   || '';
+    const type   = card.dataset.type   || '';
+    const date   = card.dataset.date   || '';
+    const desc   = card.dataset.desc   || '';
+    const github = card.dataset.github || '';
+    const img    = card.dataset.img    || '';
+
+    document.getElementById('modal-title').textContent = name;
+    document.getElementById('modal-type').textContent  = `${type}  ·  ${date}`;
+    document.getElementById('modal-desc').innerHTML = highlightDesc(desc);
+
+    const imgWrap = document.getElementById('modal-img-wrap');
+    const imgPH   = document.getElementById('modal-img-placeholder');
+    const existing = imgWrap.querySelector('img');
+    if (existing) existing.remove();
+    if (img) {
+      const el = document.createElement('img');
+      el.src = img; el.alt = name;
+      imgPH.style.display = 'none';
+      imgWrap.appendChild(el);
+    } else {
+      imgPH.style.display = '';
+      imgPH.textContent = 'No image yet — set data-img="images/yourfile.jpg" on the project row.';
+    }
+
+    const footerEl = document.getElementById('modal-footer');
+    footerEl.innerHTML = github
+      ? `<a href="${github}" target="_blank" rel="noopener" class="btn btn-ghost">View on GitHub ↗</a>`
+      : `<p style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;">Repository private or not yet published.</p>`;
+
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.project-row').forEach(card => {
+    card.addEventListener('click', () => openModal(card));
+  });
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+  /* ── Contact form modal ──────────────────── */
+  const contactBackdrop = document.getElementById('contact-modal-backdrop');
+
+  function openContactModal() {
+    contactBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('contact-email').focus();
+    // Reset status
+    document.getElementById('form-status').textContent = '';
+    document.getElementById('form-status').className = 'form-status';
+    document.getElementById('contact-send-btn').disabled = false;
+  }
+
+  function closeContactModal() {
+    contactBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('open-contact-modal').addEventListener('click', openContactModal);
+  document.getElementById('open-contact-modal-2').addEventListener('click', openContactModal);
+  document.getElementById('contact-modal-close').addEventListener('click', closeContactModal);
+  contactBackdrop.addEventListener('click', e => { if (e.target === contactBackdrop) closeContactModal(); });
+
+  /* ── Close either modal with Escape ───────── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeContactModal();
+    }
+  });
+
+  /* ── EmailJS send ────────────────────────── */
+  document.getElementById('contact-send-btn').addEventListener('click', function() {
+    const emailEl   = document.getElementById('contact-email');
+    const messageEl = document.getElementById('contact-message');
+    const statusEl  = document.getElementById('form-status');
+    const sendBtn   = this;
+
+    const email   = emailEl.value.trim();
+    const message = messageEl.value.trim();
+
+    if (!email || !message) {
+      statusEl.textContent = 'Please fill in both fields.';
+      statusEl.className = 'form-status error';
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      statusEl.textContent = 'Please enter a valid email address.';
+      statusEl.className = 'form-status error';
+      return;
+    }
+
+    sendBtn.disabled = true;
+    statusEl.textContent = 'Sending…';
+    statusEl.className = 'form-status';
+
+    emailjs.send('service_la6g9cm', 'template_iqdnhsk', {
+      reply_to: email,
+      message:  message,
+    })
+    .then(function() {
+      statusEl.textContent = 'Message sent! I\'ll get back to you soon.';
+      statusEl.className = 'form-status success';
+      emailEl.value = '';
+      messageEl.value = '';
+      setTimeout(closeContactModal, 2200);
+    }, function(error) {
+      console.error('EmailJS error:', error);
+      statusEl.textContent = 'Failed to send — try emailing directly.';
+      statusEl.className = 'form-status error';
+      sendBtn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>

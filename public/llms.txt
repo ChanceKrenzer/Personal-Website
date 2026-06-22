@@ -1,0 +1,39 @@
+# Chance Krenzer — Portfolio
+
+> Aerospace and Mechanical Engineering student at Case Western Reserve University (Class of 2029), focused on drone design, robotics, embedded systems, and defense applications.
+
+## About
+
+Chance Krenzer is an undergraduate Aerospace and Mechanical Engineering student at Case Western Reserve University in Cleveland, Ohio, graduating in 2029. He competes on the CWRU Varsity Track and Field team (800m). His primary engineering interests are unmanned aerial vehicles (UAVs/drones), fixed-wing aircraft, robotics, and applications in defense technology.
+
+## Skills
+
+- **CAD**: SolidWorks (parametric modeling, assemblies, drawings, PDM)
+- **Simulation**: SolidWorks FEA, SolidWorks Flow Simulation (CFD), ANSYS structural analysis
+- **Fabrication**: CNC waterjet, mill, lathe, MIG/TIG welding, FDM 3D printing (PETG/PLA), laser cutting, fine-pitch soldering
+- **Programming**: Python, Java, MATLAB, C (embedded), Arduino (PID controllers, flight control)
+
+## Projects
+
+### High Speed Quadcopter (2025 – Present)
+Team lead on a project targeting 500 kph quadcopter performance. Responsibilities include parametric frame design in SolidWorks, CFD flow simulation for aerodynamic drag reduction, ANSYS structural analysis, and full electronics bill-of-materials management.
+
+### VTOL Payload Mechanism (2025 — 1st Place Championship)
+Designed an autonomous payload pickup and release mechanism for a VTOL aircraft. Engineered for tolerance to alignment errors. Built a precision epoxy jig for carbon fiber arm assembly. Won first place at championship.
+
+### ESP32 Drone (Dec 2025 – Feb 2026)
+Built a custom quadcopter from scratch: designed a motor driver PCB, integrated an IMU, designed a 3D-printed PETG frame validated with FEA in SolidWorks, and wrote a hand-tuned PID flight controller in Arduino running on an ESP32 microcontroller.
+
+### EMG Robotic Hand (Nov 2025 — 4th Place, CWRU Hackathon)
+Wireless EMG (electromyography)-controlled robotic hand built at a CWRU Hackathon. Wrote custom transmitter/receiver firmware for wireless control. Designed finger linkages in SolidWorks with mechanical mates. Placed 4th overall.
+
+## Contact
+
+- Email: chance.krenzer@gmail.com
+- LinkedIn: https://linkedin.com/in/chance-krenzer
+- GitHub: https://github.com/ChanceKrenzer
+- Phone: 818-268-7308
+
+## Optional Resources
+
+- [Resume](https://chancekrenzer.com/Assets/Resume.pdf)
