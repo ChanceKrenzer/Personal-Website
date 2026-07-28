@@ -10,8 +10,8 @@
      These tags tell Google, social platforms, and AI crawlers who you are.
 ═══════════════════════════════════════════ -->
 <title>Chance Krenzer — Aerospace & Mechanical Engineer | CWRU</title>
-<meta name="description" content="Aerospace and Mechanical Engineering student at Case Western Reserve University. Specialized in drone design, CAD (SolidWorks), ANSYS simulation, embedded systems, and defense applications.">
-<meta name="keywords" content="Chance Krenzer, aerospace engineer, mechanical engineer, CWRU, Case Western Reserve, drone design, SolidWorks, ANSYS, quadcopter, robotics, defense engineering">
+<meta name="description" content="Aerospace and Mechanical Engineering student at Case Western Reserve University. Builds custom drones and robotics from scratch — SolidWorks CAD, ANSYS simulation, ESP32 embedded firmware, PID flight control, and EMG-controlled robotics.">
+<meta name="keywords" content="Chance Krenzer, aerospace engineer, mechanical engineer, CWRU, Case Western Reserve, drone design, SolidWorks, ANSYS, quadcopter, robotics, defense engineering, ESP32, Arduino, PID controller, embedded systems, EMG, electromyography, wireless firmware, flight controller">
 <meta name="author" content="Chance Krenzer">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://chancekrenzer.com/">
@@ -24,16 +24,18 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chancekrenzer.com/">
 <meta property="og:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
-<meta property="og:description" content="CWRU engineering student building drones, robots, and defense hardware. SolidWorks, ANSYS, embedded systems.">
-<!-- TODO: Create a 1200×630px preview image and update the path below -->
-<meta property="og:image" content="https://chancekrenzer.com/Assets/SitePhoto.png">
+<meta property="og:description" content="CWRU engineering student building drones, robots, and defense hardware from scratch. SolidWorks, ANSYS, ESP32 firmware, PID flight control.">
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Chance Krenzer — Aerospace & Mechanical Engineering, CWRU">
 <meta property="og:site_name" content="Chance Krenzer Portfolio">
 
 <!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
-<meta name="twitter:description" content="CWRU engineering student building drones, robots, and defense hardware.">
-<meta name="twitter:image" content="https://chancekrenzer.com/Assets/SitePhoto.png">
+<meta name="twitter:description" content="CWRU engineering student building drones, robots, and defense hardware from scratch.">
+<meta name="twitter:image" content="https://chancekrenzer.com/Assets/og-image.png">
 
 <!-- Structured Data (JSON-LD) — helps Google understand who you are -->
 <script type="application/ld+json">
@@ -42,6 +44,7 @@
   "@type": "Person",
   "name": "Chance Krenzer",
   "url": "https://chancekrenzer.com",
+  "image": "https://chancekrenzer.com/Assets/SitePhoto.png",
   "email": "chance.krenzer@gmail.com",
   "telephone": "+18182687308",
   "jobTitle": "Aerospace & Mechanical Engineering Student",
@@ -49,11 +52,32 @@
     "@type": "CollegeOrUniversity",
     "name": "Case Western Reserve University"
   },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Case Western Reserve University"
+  },
   "sameAs": [
     "https://linkedin.com/in/chance-krenzer",
     "https://github.com/ChanceKrenzer"
   ],
-  "description": "Aerospace and Mechanical Engineering student at CWRU specializing in drone design, CAD, simulation, and defense applications."
+  "description": "Aerospace and Mechanical Engineering student at CWRU specializing in drone design, CAD, simulation, and defense applications.",
+  "knowsAbout": [
+    "Aerospace Engineering",
+    "Mechanical Engineering",
+    "Drone Design",
+    "SolidWorks",
+    "ANSYS Simulation",
+    "Computational Fluid Dynamics",
+    "Finite Element Analysis",
+    "Embedded Systems",
+    "ESP32",
+    "Arduino",
+    "PID Control",
+    "Electromyography (EMG)",
+    "Robotics",
+    "CNC Machining",
+    "3D Printing"
+  ]
 }
 </script>
 
@@ -384,6 +408,14 @@
     gap: 60px;
     align-items: center;
     cursor: pointer;
+    padding: 20px;
+    margin: -20px;
+    border-radius: 18px;
+    transition: background-color var(--transition), box-shadow var(--transition);
+  }
+  .project-row:hover {
+    background: rgba(255,255,255,0.035);
+    box-shadow: 0 0 0 1px var(--border);
   }
   .project-row:nth-child(odd)  .project-image-col { order: 1; }
   .project-row:nth-child(odd)  .project-text-col  { order: 2; }
@@ -395,7 +427,8 @@
     overflow: hidden;
     display: flex; align-items: center; justify-content: center;
   }
-  .project-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .project-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; transition: transform 320ms ease; }
+  .project-row:hover .project-img-wrap img { transform: scale(1.035); }
   .project-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .project-img-placeholder span {
     font-family: var(--font-mono);
@@ -427,12 +460,16 @@
   .project-row-desc { font-size: 17px; color: var(--muted); line-height: 1.8; }
   .project-open-hint {
     font-size: 14px;
-    color: var(--faint);
+    font-weight: 600;
+    color: var(--muted);
     margin-top: 4px;
-    transition: color var(--transition);
+    transition: color var(--transition), transform var(--transition);
+    transform-origin: left center;
     display: flex; align-items: center; gap: 6px;
   }
-  .project-row:hover .project-open-hint { color: var(--muted); }
+  .project-open-hint .arrow { display: inline-block; transition: transform var(--transition); }
+  .project-row:hover .project-open-hint { color: var(--glow); transform: scale(1.08); }
+  .project-row:hover .project-open-hint .arrow { transform: translate(2px, -2px); }
   .project-case-buttons {
     display: flex;
     gap: 10px;
@@ -694,12 +731,21 @@
   .case-img-single--wide img {
     max-height: 340px;
   }
+  .case-img-single video {
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: block;
+  }
 
   /* Crops in on gifs/video that have black letterbox bars baked into the
      footage — fills a 16:9 box and crops the top/bottom instead of showing
      the full frame with the bars. Tweak the aspect-ratio below if a given
      clip needs a tighter or looser crop. */
-  img.case-gif {
+  img.case-gif, video.case-gif {
     width: 100%;
     aspect-ratio: 4 / 3;
     max-height: none;
@@ -914,7 +960,7 @@
       </h1>
 
       <p class="hero-bio">
-        I am a <strong>Mechanical and Aerospace Engineering</strong> student at <strong>Case Western Reserve University '29</strong>. I am interested in <strong>drones</strong>, <strong>planes</strong> and <strong>robotics</strong> and their applications in Defense. I work with <strong>SolidWorks</strong> and <strong>ANSYS</strong> for CAD and simulations for my projects. I also compete on the <strong>Varsity Track and Field</strong> and Cross Country teams.
+        <strong>Mechanical and Aerospace Engineering</strong> student at <strong>Case Western Reserve University</strong> (Class of 2029) with a strong interest in <strong>drones</strong>, <strong>aircraft</strong>, <strong>robotics</strong>, and their defense applications. Experienced with <strong>SolidWorks</strong> and <strong>ANSYS</strong> for CAD, simulation, and engineering analysis through personal and team projects. <strong>Varsity Track &amp; Field</strong> and Cross Country athlete with a proven commitment to teamwork, discipline, and continuous improvement.
       </p>
 
       <div class="hero-cta">
@@ -965,7 +1011,7 @@
         <p class="skill-block-name">Computer-Aided Design</p>
       </div>
       <p class="skill-block-body">
-        My primary design environment is <span class="kw">SolidWorks</span>, where I work almost use <span class="kw">parametric modeling</span>. I build parts driven by global variables so designs can be rapidly iterated without breaking assemblies. I've designed everything from drone frames and motor mounts to payload release mechanisms and precision fabrication jigs. I also use <span class="kw">SolidWorks PDM</span> for version control on team projects and am comfortable working across <span class="kw">part, assembly, and drawing</span> workflows. I genuinely enjoy CAD and will continue to improve and learn more about it.
+        My primary design environment is <span class="kw">SolidWorks</span>, where I develop <span class="kw">parametric models</span> with a focus on efficiency, precision, and manufacturability. I build parts driven by global variables so designs can be rapidly iterated without compromising assembly integrity. I've designed everything from drone frames and motor mounts to payload release mechanisms and precision fabrication jigs. I also use <span class="kw">SolidWorks PDM</span> for version control on team projects and am comfortable working across <span class="kw">part, assembly, and drawing</span> workflows. I genuinely enjoy mechanical design and continuously seek opportunities to expand my CAD skills and engineering knowledge.
       </p>
     </div>
 
@@ -977,7 +1023,7 @@
         <p class="skill-block-name">Simulation &amp; Analysis</p>
       </div>
         <p class="skill-block-body">
-          For simulations, I use <span class="kw">SolidWorks</span> and <span class="kw">ANSYS</span>. In SolidWorks, I use <span class="kw">FEA</span> to validate designs under real load cases like verifying that drones arms can withstand the <span class="kw">motor-induced forces</span> while still keeping weight down. For aerodynamics, I use <span class="kw">SolidWorks Flow Simulations</span> to parametrically test different geometrics to reduce drag in high speed builds. I've recently learned to use <span class="kw">ANSYS</span> to run <span class="kw">aerodynamic </span> and <span class="kw">heat transfer simulations</span>.
+          For engineering simulations, I primarily use <span class="kw">SolidWorks Simulation</span> and <span class="kw">ANSYS</span>. In SolidWorks, I perform <span class="kw">finite element analysis (FEA)</span> to validate designs under realistic load cases, such as verifying that drone arms can withstand <span class="kw">motor-induced forces</span> while minimizing weight. For aerodynamics, I use <span class="kw">SolidWorks Flow Simulation</span> to evaluate and optimize different geometries, reducing drag in high-speed designs through iterative analysis. I have also expanded my simulation capabilities by learning <span class="kw">ANSYS</span> for advanced <span class="kw">aerodynamic</span> and <span class="kw">heat transfer analysis</span>.
         </p>
     </div>
 
@@ -989,7 +1035,7 @@
         <p class="skill-block-name">Fabrication &amp; Manufacturing</p>
       </div>
       <p class="skill-block-body">
-        I really enjoy fabrication and machining. I've worked with a <span class="kw">CNC waterjet</span> for precision metal cutting, the <span class="kw">mill and lathe</span> for steel and aluminum components, and both <span class="kw">MIG and TIG welding</span> for structural joints. On the additive side, I use <span class="kw">FDM 3D printing</span> for cheap prototypes as well as final parts like my high speed drone shell. I've also worked with <span class="kw">CNC laser cutters</span>, <span class="kw">plastic thermoforming</span>, and have also machined some small <span class="kw">CNC milled parts</span>.
+        I really enjoy fabrication and machining and take every opportunity to build and test my designs. I've worked with <span class="kw">CNC waterjets</span> for precision metal cutting, <span class="kw">mills and lathes</span> to machine steel and aluminum components, and both <span class="kw">MIG and TIG welding</span> for structural assemblies. On the additive manufacturing side, I use <span class="kw">FDM 3D printing</span> for rapid prototyping as well as functional end-use parts, including the shell for my high-speed drone. I've also worked with <span class="kw">CNC laser cutters</span>, <span class="kw">plastic thermoforming</span>, and <span class="kw">CNC milling</span> to manufacture precision components.
       </p>
     </div>
 
@@ -1001,7 +1047,7 @@
         <p class="skill-block-name">Electronics &amp; Programming</p>
       </div>
       <p class="skill-block-body">
-        I've been coding for 5+ years and have always had fun with it. My strongest languages are <span class="kw">Python</span>, <span class="kw">Java</span>, and <span class="kw">MATLAB</span>, and I've written flight control software in <span class="kw">Arduino</span>, including a hand-tuned <span class="kw">PID controller</span> for one of my drones. On the electronics side I have experience <span class="kw">sourcing components</span>, fine-pitch <span class="kw">soldering</span>, and some <span class="kw">custom PCB design</span> experience. I understand most languages and I am comfortable picking up new languages and frameworks as projects demand.
+        I've been coding for 5+ years and have always enjoyed using software to solve engineering problems. My strongest languages are <span class="kw">Python</span>, <span class="kw">Java</span>, and <span class="kw">MATLAB</span>, and I have written flight control software in <span class="kw">Arduino</span>, including a hand-tuned <span class="kw">PID controller</span> for one of my drones. On the electronics side, I have experience <span class="kw">sourcing components</span>, performing fine-pitch <span class="kw">soldering</span>, and developing <span class="kw">custom PCB designs</span>. I have a strong understanding of programming fundamentals and am comfortable learning new languages, frameworks, and tools as project requirements evolve.
       </p>
     </div>
 
@@ -1037,7 +1083,7 @@
         <p class="project-type-tag">Aerospace / CAD · 2025 – Present</p>
         <h3 class="project-row-title">High Speed Quadcopter</h3>
         <p class="project-row-desc">Led a team of engineers to build the fastest quadcopter possible. Parametric NACA-profile shell and arm design, CFD-driven drag and stability optimization, FEA-validated material selection, and full electronics BoM management.</p>
-        <p class="project-open-hint">↗ Click for full details</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
       </div>
     </div>
 
@@ -1045,7 +1091,7 @@
       data-modal="vtol"
       data-name="CWRU VTOL"
       data-type="Mechanical Design"
-      data-date="2025 — 1st Place Championship"
+      data-date="2026 — 3rd Place Championship"
       data-github=""
       data-img="Assets/image-vtollogo.png"
       data-desc="TODO: Write your description here. Wrap key words like @@payload mechanism@@, @@CNC waterjet@@, or @@carbon fiber@@ with @@ to make them glow.">
@@ -1055,59 +1101,56 @@
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Mechanical Design · 2025 — 1st Place</p>
+        <p class="project-type-tag">Mechanical Design · 2026 — 3rd Place</p>
         <h3 class="project-row-title">CWRU VTOL</h3>
-        <p class="project-row-desc">Permanent magnet payload dropper with servo-driven release and a redundant magnet array for reliable holding, plus a redesigned aluminum landing gear after the 3D printed legs wobbled loose and failed in the field. Third place championship finish.</p>
+        <p class="project-row-desc">Designed a <span class="kw">permanent magnet payload dropper</span> with a servo-driven release mechanism and redundant magnet array for reliable payload retention. After the original 3D-printed landing gear became unstable and loosened during field testing, I redesigned and fabricated a stronger <span class="kw">aluminum landing gear</span> system to improve durability and reliability. Achieved a third-place finish out of 20 teams at the championship.</p>
         <div class="project-case-buttons">
           <button class="case-tab-btn" data-open-modal="vtol" data-open-tab="payload">Payload Mechanism</button>
           <button class="case-tab-btn" data-open-modal="vtol" data-open-tab="landing-gear">Aluminum Landing Gear</button>
         </div>
+        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
       </div>
     </div>
 
     <div class="project-row reveal"
+      data-modal="esp32"
       data-name="ESP32 Drone"
       data-type="Hardware / Embedded"
       data-date="Dec 2025 – Feb 2026"
       data-github=""
-      data-img=""
-      data-desc="TODO: Write your description here. Wrap key words like @@PID controller@@, @@ESP32@@, or @@SolidWorks FEA@@ with @@ to make them glow.">
+      data-img="Assets/ESP32Drone/gyro_accel_circuit.jpg"
+      data-desc="A quadcopter built completely from the ground up, from the frame to the flight software. Designed and printed a @@SolidWorks@@ frame, hand-soldered a custom @@N-channel MOSFET@@ motor driver, built a wireless @@IMU@@ link over @@ESP-NOW@@, and hand-tuned the @@PID controller@@ that keeps it stable in the air.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <div class="project-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            <span>Add image<br>images/esp32-drone.jpg</span>
-          </div>
+          <img src="Assets/ESP32Drone/gyro_accel_circuit.jpg" alt="ESP32 flight controller and IMU on breadboard">
         </div>
       </div>
       <div class="project-text-col">
         <p class="project-type-tag">Hardware / Embedded · Dec 2025 – Feb 2026</p>
         <h3 class="project-row-title">ESP32 Drone</h3>
-        <p class="project-row-desc">Custom drone from scratch — motor driver PCB, IMU, 3D-printed PETG frame with FEA validation, and a hand-tuned PID flight controller written in Arduino.</p>
-        <p class="project-open-hint">↗ Click for full details</p>
+        <p class="project-row-desc">A quadcopter built completely from the ground up, from the frame to the flight software. Designed and printed a SolidWorks frame, hand-soldered a custom N-channel MOSFET motor driver, built a wireless IMU link over ESP-NOW, and hand-tuned the PID controller that keeps it stable in the air.</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
       </div>
     </div>
 
     <div class="project-row reveal"
+      data-modal="emg"
       data-name="EMG Robotic Hand"
       data-type="Robotics / Biomechanics"
-      data-date="Nov 2025 — 4th Place"
+      data-date="Nov 2025"
       data-github=""
-      data-img=""
-      data-desc="TODO: Write your description here. Wrap key words like @@EMG@@, @@SolidWorks@@, or @@wireless@@ with @@ to make them glow.">
+      data-img="Assets/EMGHand/full.jpg"
+      data-desc="A robotic hand built with a teammate in a two-day CWRU hackathon, designed to open and close from real muscle activity instead of a manual switch. @@SolidWorks@@ fingers on @@hinge mates@@, a @@MyoWare@@ EMG sensor with a hand-tuned threshold, and a wireless @@ESP-NOW@@ link driving the servos.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <div class="project-img-placeholder">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            <span>Add image<br>images/robotic-hand.jpg</span>
-          </div>
+          <img src="Assets/EMGHand/full.jpg" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Robotics / Biomechanics · Nov 2025 — 4th Place</p>
+        <p class="project-type-tag">Robotics / Biomechanics · Nov 2025</p>
         <h3 class="project-row-title">EMG Robotic Hand</h3>
-        <p class="project-row-desc">Wireless EMG-controlled robotic hand built at CWRU Hackathon. Custom TX/RX firmware, SolidWorks fingers with mechanical mates, 4th place finish.</p>
-        <p class="project-open-hint">↗ Click for full details</p>
+        <p class="project-row-desc">A robotic hand built with a teammate in a two-day CWRU hackathon, designed to open and close from real muscle activity instead of a manual switch. SolidWorks fingers on hinge mates, a MyoWare EMG sensor with a hand-tuned threshold, and a wireless ESP-NOW link driving the servos.</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
       </div>
     </div>
 
@@ -1141,40 +1184,25 @@
   <h2 class="section-title reveal">Photos</h2>
   <p class="section-subtitle reveal">The build process, competition moments, and finished hardware.</p>
 
-  <div class="gallery-grid reveal">
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo1.jpg</p>
-    </div>
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo2.jpg</p>
-    </div>
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo3.jpg</p>
-    </div>
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo4.jpg</p>
-    </div>
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo5.jpg</p>
-    </div>
-    <div class="gallery-item">
-      <p class="gallery-placeholder-label">📷 Add photo<br>images/photo6.jpg</p>
-    </div>
-  </div>
+  <!-- ═══════════════════════════════════════
+       GALLERY (auto-detected)
+       HOW TO ADD PHOTOS: drop numbered images into
+       Assets/Gallery/ — PHOTO1.jpg, PHOTO2.jpg,
+       PHOTO3.jpg, etc, starting at 1 with no gaps
+       in the numbering.
+       (.jpg, .jpeg, and .png are all supported.)
+       The page automatically finds however many
+       images are there; the first 6 show here and
+       the rest appear under "More Photos". No code
+       changes needed.
+  ═══════════════════════════════════════════ -->
+  <div class="gallery-grid reveal" id="gallery-grid"></div>
 
-  <div class="more-btn-wrap reveal">
+  <div class="more-btn-wrap reveal" id="more-photos-wrap" style="display:none;">
     <button class="btn btn-ghost" id="more-photos-btn">More Photos ↓</button>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       MORE PHOTOS (hidden until the button above is clicked)
-       HOW TO ADD A NEW PHOTO: copy one whole
-       <div class="gallery-item"> ... </div> block
-       from the .gallery-grid above and paste it here.
-  ═══════════════════════════════════════════ -->
-  <div class="gallery-grid-more" id="gallery-grid-more">
-    <!-- Paste additional gallery-item blocks here -->
-  </div>
+  <div class="gallery-grid-more" id="gallery-grid-more"></div>
 </section>
 
 <div class="divider"></div>
@@ -1414,8 +1442,8 @@
        Assets/image-vtollogo.png   (project card thumbnail)
        Assets/VTOL/dropper.jpg
        Assets/VTOL/payload.png
-       Assets/VTOL/demodrop.gif
-       Assets/VTOL/wobbles.gif
+       Assets/VTOL/demodrop.mp4  (converted from .gif — MP4 loops far lighter than GIF)
+       Assets/VTOL/wobbles.mp4   (converted from .gif — MP4 loops far lighter than GIF)
        Assets/VTOL/ldgcad.png
        Assets/VTOL/ldgassem.png
 ══════════════════════════════════════════ -->
@@ -1423,7 +1451,7 @@
   <div class="modal case-modal">
     <div class="modal-header">
       <div>
-        <p class="modal-type">Mechanical Design · 2025 — 1st Place Championship</p>
+        <p class="modal-type">Mechanical Design · 2025 — 3rd Place Championship</p>
         <h2 class="modal-title">CWRU VTOL</h2>
       </div>
       <button class="modal-close" id="vtol-modal-close" aria-label="Close">✕</button>
@@ -1434,7 +1462,7 @@
       <!-- Tab 1: Payload Mechanism -->
       <div class="case-tab-panel" data-panel="payload" data-modal-group="vtol">
         <div class="case-img-single case-img-single--wide">
-          <img class="case-gif" src="Assets/VTOL/demodrop.gif" alt="Demo of the dropper releasing the payload">
+          <video class="case-gif" src="Assets/VTOL/demodrop.mp4" autoplay loop muted playsinline></video>
           <p class="case-caption">Dropper release demo</p>
         </div>
 
@@ -1460,7 +1488,7 @@
         <p class="modal-desc">After flying for a while I noticed the 3D printed landing gear attachments were loose and wobbled a lot more than I wanted, especially after repeated landings. A couple times the legs actually fell out mid use, which obviously isn't something you want happening on a drone. On top of that the printed legs were heavier than they needed to be and just weren't reliable long term, so I decided to redesign them in aluminum instead.</p>
 
         <div class="case-img-single case-img-single--wide">
-          <img class="case-gif" src="Assets/VTOL/wobbles.gif" alt="3D printed landing gear attachment wobbling">
+          <video class="case-gif" src="Assets/VTOL/wobbles.mp4" autoplay loop muted playsinline></video>
           <p class="case-caption">The printed attachments wobbling under load</p>
         </div>
 
@@ -1476,6 +1504,166 @@
         <div class="case-img-single">
           <img src="Assets/VTOL/ldgassem.png" alt="Aluminum landing gear assembled onto the drone arm">
           <p class="case-caption">Landing gear epoxied onto the arm</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;">Repository private or not yet published.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ESP32 DRONE — DEDICATED MODAL
+     Images live in Assets/ESP32Drone/:
+       motor_driver_circuit.jpg
+       gyro_accel_circuit.jpg
+       propspin_mid.mp4 (propspin.mov trimmed to its middle third)
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="esp32-modal" role="dialog" aria-modal="true">
+  <div class="modal case-modal">
+    <div class="modal-header">
+      <div>
+        <p class="modal-type">Hardware / Embedded · Dec 2025 – Feb 2026</p>
+        <h2 class="modal-title">ESP32 Drone</h2>
+      </div>
+      <button class="modal-close" id="esp32-modal-close" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body case-modal-body">
+
+      <!-- Frame Design & Fabrication -->
+      <div class="case-section">
+        <p class="modal-section-label">Frame Design &amp; Fabrication</p>
+        <p class="modal-desc">This frame was my first real project in <span class="kw">SolidWorks</span> — before this I'd mostly just followed tutorials, so it was the first time I sat down and modeled something from a blank part file with no one telling me the next step. I learned a lot just from getting it wrong a few times: figuring out how to build the arms and body so I could change a dimension without breaking the rest of the assembly, working out clearance for the motors and wiring, and generally learning how SolidWorks wants you to think about a design before you start modeling instead of after. Once the frame was finished I sliced it and sent it to the printer, which came with its own round of dialing in supports and print settings so the arms came out strong enough to survive a rough landing without adding more material than the drone needed to carry.</p>
+      </div>
+
+      <!-- Parts Research & Motor Driver Circuit -->
+      <div class="case-section">
+        <p class="modal-section-label">Parts Research &amp; Motor Driver Circuit</p>
+        <p class="modal-desc">With the frame decided, I moved into research — going through datasheets and comparing options for motors, battery, and the rest of the electronics before ordering anything. For the motor driver circuit specifically, I used <span class="kw">CWRU's circuits lab</span> to dig through their parts bins and find <span class="kw">N-channel MOSFETs</span>, flyback diodes, and gate resistors that could actually handle the current the motors would pull, instead of just grabbing whatever came up first in a search.</p>
+
+        <p class="modal-desc">I'd only learned to solder shortly before starting this project, so building the actual board was its own learning curve — and the <span class="kw">pick-and-place N-channel MOSFETs</span> were easily the worst part of it. Pick-and-place parts are meant for a reflow oven and a pick-and-place machine, not a soldering iron and a steady hand, so getting clean joints on pads that small without bridging pins or lifting a pad off the board took a lot of retries.</p>
+
+        <div class="case-img-single">
+          <img src="Assets/ESP32Drone/motor_driver_circuit.jpg" alt="Hand-soldered motor driver circuit board">
+          <p class="case-caption">Hand-soldered motor driver board — pick-and-place MOSFETs soldered with an iron</p>
+        </div>
+      </div>
+
+      <!-- Gyro/Accelerometer Circuit & Wireless Link -->
+      <div class="case-section">
+        <p class="modal-section-label">Gyro/Accelerometer Circuit &amp; Wireless Link</p>
+        <p class="modal-desc">Next was the gyro and accelerometer circuit — the <span class="kw">IMU</span> that lets the drone sense its own orientation. Once that was wired up, I connected it wirelessly to a second ESP32 using the <span class="kw">ESP-NOW protocol</span>, which lets two ESP32s talk directly to each other over Wi-Fi without a router or any real pairing process, just the receiver's MAC address. I wrote the <span class="kw">Arduino</span> firmware to test the link — reading the IMU on one board, packing the data up, and sending it over ESP-NOW to the other — and it worked cleanly on the first real test, no dropped packets or garbage data to chase down.</p>
+
+        <div class="case-img-single">
+          <img src="Assets/ESP32Drone/gyro_accel_circuit.jpg" alt="ESP32, IMU, and buck converter wired on a breadboard">
+          <p class="case-caption">ESP32 flight controller, IMU, and buck converter under bench test</p>
+        </div>
+
+        <p class="modal-desc">I ended up reusing this same ESP-NOW setup on a later project, the <span class="kw">EMG Robotic Hand</span>, to make its control link wireless too — once I had a working wireless firmware pattern, adapting it to a new project was straightforward.</p>
+      </div>
+
+      <!-- Assembly & Motor Testing -->
+      <div class="case-section">
+        <p class="modal-section-label">Assembly &amp; Motor Testing</p>
+        <p class="modal-desc">Before assembly, I weighed every component and used the motors' rated thrust to calculate a target <span class="kw">thrust-to-weight ratio</span> of about 2:1, which the finished drone ended up hitting almost exactly once everything was actually assembled and weighed for real.</p>
+
+        <p class="modal-desc">Once the frame, electronics, and motors were all mounted, I went through each motor individually to confirm it spun up cleanly and responded to throttle before ever running all four together. That test caught a problem early: with all four motors spun up at once, the <span class="kw">battery's C-rating</span> was too low to supply the current all four motors wanted simultaneously, so the voltage sagged and the motors couldn't get the current they needed. Running the motors one at a time never revealed it, since a single motor's draw was well within what the battery could supply on its own — it only showed up once the draw from all four was added together.</p>
+      </div>
+
+      <!-- PID Flight Control -->
+      <div class="case-section" style="border-bottom: none; padding-bottom: 0;">
+        <p class="modal-section-label">PID Flight Control</p>
+        <p class="modal-desc">For actual flight control I used a <span class="kw">PID controller</span> — a control loop that compares the drone's current orientation from the IMU against the orientation it's supposed to hold, and reacts to that error three ways: the <span class="kw">proportional</span> term reacts directly to how far off the drone currently is, the <span class="kw">integral</span> term accounts for how long the error has been building up so small persistent tilts still get corrected, and the <span class="kw">derivative</span> term reacts to how fast the error is changing, which damps the correction instead of letting it overshoot and oscillate. Tuning the three gains by hand meant a lot of short test runs, watching how the props responded to a tilt and adjusting from there.</p>
+
+        <div class="case-img-single case-img-single--wide">
+          <video src="Assets/ESP32Drone/propspin_mid.mp4" autoplay loop muted playsinline></video>
+          <p class="case-caption">PID correcting motor speed in response to tilt</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <p style="font-family:var(--font-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;">Repository private or not yet published.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EMG ROBOTIC HAND — DEDICATED MODAL
+     Images live in Assets/EMGHand/:
+       handdemo.mp4
+       fingercad.png
+       sensor.jpg
+       full.jpg
+══════════════════════════════════════════ -->
+<div class="modal-backdrop" id="emg-modal" role="dialog" aria-modal="true">
+  <div class="modal case-modal">
+    <div class="modal-header">
+      <div>
+        <p class="modal-type">Robotics / Biomechanics · Nov 2025</p>
+        <h2 class="modal-title">EMG Robotic Hand</h2>
+      </div>
+      <button class="modal-close" id="emg-modal-close" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-body case-modal-body">
+
+      <!-- Origins -->
+      <div class="case-section">
+        <p class="modal-section-label">Origins</p>
+        <div class="case-img-single case-img-single--wide">
+          <video src="Assets/EMGHand/handdemo.mp4" autoplay loop muted playsinline></video>
+          <p class="case-caption">The finished hand gripping on command</p>
+        </div>
+
+        <p class="modal-desc">This one came together at a CWRU hackathon, where I met an <span class="kw">electrical engineering</span> student at the kickoff and we decided to team up on the spot. The whole build only had a two-day window to begin with, and we lost even more of it when a storm rolled through partway into the second day and the venue cut the event short — so whatever we had working by that point was what we were presenting, no extra runway to fix anything after.</p>
+      </div>
+
+      <!-- Mechanical Design -->
+      <div class="case-section">
+        <p class="modal-section-label">Mechanical Design</p>
+        <p class="modal-desc">We split the mechanical design down the middle — I took the fingers in <span class="kw">SolidWorks</span> while my teammate designed the palm. Working in parallel saved time, but it also meant our two halves didn't natively agree with each other: he'd modeled the palm in a different CAD package, and getting his file into something my assembly could actually reference took some back and forth exporting through a neutral format before the two parts would mate up cleanly instead of just sitting next to each other.</p>
+
+        <p class="modal-desc">The fingers were also my first real exposure to SolidWorks's <span class="kw">mate</span> types beyond just holding parts rigidly in place. Each knuckle uses a <span class="kw">hinge mate</span>, which constrains the joint to rotate about a single axis instead of letting it float freely, and getting the fingers to curl the way an actual hand does meant learning how mates stack up to remove degrees of freedom one at a time rather than pinning a part down all at once. It was the first assembly I'd built where the parts were actually supposed to move relative to each other after going together, not just bolt on and stay put.</p>
+
+        <div class="case-img-single">
+          <img src="Assets/EMGHand/fingercad.png" alt="SolidWorks CAD model of the robotic finger with hinge mate joints">
+          <p class="case-caption">Finger CAD — hinge-mated knuckle joints</p>
+        </div>
+      </div>
+
+      <!-- EMG Sensing -->
+      <div class="case-section">
+        <p class="modal-section-label">EMG Sensing</p>
+        <p class="modal-desc">For activation we went with <span class="kw">EMG</span> — electromyography — instead of a button or switch, since the point was to have the hand respond to an actual muscle contraction rather than a manual trigger. Flexing a muscle generates a small electrical signal as the muscle fibers fire, and a <span class="kw">MyoWare Muscle Sensor</span> picks that signal up through electrodes placed over the forearm and outputs it as an analog voltage that climbs the harder you flex.</p>
+
+        <div class="case-img-single">
+          <img src="Assets/EMGHand/sensor.jpg" alt="MyoWare EMG muscle sensor held in a hand">
+          <p class="case-caption">MyoWare EMG sensor</p>
+        </div>
+
+        <p class="modal-desc">I wrote the <span class="kw">Arduino</span> firmware to read that raw signal and compare it against a <span class="kw">threshold</span> value: cross above it and the hand closes, drop back below it and the hand releases. Getting that threshold right took some trial and error, since the raw signal is noisy and the right cutoff depends a lot on how the electrodes are sitting on the skin that day. That problem was made worse by the fact that we didn't have the proper adhesive gel electrode pads the sensor is meant to be used with — just the bare snap connectors — so getting a usable read meant pressing the sensor directly against the skin and holding it firmly in place, which made the signal noisier and far more sensitive to exact placement than it would've been with real pads.</p>
+      </div>
+
+      <!-- Wireless Control -->
+      <div class="case-section">
+        <p class="modal-section-label">Wireless Control</p>
+        <p class="modal-desc">Once the sensor was reading cleanly, the next step was getting that signal over to the servos driving the hand without running a wire across the table between two separate boards. I'd already built this same kind of link a few months earlier on the <span class="kw">ESP32 Drone</span> project, so instead of re-solving the problem from scratch I reused that pattern here: one ESP32 read the EMG sensor and ran the threshold logic, then sent a simple open/close command over <span class="kw">ESP-NOW</span> to a second ESP32 wired to the servos. Testing mostly meant flexing the sensor over and over and watching the servos to make sure the hand opened and closed every single time, not just most of the time — a servo that occasionally missed the signal isn't something you can trust in a live demo.</p>
+      </div>
+
+      <!-- Presentation & Future -->
+      <div class="case-section" style="border-bottom: none; padding-bottom: 0;">
+        <p class="modal-section-label">Presentation &amp; Future</p>
+        <p class="modal-desc">We presented the finished hand to a panel of judges at the end of the hackathon, which given we'd lost part of our already-short build window to the storm meant demoing whatever state it was in the moment the event wrapped. What we built was really just an <span class="kw">MVP</span> meant to prove the core idea worked under a heavy time constraint, not a finished product, and there's a lot of room to build on it with more time. The biggest gap is <span class="kw">sensor feedback</span> — right now the hand just closes on command with no sense of how hard it's actually gripping, so it can't tell the difference between barely touching something and crushing it. Adding force sensing to the fingertips and feeding that back into the grip logic would be the next real step toward a hand that can actually interact with what it's holding instead of just closing blindly.</p>
+
+        <div class="case-img-single case-img-single--wide">
+          <img src="Assets/EMGHand/full.jpg" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
+          <p class="case-caption">The assembled hand — servos, ESP32, and breadboard wiring</p>
         </div>
       </div>
 
@@ -1772,6 +1960,85 @@
     init();
   })();
 
+  /* ══════════════════════════════════════════
+     GALLERY
+     Auto-detects how many numbered photos exist in
+     Assets/Gallery/ (PHOTO1.jpg, PHOTO2.jpg,
+     PHOTO3.jpg, ... — .jpeg and .png also work) by
+     trying to load them one at a time until one is
+     missing. The first 6 go in the main grid;
+     anything beyond that goes under the "More Photos"
+     toggle. No manual list to maintain — just drop
+     files in named sequentially starting at 1.
+  ══════════════════════════════════════════ */
+  (function() {
+    const FOLDER       = 'Assets/Gallery/';
+    const EXTENSIONS   = ['jpg', 'jpeg', 'png'];
+    const MAX_TO_CHECK = 60;
+    const MAIN_COUNT   = 6;
+
+    const grid     = document.getElementById('gallery-grid');
+    const moreGrid = document.getElementById('gallery-grid-more');
+    const moreWrap = document.getElementById('more-photos-wrap');
+
+    function imageExists(url) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload  = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+    }
+
+    async function findImage(index) {
+      for (const ext of EXTENSIONS) {
+        const url = `${FOLDER}PHOTO${index}.${ext}`;
+        if (await imageExists(url)) return url;
+      }
+      return null;
+    }
+
+    async function detectImages() {
+      const found = [];
+      for (let i = 1; i <= MAX_TO_CHECK; i++) {
+        const url = await findImage(i);
+        if (!url) break;
+        found.push(url);
+      }
+      return found;
+    }
+
+    function makeGalleryItem(url) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      const img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Chance Krenzer project photo';
+      item.appendChild(img);
+      return item;
+    }
+
+    async function init() {
+      if (!grid) return;
+      const images = await detectImages();
+
+      if (images.length === 0) {
+        grid.innerHTML = '<div class="gallery-item"><p class="gallery-placeholder-label">Add photos to Assets/Gallery/ named PHOTO1.jpg, PHOTO2.jpg, PHOTO3.jpg, etc. to fill this section.</p></div>';
+        return;
+      }
+
+      images.slice(0, MAIN_COUNT).forEach(url => grid.appendChild(makeGalleryItem(url)));
+
+      const rest = images.slice(MAIN_COUNT);
+      if (rest.length > 0) {
+        rest.forEach(url => moreGrid.appendChild(makeGalleryItem(url)));
+        moreWrap.style.display = '';
+      }
+    }
+
+    init();
+  })();
+
   /* ── Project modal (generic) ─────────────── */
   const backdrop   = document.getElementById('modal');
   const modalClose = document.getElementById('modal-close');
@@ -1820,6 +2087,8 @@
   const caseModals = {
     drone: document.getElementById('drone-modal'),
     vtol:  document.getElementById('vtol-modal'),
+    esp32: document.getElementById('esp32-modal'),
+    emg:   document.getElementById('emg-modal'),
   };
 
   function openCaseModal(key) {

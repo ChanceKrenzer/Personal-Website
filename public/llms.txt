@@ -12,6 +12,7 @@ Chance Krenzer is an undergraduate Aerospace and Mechanical Engineering student 
 - **Simulation**: SolidWorks FEA, SolidWorks Flow Simulation (CFD), ANSYS structural analysis
 - **Fabrication**: CNC waterjet, mill, lathe, MIG/TIG welding, FDM 3D printing (PETG/PLA), laser cutting, fine-pitch soldering
 - **Programming**: Python, Java, MATLAB, C (embedded), Arduino (PID controllers, flight control)
+- **Electronics**: Component sourcing, fine-pitch soldering, custom motor driver circuits, EMG (electromyography) sensing, wireless firmware (ESP-NOW)
 
 ## Projects
 
@@ -22,10 +23,10 @@ Team lead on a project targeting 500 kph quadcopter performance. Responsibilitie
 Designed an autonomous payload pickup and release mechanism for a VTOL aircraft. Engineered for tolerance to alignment errors. Built a precision epoxy jig for carbon fiber arm assembly. Won first place at championship.
 
 ### ESP32 Drone (Dec 2025 – Feb 2026)
-Built a custom quadcopter from scratch: designed a motor driver PCB, integrated an IMU, designed a 3D-printed PETG frame validated with FEA in SolidWorks, and wrote a hand-tuned PID flight controller in Arduino running on an ESP32 microcontroller.
+Built a custom quadcopter completely from scratch, from CAD to flight software. Designed and 3D-printed the frame in SolidWorks (first full SolidWorks design), hand-soldered a custom N-channel MOSFET motor driver (parts sourced via CWRU's circuits lab), wired a gyro/accelerometer IMU circuit with a wireless ESP-NOW link to a second ESP32, and wrote a hand-tuned PID flight controller in Arduino. Verified thrust-to-weight ratio (~2:1) and diagnosed a battery C-rating bottleneck under full four-motor load.
 
-### EMG Robotic Hand (Nov 2025 — 4th Place, CWRU Hackathon)
-Wireless EMG (electromyography)-controlled robotic hand built at a CWRU Hackathon. Wrote custom transmitter/receiver firmware for wireless control. Designed finger linkages in SolidWorks with mechanical mates. Placed 4th overall.
+### EMG Robotic Hand (Nov 2025, CWRU Hackathon)
+Wireless EMG (electromyography)-controlled robotic hand built with a teammate in a two-day CWRU hackathon (cut short by a storm). Designed the fingers in SolidWorks using hinge mates while a teammate designed the palm; resolved a cross-CAD file-format issue between the two halves. Used a MyoWare muscle sensor with hand-tuned Arduino threshold logic to trigger grip/release, and a wireless ESP-NOW link (reused from the ESP32 Drone project) between the sensor board and the servo-driving ESP32.
 
 ## Contact
 
