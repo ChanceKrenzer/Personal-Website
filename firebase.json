@@ -15,6 +15,24 @@
             "value": "application/xml"
           }
         ]
+      },
+      {
+        "source": "/Assets/**/*.@(webp|png|jpg|jpeg|mp4|pdf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=2592000"
+          }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
+          }
+        ]
       }
     ]
   }

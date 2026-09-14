@@ -1,10 +1,10 @@
-# Chance Krenzer — Portfolio
+# Chance Krenzer, Portfolio
 
 > Aerospace and Mechanical Engineering student at Case Western Reserve University (Class of 2029), focused on drone design, robotics, embedded systems, and defense applications.
 
 ## About
 
-Chance Krenzer is an undergraduate Aerospace and Mechanical Engineering student at Case Western Reserve University in Cleveland, Ohio, graduating in 2029. He competes on the CWRU Varsity Track and Field team (800m). His primary engineering interests are unmanned aerial vehicles (UAVs/drones), fixed-wing aircraft, robotics, and applications in defense technology.
+Chance Krenzer is an undergraduate at Case Western Reserve University in Cleveland, Ohio, pursuing a BS in Mechanical Engineering and a BS in Aerospace Engineering, graduating in 2029. He is on the Dean’s High Honors List with a cumulative GPA of 3.81/4.00, and competes on the CWRU Varsity Cross Country and Track and Field team (800m). He graduated from Harvard-Westlake School in 2025 as a National Merit Scholar and captain of the varsity track team. His primary engineering interests are unmanned aerial vehicles (UAVs/drones), fixed-wing aircraft, robotics, and applications in defense technology.
 
 ## Skills
 
@@ -14,18 +14,35 @@ Chance Krenzer is an undergraduate Aerospace and Mechanical Engineering student 
 - **Programming**: Python, Java, MATLAB, C (embedded), Arduino (PID controllers, flight control)
 - **Electronics**: Component sourcing, fine-pitch soldering, custom motor driver circuits, EMG (electromyography) sensing, wireless firmware (ESP-NOW)
 
+## Experience
+
+### Los Angeles Department of Water and Power (LADWP), DERMS Fellowship (May 2026 - Jul 2026)
+Analyzed operational gaps created by the growing influx of distributed energy resources (DERs) and designed DERMS approaches for grid operators to monitor and manage DER integration. Worked with DERMS software platforms and utility communication protocols, using Modbus and IEEE 2030.5 to evaluate telemetry, monitoring, and control pathways between the utility and DER endpoints. Synthesized findings with a cross-functional team into a stakeholder presentation.
+
+### Dronefly, Drone Repair & Operations Intern (May 2026 - Aug 2026)
+Diagnosed and serviced high-end commercial drones returned under warranty, maximizing successful repairs to preserve margin on each returned unit. Rebuilt the file management system for warranty and repair records to improve traceability.
+
+### CWRU Vertical Take-Off and Landing (VTOL) Team, Mechanical Team Specialist (Aug 2025 - Present)
+Designed and fabricated the payload pickup and release mechanism, engineered to tolerate positional and alignment error for reliable autonomous operation. CAD'd and fabricated a jig to epoxy an aluminum motor mount to a carbon fiber arm for the drone's X8 configuration. Machined aluminum motor mount components on the CNC waterjet, belt sander, and mill. Third place out of 20 teams at the 2026 championship.
+
+### CWRU High-Speed Quadcopter, Mechanical Design Lead (2025 - Present)
+Leads a team of engineers on a quadcopter targeting 500 kph. Designs the frame parametrically and runs flow simulations to minimize drag while retaining structural strength at speed. Specified the electronics and mounting architecture and submitted the bill of materials that secured team funding.
+
+### CWRU Varsity Cross Country and Track & Field (Aug 2025 - Present)
+Student-athlete, 800m.
+
 ## Projects
 
-### High Speed Quadcopter (2025 – Present)
+### High Speed Quadcopter (2025 - Present)
 Team lead on a project targeting 500 kph quadcopter performance. Responsibilities include parametric frame design in SolidWorks, CFD flow simulation for aerodynamic drag reduction, ANSYS structural analysis, and full electronics bill-of-materials management.
 
-### VTOL Payload Mechanism (2025 — 1st Place Championship)
-Designed an autonomous payload pickup and release mechanism for a VTOL aircraft. Engineered for tolerance to alignment errors. Built a precision epoxy jig for carbon fiber arm assembly. Won first place at championship.
+### CWRU VTOL (2026, 3rd Place Championship)
+Designed a permanent magnet payload dropper with a servo-driven release and a redundant magnet array, engineered for tolerance to alignment errors on pickup. Redesigned the landing gear in waterjet-cut aluminum after the 3D-printed version loosened in field testing, and built a precision epoxy jig so every leg bonded to its arm at the same angle. Placed third out of 20 teams at the championship.
 
-### ESP32 Drone (Dec 2025 – Feb 2026)
+### ESP32 Drone (Dec 2025 - Feb 2026)
 Built a custom quadcopter completely from scratch, from CAD to flight software. Designed and 3D-printed the frame in SolidWorks (first full SolidWorks design), hand-soldered a custom N-channel MOSFET motor driver (parts sourced via CWRU's circuits lab), wired a gyro/accelerometer IMU circuit with a wireless ESP-NOW link to a second ESP32, and wrote a hand-tuned PID flight controller in Arduino. Verified thrust-to-weight ratio (~2:1) and diagnosed a battery C-rating bottleneck under full four-motor load.
 
-### EMG Robotic Hand (Nov 2025, CWRU Hackathon)
+### EMG Robotic Hand (Nov 2025, CWRU Hackathon, 4th Place)
 Wireless EMG (electromyography)-controlled robotic hand built with a teammate in a two-day CWRU hackathon (cut short by a storm). Designed the fingers in SolidWorks using hinge mates while a teammate designed the palm; resolved a cross-CAD file-format issue between the two halves. Used a MyoWare muscle sensor with hand-tuned Arduino threshold logic to trigger grip/release, and a wireless ESP-NOW link (reused from the ESP32 Drone project) between the sensor board and the servo-driving ESP32.
 
 ## Contact

@@ -6,38 +6,41 @@
 
 <!-- ═══════════════════════════════════════════
      SEO META TAGS
-     TODO: Update the URL below to your actual deployed domain.
      These tags tell Google, social platforms, and AI crawlers who you are.
+     Every URL here points at https://chancekrenzer.com/, so they all need
+     updating together if the domain ever changes.
 ═══════════════════════════════════════════ -->
-<title>Chance Krenzer — Aerospace & Mechanical Engineer | CWRU</title>
-<meta name="description" content="Aerospace and Mechanical Engineering student at Case Western Reserve University. Builds custom drones and robotics from scratch — SolidWorks CAD, ANSYS simulation, ESP32 embedded firmware, PID flight control, and EMG-controlled robotics.">
+<title>Chance Krenzer | Aerospace and Mechanical Engineer | CWRU</title>
+<meta name="description" content="Aerospace and Mechanical Engineering student at Case Western Reserve University. Builds custom drones and robotics from scratch using SolidWorks CAD, ANSYS simulation, ESP32 embedded firmware, PID flight control, and EMG-controlled robotics.">
 <meta name="keywords" content="Chance Krenzer, aerospace engineer, mechanical engineer, CWRU, Case Western Reserve, drone design, SolidWorks, ANSYS, quadcopter, robotics, defense engineering, ESP32, Arduino, PID controller, embedded systems, EMG, electromyography, wireless firmware, flight controller">
 <meta name="author" content="Chance Krenzer">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://chancekrenzer.com/">
 
-<!-- Favicon (this is what shows next to your site name in Google search results) -->
-<link rel="icon" type="image/png" href="Assets/SitePhoto.png">
-<link rel="apple-touch-icon" href="Assets/SitePhoto.png">
+<!-- Favicon (this is what shows next to your site name in Google search results).
+     These are cut down from Assets/SitePhoto.png so the tab icon is a few KB
+     rather than the full-size mark. -->
+<link rel="icon" type="image/png" sizes="64x64" href="Assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Assets/apple-touch-icon.png">
 
 <!-- Open Graph (Facebook, LinkedIn previews) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://chancekrenzer.com/">
-<meta property="og:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
+<meta property="og:title" content="Chance Krenzer | Aerospace and Mechanical Engineer">
 <meta property="og:description" content="CWRU engineering student building drones, robots, and defense hardware from scratch. SolidWorks, ANSYS, ESP32 firmware, PID flight control.">
 <meta property="og:image" content="https://chancekrenzer.com/Assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Chance Krenzer — Aerospace & Mechanical Engineering, CWRU">
+<meta property="og:image:alt" content="Chance Krenzer, Aerospace and Mechanical Engineering, CWRU">
 <meta property="og:site_name" content="Chance Krenzer Portfolio">
 
 <!-- Twitter / X card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Chance Krenzer — Aerospace & Mechanical Engineer">
+<meta name="twitter:title" content="Chance Krenzer | Aerospace and Mechanical Engineer">
 <meta name="twitter:description" content="CWRU engineering student building drones, robots, and defense hardware from scratch.">
 <meta name="twitter:image" content="https://chancekrenzer.com/Assets/og-image.png">
 
-<!-- Structured Data (JSON-LD) — helps Google understand who you are -->
+<!-- Structured Data (JSON-LD): helps Google understand who you are -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -81,14 +84,15 @@
 }
 </script>
 
-<!-- EmailJS SDK — powers the contact form -->
-<!-- TODO: Sign up at https://emailjs.com (free), then replace YOUR_PUBLIC_KEY below -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-  (function(){
-    emailjs.init({ publicKey: 'U2F9KA8NrbCgg3Rku' });
-  })();
-</script>
+<!-- The EmailJS SDK is not loaded here on purpose. It is fetched on demand
+     the first time the contact form is opened (see "EmailJS send" near the
+     bottom of the page), so a visitor who never opens the form never pays
+     for the request. -->
+
+<!-- First paint: the logo and the opening slideshow frame are the only two
+     images above the fold, so they get requested alongside the HTML. -->
+<link rel="preload" as="image" href="Assets/Logo.webp" fetchpriority="high">
+<link rel="preload" as="image" href="Assets/Slideshow/1.webp" fetchpriority="high">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,7 +125,12 @@
      RESET
   ═══════════════════════════════════════════ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Stops iOS Safari inflating text when a phone is turned to landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
   body {
     background: var(--bg);
     color: var(--text);
@@ -151,7 +160,7 @@
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
   }
-  .nav-logo { display: flex; align-items: center; }
+  .nav-logo { display: flex; align-items: center; min-height: 44px; }  /* min-height keeps it a full-size tap target once the logo shrinks on phones */
   .nav-logo img { height: 46px; width: auto; display: block; }
   .nav-links { display: flex; gap: 36px; align-items: center; }
   .nav-links a {
@@ -163,12 +172,42 @@
   }
   .nav-links a:hover { color: var(--white); }
 
+  /* Hamburger. Hidden until the link row stops fitting, at which point the
+     row becomes a drop-down panel under the bar. The bars rotate into an X
+     when the panel is open. */
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+  }
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--muted);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition), background-color var(--transition);
+  }
+  .nav-toggle:hover .nav-toggle-bar { background: var(--white); }
+  .nav-toggle.open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+  .nav-toggle.open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   /* ═══════════════════════════════════════════
      HERO
   ═══════════════════════════════════════════ */
   #hero {
     position: relative;
+    /* svh is the viewport with the mobile browser chrome showing, so the hero
+       fits on first paint instead of being cropped by the URL bar. */
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
     padding: 66px 52px 0;
@@ -398,6 +437,108 @@
   .skill-block-body { font-size: 17px; color: var(--muted); line-height: 1.85; }
   .skill-block-divider { height: 1px; background: var(--border); }
 
+  /* The prose is the honest version of each skill. The chips under it are the
+     same thing as a list, for anyone scanning for one specific tool name. */
+  .skill-block-right { display: flex; flex-direction: column; gap: 22px; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-chip {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    line-height: 1.4;
+  }
+
+  /* ═══════════════════════════════════════════
+     EXPERIENCE
+     Same 220px meta column as the skill blocks so
+     the two sections line up down the page.
+  ═══════════════════════════════════════════ */
+  #experience .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-group-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 34px;
+  }
+  .exp-group + .exp-group { margin-top: 76px; padding-top: 60px; border-top: 1px solid var(--border); }
+  .exp-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 36px;
+    align-items: start;
+    padding: 30px 0;
+  }
+  .exp-row + .exp-row { border-top: 1px solid var(--border); }
+  .exp-meta { display: flex; flex-direction: column; gap: 6px; padding-top: 3px; }
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .exp-place {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+  .exp-body { display: flex; flex-direction: column; gap: 10px; }
+  .exp-org {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    line-height: 1.25;
+  }
+  .exp-role {
+    font-size: 15px;
+    color: var(--glow);
+    line-height: 1.5;
+  }
+  .exp-points { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .exp-points li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .exp-points li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 12px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border-hi);
+  }
+  .exp-link {
+    align-self: flex-start;
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    border: 1px solid var(--border-hi);
+    border-radius: 999px;
+    padding: 9px 18px;
+    transition: all var(--transition);
+  }
+  .exp-link:hover { color: var(--text); border-color: var(--muted); }
+
   /* ═══════════════════════════════════════════
      PROJECTS
   ═══════════════════════════════════════════ */
@@ -569,6 +710,7 @@
   }
   .contact-link-name {
     font-family: var(--font-display);
+    overflow-wrap: anywhere;
     font-size: 20px;
     font-weight: 500;
     color: var(--muted);
@@ -596,7 +738,9 @@
   .modal {
     width: 100%;
     max-width: 740px;
+    /* dvh so the modal resizes with the mobile URL bar rather than overflowing. */
     max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 80px);
     background: var(--surface);
     border: 1px solid var(--border-hi);
     border-radius: 8px;
@@ -645,7 +789,7 @@
   .modal-footer { flex-shrink: 0; padding: 24px 40px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; }
 
   /* ═══════════════════════════════════════════
-     HIGH SPEED DRONE — DEDICATED CASE-STUDY MODAL
+     HIGH SPEED DRONE: DEDICATED CASE-STUDY MODAL
      This project has a full write-up (aero,
      structures, design iteration, electronics)
      with 16 supporting images, so it gets its
@@ -742,7 +886,7 @@
   }
 
   /* Crops in on gifs/video that have black letterbox bars baked into the
-     footage — fills a 16:9 box and crops the top/bottom instead of showing
+     footage. Fills a 16:9 box and crops the top/bottom instead of showing
      the full frame with the bars. Tweak the aspect-ratio below if a given
      clip needs a tighter or looser crop. */
   img.case-gif, video.case-gif {
@@ -904,25 +1048,114 @@
     .hero-inner { flex-direction: column; align-items: flex-start; }
     .hero-slideshow { width: 100%; max-width: 420px; }
   }
+
+  /* The six links need 601px and the logo ends at 237px, so the row is already
+     touching the logo by about 890px. Switching to the hamburger at 980 leaves
+     a comfortable gap rather than a squeeze. Keep NAV_BREAKPOINT in the script
+     at the bottom of the page in sync with this number. */
+  @media (max-width: 980px) {
+    nav { padding: 0 24px; }
+    .nav-toggle { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 6px 0 10px;
+      background: rgba(6,6,6,0.98);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      max-height: calc(100vh - 66px);
+      max-height: calc(100dvh - 66px);
+      overflow-y: auto;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 15px 24px;   /* 46px tall, comfortably above the 44px tap target */
+      font-size: 13px;
+    }
+    .nav-links a:active { background: rgba(255,255,255,0.06); color: var(--white); }
+  }
+
   @media (max-width: 760px) {
     nav { padding: 0 20px; }
-    .nav-links { gap: 18px; }
-    .nav-links a { font-size: 11px; }
+    .nav-links a { padding: 15px 20px; }
     section { padding: 76px 20px; }
     #hero { padding: 66px 20px 0; }
+
     .skill-block { grid-template-columns: 1fr; gap: 16px; }
+    .skill-block-right { gap: 18px; }
+
+    .exp-row { grid-template-columns: 1fr; gap: 14px; padding: 26px 0; }
+    .exp-meta { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding-top: 0; }
+    .exp-group + .exp-group { margin-top: 56px; padding-top: 44px; }
+
     .project-row { grid-template-columns: 1fr; gap: 28px; }
     .project-row:nth-child(odd) .project-image-col,
     .project-row:nth-child(odd) .project-text-col,
     .project-row:nth-child(even) .project-text-col,
     .project-row:nth-child(even) .project-image-col { order: unset; }
+    #projects .projects-list { gap: 72px; }
+
     .gallery-grid, .gallery-grid-more.open { grid-template-columns: 1fr 1fr; }
     footer { padding: 20px; flex-direction: column; gap: 8px; text-align: center; }
-    .modal-header, .modal-body, .modal-footer { padding-left: 20px; padding-right: 20px; }
-    .contact-modal-header, .contact-modal-body, .contact-modal-footer { padding-left: 20px; padding-right: 20px; }
+
+    /* Contact rows: stack the label above the value so a long URL gets the
+       full width instead of being squeezed into what is left of the line. */
+    .contact-link-item { padding: 18px 0; }
+    .contact-link-left { flex-direction: column; align-items: flex-start; gap: 3px; }
+    .contact-link-label { min-width: 0; }
+    .contact-link-name { font-size: 17px; }
+
+    /* Modals get the screen back: thinner backdrop gutter, tighter chrome,
+       and a close button big enough to hit with a thumb. */
+    .modal-backdrop { padding: 16px 12px; }
+    .modal { max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); }
+    .modal-header { padding: 24px 20px 20px; }
+    .modal-body { padding: 24px 20px; }
+    .modal-footer { padding: 18px 20px; }
+    .modal-title { font-size: 22px; }
+    .modal-close { padding: 13px; margin: -13px -10px -13px 0; }  /* 44px+ square for a thumb */
+    .case-modal-body { padding-right: 0; }
+    .case-section { padding-bottom: 30px; }
+    .case-section + .case-section { padding-top: 26px; }
+
+    #contact-modal-backdrop { padding: 24px 12px; }
+    .contact-modal-header { padding: 24px 20px 20px; }
+    .contact-modal-body { padding: 24px 20px; }
+    .contact-modal-footer { padding: 16px 20px 24px; }
+    /* 16px is the threshold below which iOS Safari zooms the page on focus. */
+    .form-input, .form-textarea { font-size: 16px; }
   }
+
+  @media (max-width: 480px) {
+    .nav-logo img { height: 38px; }
+    .hero-cta { gap: 10px; }
+    .btn { padding: 12px 20px; }
+    .exp-org { font-size: 19px; }
+    .project-row-title { font-size: 24px; }
+    .skill-chip { font-size: 12px; padding: 5px 12px; }
+    .case-img-item img { height: 110px; }
+    .case-img-grid-4 { gap: 8px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    *, #dot-canvas { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+    /* Kill the entrances, but leave the cube faces and the hamburger their
+       transforms, otherwise the slideshow collapses into one stacked face and
+       the menu button never forms an X. Transitions go instant, not absent. */
+    * { animation: none !important; transition-duration: 1ms !important; }
+    .reveal,
+    .hero-eyebrow, .hero-name, .hero-bio, .hero-cta,
+    .hero-slideshow, #dot-canvas {
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 </style>
 </head>
@@ -933,10 +1166,16 @@
 ══════════════════════════════════════════ -->
 <nav>
   <a class="nav-logo" href="#hero" aria-label="Chance Krenzer">
-    <img src="Assets/Logo.png" alt="Chance Krenzer">
+    <img loading="lazy" decoding="async" src="Assets/Logo.webp" alt="Chance Krenzer">
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -960,7 +1199,7 @@
       </h1>
 
       <p class="hero-bio">
-        <strong>Mechanical and Aerospace Engineering</strong> student at <strong>Case Western Reserve University</strong> (Class of 2029) with a strong interest in <strong>drones</strong>, <strong>aircraft</strong>, <strong>robotics</strong>, and their defense applications. Experienced with <strong>SolidWorks</strong> and <strong>ANSYS</strong> for CAD, simulation, and engineering analysis through personal and team projects. <strong>Varsity Track &amp; Field</strong> and Cross Country athlete with a proven commitment to teamwork, discipline, and continuous improvement.
+        <strong>Mechanical and Aerospace Engineering</strong> student at <strong>Case Western Reserve University</strong> (Class of 2029) with a strong interest in <strong>drones</strong>, <strong>aircraft</strong>, <strong>robotics</strong>, and their defense applications. Experienced with <strong>SolidWorks</strong> and <strong>ANSYS</strong> for CAD, simulation, and engineering analysis through personal and team projects, plus internships in <strong>drone repair</strong> and <strong>grid energy systems</strong>. <strong>Varsity Track &amp; Field</strong> and Cross Country athlete with a proven commitment to teamwork, discipline, and continuous improvement.
       </p>
 
       <div class="hero-cta">
@@ -972,8 +1211,8 @@
 
     <!-- ═══════════════════════════════════════
          HERO SLIDESHOW (cube transition)
-         HOW TO ADD PHOTOS: drop numbered PNGs into
-         Assets/Slideshow/ — 1.png, 2.png, 3.png, etc,
+         HOW TO ADD PHOTOS: drop numbered WebPs into
+         Assets/Slideshow/ (1.webp, 2.webp, 3.webp, etc),
          starting at 1 with no gaps in the numbering.
          The page automatically finds however many
          images are there and cycles through all of
@@ -983,10 +1222,10 @@
       <div class="cube-slideshow" id="cube-slideshow">
         <div class="cube-inner" id="cube-inner">
           <div class="cube-face cube-face-front" id="cube-face-front">
-            <img id="cube-img-front" src="" alt="">
+            <img id="cube-img-front" src="" alt="" decoding="async" fetchpriority="high">
           </div>
           <div class="cube-face cube-face-right" id="cube-face-right">
-            <img id="cube-img-right" src="" alt="">
+            <img id="cube-img-right" src="" alt="" decoding="async">
           </div>
         </div>
       </div>
@@ -1007,48 +1246,227 @@
 
     <div class="skill-block reveal">
       <div class="skill-block-left">
-        <img class="skill-icon" src="Assets/icon-cad.png" alt="CAD icon">
+        <img loading="lazy" decoding="async" width="90" height="90" class="skill-icon" src="Assets/icon-cad.webp" alt="CAD icon">
         <p class="skill-block-name">Computer-Aided Design</p>
       </div>
-      <p class="skill-block-body">
-        My primary design environment is <span class="kw">SolidWorks</span>, where I develop <span class="kw">parametric models</span> with a focus on efficiency, precision, and manufacturability. I build parts driven by global variables so designs can be rapidly iterated without compromising assembly integrity. I've designed everything from drone frames and motor mounts to payload release mechanisms and precision fabrication jigs. I also use <span class="kw">SolidWorks PDM</span> for version control on team projects and am comfortable working across <span class="kw">part, assembly, and drawing</span> workflows. I genuinely enjoy mechanical design and continuously seek opportunities to expand my CAD skills and engineering knowledge.
-      </p>
+      <div class="skill-block-right">
+        <p class="skill-block-body">
+          My primary design environment is <span class="kw">SolidWorks</span>, where I develop <span class="kw">parametric models</span> with a focus on efficiency, precision, and manufacturability. I build parts driven by global variables so designs can be rapidly iterated without compromising assembly integrity. I've designed everything from drone frames and motor mounts to payload release mechanisms and precision fabrication jigs. I also use <span class="kw">SolidWorks PDM</span> for version control on team projects and am comfortable working across <span class="kw">part, assembly, and drawing</span> workflows. I genuinely enjoy mechanical design and continuously seek opportunities to expand my CAD skills and engineering knowledge.
+        </p>
+        <div class="skill-chips">
+          <span class="skill-chip">SolidWorks</span>
+          <span class="skill-chip">SolidWorks PDM</span>
+          <span class="skill-chip">Parametric modeling</span>
+          <span class="skill-chip">Part, assembly &amp; drawing</span>
+          <span class="skill-chip">UAV / VTOL airframe design</span>
+          <span class="skill-chip">Design for Manufacturing</span>
+        </div>
+      </div>
     </div>
 
     <div class="skill-block-divider"></div>
 
     <div class="skill-block reveal">
       <div class="skill-block-left">
-        <img class="skill-icon" src="Assets/icon-sim.png" alt="Sim icon">
+        <img loading="lazy" decoding="async" width="90" height="90" class="skill-icon" src="Assets/icon-sim.webp" alt="Sim icon">
         <p class="skill-block-name">Simulation &amp; Analysis</p>
       </div>
+      <div class="skill-block-right">
         <p class="skill-block-body">
           For engineering simulations, I primarily use <span class="kw">SolidWorks Simulation</span> and <span class="kw">ANSYS</span>. In SolidWorks, I perform <span class="kw">finite element analysis (FEA)</span> to validate designs under realistic load cases, such as verifying that drone arms can withstand <span class="kw">motor-induced forces</span> while minimizing weight. For aerodynamics, I use <span class="kw">SolidWorks Flow Simulation</span> to evaluate and optimize different geometries, reducing drag in high-speed designs through iterative analysis. I have also expanded my simulation capabilities by learning <span class="kw">ANSYS</span> for advanced <span class="kw">aerodynamic</span> and <span class="kw">heat transfer analysis</span>.
         </p>
+        <div class="skill-chips">
+          <span class="skill-chip">SolidWorks Simulation (FEA)</span>
+          <span class="skill-chip">Flow Simulation (CFD)</span>
+          <span class="skill-chip">Ansys Fluent</span>
+          <span class="skill-chip">Aerodynamics</span>
+          <span class="skill-chip">Heat transfer analysis</span>
+          <span class="skill-chip">Propulsion selection</span>
+        </div>
+      </div>
     </div>
 
     <div class="skill-block-divider"></div>
 
     <div class="skill-block reveal">
       <div class="skill-block-left">
-        <img class="skill-icon" src="Assets/icon-fab.png" alt="Fab icon">
+        <img loading="lazy" decoding="async" width="90" height="90" class="skill-icon" src="Assets/icon-fab.webp" alt="Fab icon">
         <p class="skill-block-name">Fabrication &amp; Manufacturing</p>
       </div>
-      <p class="skill-block-body">
-        I really enjoy fabrication and machining and take every opportunity to build and test my designs. I've worked with <span class="kw">CNC waterjets</span> for precision metal cutting, <span class="kw">mills and lathes</span> to machine steel and aluminum components, and both <span class="kw">MIG and TIG welding</span> for structural assemblies. On the additive manufacturing side, I use <span class="kw">FDM 3D printing</span> for rapid prototyping as well as functional end-use parts, including the shell for my high-speed drone. I've also worked with <span class="kw">CNC laser cutters</span>, <span class="kw">plastic thermoforming</span>, and <span class="kw">CNC milling</span> to manufacture precision components.
-      </p>
+      <div class="skill-block-right">
+        <p class="skill-block-body">
+          I really enjoy fabrication and machining and take every opportunity to build and test my designs. I've worked with <span class="kw">CNC waterjets</span> for precision metal cutting, <span class="kw">mills and lathes</span> to machine steel and aluminum components, and both <span class="kw">MIG and TIG welding</span> for structural assemblies. On the additive manufacturing side, I use <span class="kw">FDM 3D printing</span> for rapid prototyping as well as functional end-use parts, including the shell for my high-speed drone. I've also worked with <span class="kw">CNC laser cutters</span>, <span class="kw">plastic thermoforming</span>, and <span class="kw">CNC milling</span> to manufacture precision components.
+        </p>
+        <div class="skill-chips">
+          <span class="skill-chip">CNC waterjet</span>
+          <span class="skill-chip">Mill</span>
+          <span class="skill-chip">Lathe</span>
+          <span class="skill-chip">MIG &amp; TIG welding</span>
+          <span class="skill-chip">Laser cutter</span>
+          <span class="skill-chip">FDM 3D printing</span>
+          <span class="skill-chip">Thermoforming</span>
+          <span class="skill-chip">Mastercam 2026</span>
+        </div>
+      </div>
     </div>
 
     <div class="skill-block-divider"></div>
 
     <div class="skill-block reveal">
       <div class="skill-block-left">
-        <img class="skill-icon" src="Assets/icon-code.png" alt="Code icon">
+        <img loading="lazy" decoding="async" width="90" height="90" class="skill-icon" src="Assets/icon-code.webp" alt="Code icon">
         <p class="skill-block-name">Electronics &amp; Programming</p>
       </div>
-      <p class="skill-block-body">
-        I've been coding for 5+ years and have always enjoyed using software to solve engineering problems. My strongest languages are <span class="kw">Python</span>, <span class="kw">Java</span>, and <span class="kw">MATLAB</span>, and I have written flight control software in <span class="kw">Arduino</span>, including a hand-tuned <span class="kw">PID controller</span> for one of my drones. On the electronics side, I have experience <span class="kw">sourcing components</span>, performing fine-pitch <span class="kw">soldering</span>, and developing <span class="kw">custom PCB designs</span>. I have a strong understanding of programming fundamentals and am comfortable learning new languages, frameworks, and tools as project requirements evolve.
-      </p>
+      <div class="skill-block-right">
+        <p class="skill-block-body">
+          I've been coding for 5+ years and have always enjoyed using software to solve engineering problems. My strongest languages are <span class="kw">Python</span>, <span class="kw">Java</span>, and <span class="kw">MATLAB</span>, and I have written flight control software in <span class="kw">Arduino</span>, including a hand-tuned <span class="kw">PID controller</span> for one of my drones. On the electronics side, I have experience <span class="kw">sourcing components</span>, performing fine-pitch <span class="kw">soldering</span>, and developing <span class="kw">custom PCB designs</span>. I have a strong understanding of programming fundamentals and am comfortable learning new languages, frameworks, and tools as project requirements evolve.
+        </p>
+        <div class="skill-chips">
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">C</span>
+          <span class="skill-chip">Java</span>
+          <span class="skill-chip">MATLAB</span>
+          <span class="skill-chip">Arduino</span>
+          <span class="skill-chip">Embedded systems</span>
+          <span class="skill-chip">Flight controls (PID)</span>
+          <span class="skill-chip">Avionics</span>
+          <span class="skill-chip">Fine-pitch soldering</span>
+          <span class="skill-chip">PCB design (learning)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════════════ -->
+<section id="experience">
+  <p class="section-label reveal">Experience</p>
+  <h2 class="section-title reveal">Where I've Been</h2>
+  <p class="section-subtitle reveal">Internships, team roles, and the coursework behind the projects below.</p>
+
+  <div class="exp-list">
+
+    <div class="exp-group">
+      <p class="exp-group-label reveal">Work &amp; Involvement</p>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">May 2026 - Jul 2026</p>
+          <p class="exp-place">Los Angeles, CA</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">Los Angeles Department of Water and Power</h3>
+          <p class="exp-role">DERMS Fellowship</p>
+          <ul class="exp-points">
+            <li>Analyzed the operational gaps that the growing number of <span class="kw">distributed energy resources</span> creates for the grid, and designed DERMS approaches to help operators monitor and manage them as they come online.</li>
+            <li>Worked inside the DERMS software platforms and the utility communication protocols behind them, using <span class="kw">Modbus</span> and <span class="kw">IEEE 2030.5</span> to evaluate the telemetry, monitoring, and control paths between the utility and the DER endpoints.</li>
+            <li>Pulled the technical findings together with a cross-functional team into a summary presentation for stakeholders.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">May 2026 - Aug 2026</p>
+          <p class="exp-place">Los Angeles, CA</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">Dronefly</h3>
+          <p class="exp-role">Drone Repair &amp; Operations Intern</p>
+          <ul class="exp-points">
+            <li>Diagnosed and serviced high-end commercial drones that came back through <span class="kw">warranty claims</span>, recovering as many as possible instead of writing them off, which protects the margin on every returned unit.</li>
+            <li>Rebuilt how warranty and repair records were filed so a job could actually be traced back through the system later.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">Aug 2025 - Present</p>
+          <p class="exp-place">Cleveland, OH</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">CWRU Vertical Take-Off and Landing Team</h3>
+          <p class="exp-role">Mechanical Team Specialist</p>
+          <ul class="exp-points">
+            <li>Designed and fabricated the <span class="kw">payload pickup and release mechanism</span>, built to tolerate positional and alignment error so it stays reliable on autonomous competition runs.</li>
+            <li>Worked with the team to CAD and fabricate a jig that epoxies an aluminum motor mount to a <span class="kw">carbon fiber arm</span> for the competition drone's X8 configuration.</li>
+            <li>Machined the aluminum motor mount components on the <span class="kw">CNC waterjet</span>, belt sander, and mill.</li>
+            <li>Took third out of 20 teams at the 2026 championship.</li>
+          </ul>
+          <button class="exp-link" data-open-modal="vtol" data-open-tab="payload">See the build ↗</button>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">2025 - Present</p>
+          <p class="exp-place">Cleveland, OH</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">CWRU High-Speed Quadcopter</h3>
+          <p class="exp-role">Mechanical Design Lead</p>
+          <ul class="exp-points">
+            <li>Leading a team of engineers on a quadcopter targeting <span class="kw">500 kph</span>, designing the frame parametrically and running the flow simulations that cut drag without giving up the structural strength it needs at that speed.</li>
+            <li>Specified the electronics and mounting architecture and submitted the <span class="kw">bill of materials</span> that secured the team's funding.</li>
+          </ul>
+          <button class="exp-link" data-open-modal="drone">See the build ↗</button>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">Aug 2025 - Present</p>
+          <p class="exp-place">Cleveland, OH</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">CWRU Varsity Cross Country and Track &amp; Field</h3>
+          <p class="exp-role">Student-Athlete</p>
+          <ul class="exp-points">
+            <li>Running the 800m for CWRU while carrying a full dual-degree engineering course load.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-group">
+      <p class="exp-group-label reveal">Education</p>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">Class of 2029</p>
+          <p class="exp-place">Cleveland, OH</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">Case Western Reserve University</h3>
+          <p class="exp-role">BS Mechanical Engineering and BS Aerospace Engineering</p>
+          <ul class="exp-points">
+            <li><span class="kw">Dean's High Honors List</span>. Cumulative GPA <span class="kw">3.81 / 4.00</span>.</li>
+            <li>Relevant coursework: Mechanical Manufacturing, Thermodynamics, Dynamics, Strength of Materials, and Computers.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div class="exp-meta">
+          <p class="exp-date">Class of 2025</p>
+          <p class="exp-place">Los Angeles, CA</p>
+        </div>
+        <div class="exp-body">
+          <h3 class="exp-org">Harvard-Westlake School</h3>
+          <p class="exp-role">High School Diploma</p>
+          <ul class="exp-points">
+            <li><span class="kw">National Merit Scholar</span> and Dean's List.</li>
+            <li>Captain of the varsity track team, and a Presidential Gold Volunteer Service Award in 2023.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -1062,7 +1480,7 @@
 <section id="projects">
   <p class="section-label reveal">Projects</p>
   <h2 class="section-title reveal">What I've Built</h2>
-  <p class="section-subtitle reveal">Hardware, software, and everything in between. Click any project to open the full breakdown.</p>
+  <p class="section-subtitle reveal">Hardware, software, and everything in between. Open any project for the full breakdown.</p>
 
   <div class="projects-list">
 
@@ -1070,20 +1488,20 @@
       data-modal="drone"
       data-name="High Speed Quadcopter"
       data-type="Aerospace / CAD"
-      data-date="2025 – Present"
+      data-date="2025 - Present"
       data-github=""
-      data-img="Assets/image-dronev1.png"
-      data-desc="TODO: Write your description here. Wrap key words like @@SolidWorks@@, @@CFD@@, or @@ANSYS@@ with @@ to make them glow in the popup.">
+      data-img="Assets/image-dronev1.webp"
+      data-desc="Led a team of engineers building the fastest quadcopter we could. Parametric @@NACA-profile@@ shell and arm design, @@CFD@@-driven drag and stability optimization, @@FEA@@-validated material selection, and full electronics BoM management.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <img src="Assets/image-dronev1.png" alt="High Speed Quadcopter">
+          <img loading="lazy" decoding="async" src="Assets/image-dronev1.webp" alt="High Speed Quadcopter">
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Aerospace / CAD · 2025 – Present</p>
+        <p class="project-type-tag">Aerospace / CAD · 2025 - Present</p>
         <h3 class="project-row-title">High Speed Quadcopter</h3>
         <p class="project-row-desc">Led a team of engineers to build the fastest quadcopter possible. Parametric NACA-profile shell and arm design, CFD-driven drag and stability optimization, FEA-validated material selection, and full electronics BoM management.</p>
-        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Open the full breakdown</p>
       </div>
     </div>
 
@@ -1091,24 +1509,24 @@
       data-modal="vtol"
       data-name="CWRU VTOL"
       data-type="Mechanical Design"
-      data-date="2026 — 3rd Place Championship"
+      data-date="2026, 3rd Place Championship"
       data-github=""
-      data-img="Assets/image-vtollogo.png"
-      data-desc="TODO: Write your description here. Wrap key words like @@payload mechanism@@, @@CNC waterjet@@, or @@carbon fiber@@ with @@ to make them glow.">
+      data-img="Assets/image-vtollogo.webp"
+      data-desc="Designed a @@permanent magnet payload dropper@@ with a servo-driven release and a redundant magnet array, then redesigned the landing gear in @@CNC waterjet@@-cut aluminum after the printed version loosened in field testing. Third out of 20 teams at the championship.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <img src="Assets/image-vtollogo.png" alt="CWRU VTOL">
+          <img loading="lazy" decoding="async" src="Assets/image-vtollogo.webp" alt="CWRU VTOL">
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Mechanical Design · 2026 — 3rd Place</p>
+        <p class="project-type-tag">Mechanical Design · 2026, 3rd Place</p>
         <h3 class="project-row-title">CWRU VTOL</h3>
         <p class="project-row-desc">Designed a <span class="kw">permanent magnet payload dropper</span> with a servo-driven release mechanism and redundant magnet array for reliable payload retention. After the original 3D-printed landing gear became unstable and loosened during field testing, I redesigned and fabricated a stronger <span class="kw">aluminum landing gear</span> system to improve durability and reliability. Achieved a third-place finish out of 20 teams at the championship.</p>
         <div class="project-case-buttons">
           <button class="case-tab-btn" data-open-modal="vtol" data-open-tab="payload">Payload Mechanism</button>
           <button class="case-tab-btn" data-open-modal="vtol" data-open-tab="landing-gear">Aluminum Landing Gear</button>
         </div>
-        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Open the full breakdown</p>
       </div>
     </div>
 
@@ -1116,20 +1534,20 @@
       data-modal="esp32"
       data-name="ESP32 Drone"
       data-type="Hardware / Embedded"
-      data-date="Dec 2025 – Feb 2026"
+      data-date="Dec 2025 - Feb 2026"
       data-github=""
-      data-img="Assets/ESP32Drone/gyro_accel_circuit.jpg"
+      data-img="Assets/ESP32Drone/gyro_accel_circuit-card.webp"
       data-desc="A quadcopter built completely from the ground up, from the frame to the flight software. Designed and printed a @@SolidWorks@@ frame, hand-soldered a custom @@N-channel MOSFET@@ motor driver, built a wireless @@IMU@@ link over @@ESP-NOW@@, and hand-tuned the @@PID controller@@ that keeps it stable in the air.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <img src="Assets/ESP32Drone/gyro_accel_circuit.jpg" alt="ESP32 flight controller and IMU on breadboard">
+          <img loading="lazy" decoding="async" src="Assets/ESP32Drone/gyro_accel_circuit-card.webp" alt="ESP32 flight controller and IMU on breadboard">
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Hardware / Embedded · Dec 2025 – Feb 2026</p>
+        <p class="project-type-tag">Hardware / Embedded · Dec 2025 - Feb 2026</p>
         <h3 class="project-row-title">ESP32 Drone</h3>
         <p class="project-row-desc">A quadcopter built completely from the ground up, from the frame to the flight software. Designed and printed a SolidWorks frame, hand-soldered a custom N-channel MOSFET motor driver, built a wireless IMU link over ESP-NOW, and hand-tuned the PID controller that keeps it stable in the air.</p>
-        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Open the full breakdown</p>
       </div>
     </div>
 
@@ -1137,20 +1555,20 @@
       data-modal="emg"
       data-name="EMG Robotic Hand"
       data-type="Robotics / Biomechanics"
-      data-date="Nov 2025"
+      data-date="Nov 2025, 4th Place"
       data-github=""
-      data-img="Assets/EMGHand/full.jpg"
+      data-img="Assets/EMGHand/full-card.webp"
       data-desc="A robotic hand built with a teammate in a two-day CWRU hackathon, designed to open and close from real muscle activity instead of a manual switch. @@SolidWorks@@ fingers on @@hinge mates@@, a @@MyoWare@@ EMG sensor with a hand-tuned threshold, and a wireless @@ESP-NOW@@ link driving the servos.">
       <div class="project-image-col">
         <div class="project-img-wrap">
-          <img src="Assets/EMGHand/full.jpg" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
+          <img loading="lazy" decoding="async" src="Assets/EMGHand/full-card.webp" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
         </div>
       </div>
       <div class="project-text-col">
-        <p class="project-type-tag">Robotics / Biomechanics · Nov 2025</p>
+        <p class="project-type-tag">Robotics / Biomechanics · Nov 2025, 4th Place</p>
         <h3 class="project-row-title">EMG Robotic Hand</h3>
         <p class="project-row-desc">A robotic hand built with a teammate in a two-day CWRU hackathon, designed to open and close from real muscle activity instead of a manual switch. SolidWorks fingers on hinge mates, a MyoWare EMG sensor with a hand-tuned threshold, and a wireless ESP-NOW link driving the servos.</p>
-        <p class="project-open-hint"><span class="arrow">↗</span> Click for full details</p>
+        <p class="project-open-hint"><span class="arrow">↗</span> Open the full breakdown</p>
       </div>
     </div>
 
@@ -1186,11 +1604,13 @@
 
   <!-- ═══════════════════════════════════════
        GALLERY (auto-detected)
-       HOW TO ADD PHOTOS: drop numbered images into
-       Assets/Gallery/ — PHOTO1.jpg, PHOTO2.jpg,
-       PHOTO3.jpg, etc, starting at 1 with no gaps
-       in the numbering.
-       (.jpg, .jpeg, and .png are all supported.)
+       HOW TO ADD PHOTOS: each photo needs two files
+       in Assets/Gallery/, a grid-sized one and a
+       retina one, numbered starting at 1 with no
+       gaps: PHOTO1-800.webp and PHOTO1-1600.webp,
+       PHOTO2-800.webp and PHOTO2-1600.webp, and so
+       on. Run tools/optimize-images.sh to generate
+       both from a full-resolution original.
        The page automatically finds however many
        images are there; the first 6 show here and
        the rest appear under "More Photos". No code
@@ -1257,7 +1677,7 @@
 </footer>
 
 <!-- ══════════════════════════════════════════
-     PROJECT DETAIL MODAL (generic — used by
+     PROJECT DETAIL MODAL (generic, used by
      every project except the High Speed Quadcopter)
 ══════════════════════════════════════════ -->
 <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true">
@@ -1286,19 +1706,19 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     HIGH SPEED QUADCOPTER — DEDICATED MODAL
+     HIGH SPEED QUADCOPTER: DEDICATED MODAL
      HOW TO ADD THE IMAGES: this write-up references
      16 images (image1.png through image16.png), the
      same ones exported from the project write-up doc.
      Drop them into Assets/Drone/ named exactly
      image1.png, image2.png, ... image16.png and they
-     will appear automatically — no code changes needed.
+     will appear automatically, no code changes needed.
 ══════════════════════════════════════════ -->
 <div class="modal-backdrop" id="drone-modal" role="dialog" aria-modal="true">
   <div class="modal case-modal">
     <div class="modal-header">
       <div>
-        <p class="modal-type">Aerospace / CAD · 2025 – Present</p>
+        <p class="modal-type">Aerospace / CAD · 2025 - Present</p>
         <h2 class="modal-title">High Speed Quadcopter</h2>
       </div>
       <button class="modal-close" id="drone-modal-close" aria-label="Close">✕</button>
@@ -1313,11 +1733,11 @@
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image1.png" alt="Flow simulation without motor caps">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image1.webp" alt="Flow simulation without motor caps">
             <p class="case-caption">Simulation: No motor caps</p>
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image6.png" alt="Flow simulation with motor caps">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image6.webp" alt="Flow simulation with motor caps">
             <p class="case-caption">Simulation: Motor caps</p>
           </div>
         </div>
@@ -1326,10 +1746,10 @@
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image9.png" alt="Lift and drag parametric sweep chart">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image9.webp" alt="Lift and drag parametric sweep chart">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image5.png" alt="Lift and drag parametric sweep chart 2">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image5.webp" alt="Lift and drag parametric sweep chart 2">
           </div>
         </div>
 
@@ -1337,36 +1757,36 @@
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image8.png" alt="Center of pressure vs center of mass diagram">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image8.webp" alt="Center of pressure vs center of mass diagram">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image15.png" alt="Center of pressure shift across angle of attack">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image15.webp" alt="Center of pressure shift across angle of attack">
           </div>
         </div>
 
         <p class="modal-desc">Originally I designed with the goal of generating enough lift to maintain altitude independently, but I later concluded that goal wasn't particularly useful, since the drone descending isn't a problem as long as it stays stable and controllable. I shifted focus away from lift generation and toward drag reduction and stability instead.</p>
 
-        <p class="modal-desc">In V2, I began using <span class="kw">parametric curves</span> and global variables in SolidWorks so I could run studies across many shell and arm geometries without rebuilding the model each time. Both the shell and arms are based on a <span class="kw">NACA 00XX profile</span>: the shell is that profile rotated as a body of revolution, and the arms use the same profile family in cross section. I also spent significant time designing the motor nacelles, since their shape controls how clean the airflow stays around the motor and how much of the motor remains exposed to the airstream. Getting this geometry right proved just as important as the main shell shape. For comparison, I tested my original hand-drawn spline shell against a <span class="kw">Sears-Haack body</span> and against the NACA 00XX rotated shell, using data from earlier drag simulations. The Sears-Haack body produced more skin friction drag than the NACA 00XX shell, which wasn't what I expected given that Sears-Haack is typically cited as a minimum-drag shape — this makes sense once you account for the fact that Sears-Haack minimizes wave drag specifically, not skin friction drag at the speeds this drone actually flies at.</p>
+        <p class="modal-desc">In V2, I began using <span class="kw">parametric curves</span> and global variables in SolidWorks so I could run studies across many shell and arm geometries without rebuilding the model each time. Both the shell and arms are based on a <span class="kw">NACA 00XX profile</span>: the shell is that profile rotated as a body of revolution, and the arms use the same profile family in cross section. I also spent significant time designing the motor nacelles, since their shape controls how clean the airflow stays around the motor and how much of the motor remains exposed to the airstream. Getting this geometry right proved just as important as the main shell shape. For comparison, I tested my original hand-drawn spline shell against a <span class="kw">Sears-Haack body</span> and against the NACA 00XX rotated shell, using data from earlier drag simulations. The Sears-Haack body produced more skin friction drag than the NACA 00XX shell, which wasn't what I expected given that Sears-Haack is typically cited as a minimum-drag shape. It makes sense once you account for the fact that Sears-Haack minimizes wave drag specifically, not skin friction drag at the speeds this drone actually flies at.</p>
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image2.png" alt="Sears-Haack body shell geometry">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image2.webp" alt="Sears-Haack body shell geometry">
             <p class="case-caption">Sears-Haack Body</p>
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image16.png" alt="NACA 0016 body shell geometry">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image16.webp" alt="NACA 0016 body shell geometry">
             <p class="case-caption">NACA 0016 Body</p>
           </div>
         </div>
 
-        <p class="modal-desc">To analyze the parametric data systematically rather than reviewing spreadsheets manually, I wrote a <span class="kw">MATLAB</span> script to plot and compare results across the different bodies. I also added a <span class="kw">NACA duct</span>, which I derived a parametric equation for in <span class="kw">Desmos</span>, to the shell to bring in cooling air and vent it out the tail — specifically to cool the ESCs — and ran simulations to confirm the duct wasn't adding more drag than the cooling benefit justified.</p>
+        <p class="modal-desc">To analyze the parametric data systematically rather than reviewing spreadsheets manually, I wrote a <span class="kw">MATLAB</span> script to plot and compare results across the different bodies. I also added a <span class="kw">NACA duct</span>, which I derived a parametric equation for in <span class="kw">Desmos</span>, to the shell to bring in cooling air and vent it out the tail, specifically to cool the ESCs, and ran simulations to confirm the duct wasn't adding more drag than the cooling benefit justified.</p>
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image12.png" alt="MATLAB drag comparison plot across shell geometries">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image12.webp" alt="MATLAB drag comparison plot across shell geometries">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image11.png" alt="NACA duct design for ESC cooling">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image11.webp" alt="NACA duct design for ESC cooling">
           </div>
         </div>
       </div>
@@ -1378,11 +1798,11 @@
 
         <div class="case-img-pair">
           <div class="case-img-item">
-            <img src="Assets/Drone/image4.png" alt="PETG FEA von Mises stress results">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image4.webp" alt="PETG FEA von Mises stress results">
             <p class="case-caption">PETG</p>
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image13.png" alt="Carbon fiber reinforced nylon FEA results">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image13.webp" alt="Carbon fiber reinforced nylon FEA results">
             <p class="case-caption">CF Reinforced Nylon</p>
           </div>
         </div>
@@ -1391,20 +1811,20 @@
       <!-- Design Process -->
       <div class="case-section">
         <p class="modal-section-label">Design Process</p>
-        <p class="modal-desc">For most of the design, there wasn't too much iteration, but for the arms and motor attachments I had to test a bunch of configurations to make sure the wires could slide through easily, the motor was in the proper position and secure, and the arm was strong enough. I printed four or five versions, making changes until I was finally happy enough with the arms to print the full shell — and because of all that testing, no changes were needed on the full print.</p>
+        <p class="modal-desc">For most of the design, there wasn't too much iteration, but for the arms and motor attachments I had to test a bunch of configurations to make sure the wires could slide through easily, the motor was in the proper position and secure, and the arm was strong enough. I printed four or five versions, making changes until I was finally happy enough with the arms to print the full shell. Because of all that testing, no changes were needed on the full print.</p>
 
         <div class="case-img-grid-4">
           <div class="case-img-item">
-            <img src="Assets/Drone/image10.png" alt="Arm design version 1">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image10.webp" alt="Arm design version 1">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image14.png" alt="Arm design version 1 detail">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image14.webp" alt="Arm design version 1 detail">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image3.png" alt="Final arm design">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image3.webp" alt="Final arm design">
           </div>
           <div class="case-img-item">
-            <img src="Assets/Drone/image7.png" alt="Final arm design detail">
+            <img loading="lazy" decoding="async" data-src="Assets/Drone/image7.webp" alt="Final arm design detail">
           </div>
         </div>
         <div class="case-img-pair">
@@ -1422,7 +1842,7 @@
       <!-- Next Steps -->
       <div class="case-section" style="border-bottom: none; padding-bottom: 0;">
         <p class="modal-section-label">Next Steps</p>
-        <p class="modal-desc">The next phase involves finalizing the electronics selection, since the current list remains a shortlist rather than a confirmed build. After finalizing the motor, ESC, flight controller, and battery, the next step is completing the wiring and moving into test flights, since simulation and bench fitting can only provide limited insight without flight data. I also plan to investigate heat-sinking for select electronics, particularly the ESCs — improved passive cooling or more effective use of the NACA duct airflow could reduce the size of the cooling features currently built into the design, allowing for a further reduction in shell size and drag.</p>
+        <p class="modal-desc">The next phase involves finalizing the electronics selection, since the current list remains a shortlist rather than a confirmed build. After finalizing the motor, ESC, flight controller, and battery, the next step is completing the wiring and moving into test flights, since simulation and bench fitting can only provide limited insight without flight data. I also plan to investigate heat-sinking for select electronics, particularly the ESCs. Improved passive cooling or more effective use of the NACA duct airflow could reduce the size of the cooling features currently built into the design, allowing for a further reduction in shell size and drag.</p>
       </div>
 
     </div>
@@ -1434,7 +1854,7 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     CWRU VTOL — DEDICATED MODAL
+     CWRU VTOL: DEDICATED MODAL
      Two tabs: Payload Mechanism and Aluminum
      Landing Gear. HOW TO ADD THE IMAGES: drop
      these in named exactly as shown, no code
@@ -1442,8 +1862,8 @@
        Assets/image-vtollogo.png   (project card thumbnail)
        Assets/VTOL/dropper.jpg
        Assets/VTOL/payload.png
-       Assets/VTOL/demodrop.mp4  (converted from .gif — MP4 loops far lighter than GIF)
-       Assets/VTOL/wobbles.mp4   (converted from .gif — MP4 loops far lighter than GIF)
+       Assets/VTOL/demodrop.mp4  (converted from .gif, MP4 loops far lighter than GIF)
+       Assets/VTOL/wobbles.mp4   (converted from .gif, MP4 loops far lighter than GIF)
        Assets/VTOL/ldgcad.png
        Assets/VTOL/ldgassem.png
 ══════════════════════════════════════════ -->
@@ -1451,7 +1871,7 @@
   <div class="modal case-modal">
     <div class="modal-header">
       <div>
-        <p class="modal-type">Mechanical Design · 2025 — 3rd Place Championship</p>
+        <p class="modal-type">Mechanical Design · 2026, 3rd Place Championship</p>
         <h2 class="modal-title">CWRU VTOL</h2>
       </div>
       <button class="modal-close" id="vtol-modal-close" aria-label="Close">✕</button>
@@ -1462,21 +1882,21 @@
       <!-- Tab 1: Payload Mechanism -->
       <div class="case-tab-panel" data-panel="payload" data-modal-group="vtol">
         <div class="case-img-single case-img-single--wide">
-          <video class="case-gif" src="Assets/VTOL/demodrop.mp4" autoplay loop muted playsinline></video>
+          <video class="case-gif" data-src="Assets/VTOL/demodrop.mp4" autoplay loop muted playsinline preload="none"></video>
           <p class="case-caption">Dropper release demo</p>
         </div>
 
         <p class="modal-desc">Figuring out how the dropper would actually hold onto and release the payload took a lot of digging into how other teams solve the same problem. I looked at mechanical latches, servo hooks, and a few different magnetic setups before landing on magnetics as the cleanest option. I first built and tested a regular <span class="kw">electromagnet</span>: power it on and it holds, cut the power and it drops. It worked fine on the bench, but it only holds as long as it has power, so any brief power hiccup mid flight could drop the payload when I didn't want it to. That was a dealbreaker for something carrying real weight, so I switched to <span class="kw">permanent magnets with servo activation</span> instead. The magnets hold the payload on their own with no power needed at all, and a servo handles the release by physically pulling the plate away from the magnets when triggered. That gave me the same on-demand release control I wanted from the electromagnet, but since the holding force no longer depended on a live current, a power glitch couldn't cause an accidental drop anymore.</p>
 
         <div class="case-img-single">
-          <img src="Assets/VTOL/payload.png" alt="CAD model of the dropper mechanism">
+          <img loading="lazy" decoding="async" data-src="Assets/VTOL/payload.webp" alt="CAD model of the dropper mechanism">
           <p class="case-caption">CAD model of the dropper</p>
         </div>
 
         <p class="modal-desc">One problem I ran into with a bare magnet interface is that you can't guarantee good contact. If the payload gets picked up even slightly misaligned, you end up with an uneven contact patch and uneven holding force. To deal with that I added a plate between the magnet array and the payload mount so the pressure stayed constant across the interface even with small misalignments. Then I worked on the layout of the magnet array itself, spacing out multiple permanent magnets in a pattern where a minimum number of them would always be touching the plate no matter how the payload got picked up. That way the mechanism wasn't relying on one perfect alignment to hold the load. Even in the worst case pickup orientation there were still enough magnets making contact to carry it.</p>
 
         <div class="case-img-single">
-          <img src="Assets/VTOL/dropper.png" alt="Printed permanent magnet dropper mechanism">
+          <img loading="lazy" decoding="async" data-src="Assets/VTOL/dropper.webp" alt="Printed permanent magnet dropper mechanism">
           <p class="case-caption">Printed dropper mechanism</p>
         </div>
 
@@ -1488,21 +1908,21 @@
         <p class="modal-desc">After flying for a while I noticed the 3D printed landing gear attachments were loose and wobbled a lot more than I wanted, especially after repeated landings. A couple times the legs actually fell out mid use, which obviously isn't something you want happening on a drone. On top of that the printed legs were heavier than they needed to be and just weren't reliable long term, so I decided to redesign them in aluminum instead.</p>
 
         <div class="case-img-single case-img-single--wide">
-          <video class="case-gif" src="Assets/VTOL/wobbles.mp4" autoplay loop muted playsinline></video>
+          <video class="case-gif" data-src="Assets/VTOL/wobbles.mp4" autoplay loop muted playsinline preload="none"></video>
           <p class="case-caption">The printed attachments wobbling under load</p>
         </div>
 
         <p class="modal-desc">I set up the <span class="kw">CNC waterjet</span> to cut the new legs out of aluminum sheet, which got me most of the way to final shape but left me with rough edges and holes that weren't sized correctly for hardware. So after cutting I moved to post processing, milling out the mounting holes to the right diameter and then tapping them so I could bolt everything together directly instead of relying on printed threads that would strip out over time.</p>
 
         <div class="case-img-single">
-          <img src="Assets/VTOL/ldgcad.png" alt="CAD model of the aluminum landing gear">
+          <img loading="lazy" decoding="async" data-src="Assets/VTOL/ldgcad.webp" alt="CAD model of the aluminum landing gear">
           <p class="case-caption">Aluminum landing gear CAD</p>
         </div>
 
         <p class="modal-desc">To attach the legs to the drone arms I built a jig that held both the leg and the arm in the correct position and alignment while the epoxy cured. That kept every leg going on at the same angle and location instead of relying on eyeballing it each time, which mattered a lot once I had multiple legs to attach and needed them all to end up consistent with each other.</p>
 
         <div class="case-img-single">
-          <img src="Assets/VTOL/ldgassem.png" alt="Aluminum landing gear assembled onto the drone arm">
+          <img loading="lazy" decoding="async" data-src="Assets/VTOL/ldgassem.webp" alt="Aluminum landing gear assembled onto the drone arm">
           <p class="case-caption">Landing gear epoxied onto the arm</p>
         </div>
       </div>
@@ -1516,7 +1936,7 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     ESP32 DRONE — DEDICATED MODAL
+     ESP32 DRONE: DEDICATED MODAL
      Images live in Assets/ESP32Drone/:
        motor_driver_circuit.jpg
        gyro_accel_circuit.jpg
@@ -1526,7 +1946,7 @@
   <div class="modal case-modal">
     <div class="modal-header">
       <div>
-        <p class="modal-type">Hardware / Embedded · Dec 2025 – Feb 2026</p>
+        <p class="modal-type">Hardware / Embedded · Dec 2025 - Feb 2026</p>
         <h2 class="modal-title">ESP32 Drone</h2>
       </div>
       <button class="modal-close" id="esp32-modal-close" aria-label="Close">✕</button>
@@ -1537,33 +1957,33 @@
       <!-- Frame Design & Fabrication -->
       <div class="case-section">
         <p class="modal-section-label">Frame Design &amp; Fabrication</p>
-        <p class="modal-desc">This frame was my first real project in <span class="kw">SolidWorks</span> — before this I'd mostly just followed tutorials, so it was the first time I sat down and modeled something from a blank part file with no one telling me the next step. I learned a lot just from getting it wrong a few times: figuring out how to build the arms and body so I could change a dimension without breaking the rest of the assembly, working out clearance for the motors and wiring, and generally learning how SolidWorks wants you to think about a design before you start modeling instead of after. Once the frame was finished I sliced it and sent it to the printer, which came with its own round of dialing in supports and print settings so the arms came out strong enough to survive a rough landing without adding more material than the drone needed to carry.</p>
+        <p class="modal-desc">This frame was my first real project in <span class="kw">SolidWorks</span>. Before this I'd mostly just followed tutorials, so it was the first time I sat down and modeled something from a blank part file with no one telling me the next step. I learned a lot just from getting it wrong a few times: figuring out how to build the arms and body so I could change a dimension without breaking the rest of the assembly, working out clearance for the motors and wiring, and generally learning how SolidWorks wants you to think about a design before you start modeling instead of after. Once the frame was finished I sliced it and sent it to the printer, which came with its own round of dialing in supports and print settings so the arms came out strong enough to survive a rough landing without adding more material than the drone needed to carry.</p>
       </div>
 
       <!-- Parts Research & Motor Driver Circuit -->
       <div class="case-section">
         <p class="modal-section-label">Parts Research &amp; Motor Driver Circuit</p>
-        <p class="modal-desc">With the frame decided, I moved into research — going through datasheets and comparing options for motors, battery, and the rest of the electronics before ordering anything. For the motor driver circuit specifically, I used <span class="kw">CWRU's circuits lab</span> to dig through their parts bins and find <span class="kw">N-channel MOSFETs</span>, flyback diodes, and gate resistors that could actually handle the current the motors would pull, instead of just grabbing whatever came up first in a search.</p>
+        <p class="modal-desc">With the frame decided, I moved into research, going through datasheets and comparing options for motors, battery, and the rest of the electronics before ordering anything. For the motor driver circuit specifically, I used <span class="kw">CWRU's circuits lab</span> to dig through their parts bins and find <span class="kw">N-channel MOSFETs</span>, flyback diodes, and gate resistors that could actually handle the current the motors would pull, instead of just grabbing whatever came up first in a search.</p>
 
-        <p class="modal-desc">I'd only learned to solder shortly before starting this project, so building the actual board was its own learning curve — and the <span class="kw">pick-and-place N-channel MOSFETs</span> were easily the worst part of it. Pick-and-place parts are meant for a reflow oven and a pick-and-place machine, not a soldering iron and a steady hand, so getting clean joints on pads that small without bridging pins or lifting a pad off the board took a lot of retries.</p>
+        <p class="modal-desc">I'd only learned to solder shortly before starting this project, so building the actual board was its own learning curve, and the <span class="kw">pick-and-place N-channel MOSFETs</span> were easily the worst part of it. Pick-and-place parts are meant for a reflow oven and a pick-and-place machine, not a soldering iron and a steady hand, so getting clean joints on pads that small without bridging pins or lifting a pad off the board took a lot of retries.</p>
 
         <div class="case-img-single">
-          <img src="Assets/ESP32Drone/motor_driver_circuit.jpg" alt="Hand-soldered motor driver circuit board">
-          <p class="case-caption">Hand-soldered motor driver board — pick-and-place MOSFETs soldered with an iron</p>
+          <img loading="lazy" decoding="async" data-src="Assets/ESP32Drone/motor_driver_circuit.webp" alt="Hand-soldered motor driver circuit board">
+          <p class="case-caption">Hand-soldered motor driver board, pick-and-place MOSFETs soldered with an iron</p>
         </div>
       </div>
 
       <!-- Gyro/Accelerometer Circuit & Wireless Link -->
       <div class="case-section">
         <p class="modal-section-label">Gyro/Accelerometer Circuit &amp; Wireless Link</p>
-        <p class="modal-desc">Next was the gyro and accelerometer circuit — the <span class="kw">IMU</span> that lets the drone sense its own orientation. Once that was wired up, I connected it wirelessly to a second ESP32 using the <span class="kw">ESP-NOW protocol</span>, which lets two ESP32s talk directly to each other over Wi-Fi without a router or any real pairing process, just the receiver's MAC address. I wrote the <span class="kw">Arduino</span> firmware to test the link — reading the IMU on one board, packing the data up, and sending it over ESP-NOW to the other — and it worked cleanly on the first real test, no dropped packets or garbage data to chase down.</p>
+        <p class="modal-desc">Next was the gyro and accelerometer circuit, the <span class="kw">IMU</span> that lets the drone sense its own orientation. Once that was wired up, I connected it wirelessly to a second ESP32 using the <span class="kw">ESP-NOW protocol</span>, which lets two ESP32s talk directly to each other over Wi-Fi without a router or any real pairing process, just the receiver's MAC address. I wrote the <span class="kw">Arduino</span> firmware to test the link, reading the IMU on one board, packing the data up, and sending it over ESP-NOW to the other, and it worked cleanly on the first real test, no dropped packets or garbage data to chase down.</p>
 
         <div class="case-img-single">
-          <img src="Assets/ESP32Drone/gyro_accel_circuit.jpg" alt="ESP32, IMU, and buck converter wired on a breadboard">
+          <img loading="lazy" decoding="async" data-src="Assets/ESP32Drone/gyro_accel_circuit.webp" alt="ESP32, IMU, and buck converter wired on a breadboard">
           <p class="case-caption">ESP32 flight controller, IMU, and buck converter under bench test</p>
         </div>
 
-        <p class="modal-desc">I ended up reusing this same ESP-NOW setup on a later project, the <span class="kw">EMG Robotic Hand</span>, to make its control link wireless too — once I had a working wireless firmware pattern, adapting it to a new project was straightforward.</p>
+        <p class="modal-desc">I ended up reusing this same ESP-NOW setup on a later project, the <span class="kw">EMG Robotic Hand</span>, to make its control link wireless too. Once I had a working wireless firmware pattern, adapting it to a new project was straightforward.</p>
       </div>
 
       <!-- Assembly & Motor Testing -->
@@ -1571,16 +1991,16 @@
         <p class="modal-section-label">Assembly &amp; Motor Testing</p>
         <p class="modal-desc">Before assembly, I weighed every component and used the motors' rated thrust to calculate a target <span class="kw">thrust-to-weight ratio</span> of about 2:1, which the finished drone ended up hitting almost exactly once everything was actually assembled and weighed for real.</p>
 
-        <p class="modal-desc">Once the frame, electronics, and motors were all mounted, I went through each motor individually to confirm it spun up cleanly and responded to throttle before ever running all four together. That test caught a problem early: with all four motors spun up at once, the <span class="kw">battery's C-rating</span> was too low to supply the current all four motors wanted simultaneously, so the voltage sagged and the motors couldn't get the current they needed. Running the motors one at a time never revealed it, since a single motor's draw was well within what the battery could supply on its own — it only showed up once the draw from all four was added together.</p>
+        <p class="modal-desc">Once the frame, electronics, and motors were all mounted, I went through each motor individually to confirm it spun up cleanly and responded to throttle before ever running all four together. That test caught a problem early: with all four motors spun up at once, the <span class="kw">battery's C-rating</span> was too low to supply the current all four motors wanted simultaneously, so the voltage sagged and the motors couldn't get the current they needed. Running the motors one at a time never revealed it, since a single motor's draw was well within what the battery could supply on its own. It only showed up once the draw from all four was added together.</p>
       </div>
 
       <!-- PID Flight Control -->
       <div class="case-section" style="border-bottom: none; padding-bottom: 0;">
         <p class="modal-section-label">PID Flight Control</p>
-        <p class="modal-desc">For actual flight control I used a <span class="kw">PID controller</span> — a control loop that compares the drone's current orientation from the IMU against the orientation it's supposed to hold, and reacts to that error three ways: the <span class="kw">proportional</span> term reacts directly to how far off the drone currently is, the <span class="kw">integral</span> term accounts for how long the error has been building up so small persistent tilts still get corrected, and the <span class="kw">derivative</span> term reacts to how fast the error is changing, which damps the correction instead of letting it overshoot and oscillate. Tuning the three gains by hand meant a lot of short test runs, watching how the props responded to a tilt and adjusting from there.</p>
+        <p class="modal-desc">For actual flight control I used a <span class="kw">PID controller</span>, a control loop that compares the drone's current orientation from the IMU against the orientation it's supposed to hold, and reacts to that error three ways: the <span class="kw">proportional</span> term reacts directly to how far off the drone currently is, the <span class="kw">integral</span> term accounts for how long the error has been building up so small persistent tilts still get corrected, and the <span class="kw">derivative</span> term reacts to how fast the error is changing, which damps the correction instead of letting it overshoot and oscillate. Tuning the three gains by hand meant a lot of short test runs, watching how the props responded to a tilt and adjusting from there.</p>
 
         <div class="case-img-single case-img-single--wide">
-          <video src="Assets/ESP32Drone/propspin_mid.mp4" autoplay loop muted playsinline></video>
+          <video data-src="Assets/ESP32Drone/propspin_mid.mp4" autoplay loop muted playsinline preload="none"></video>
           <p class="case-caption">PID correcting motor speed in response to tilt</p>
         </div>
       </div>
@@ -1594,7 +2014,7 @@
 </div>
 
 <!-- ══════════════════════════════════════════
-     EMG ROBOTIC HAND — DEDICATED MODAL
+     EMG ROBOTIC HAND: DEDICATED MODAL
      Images live in Assets/EMGHand/:
        handdemo.mp4
        fingercad.png
@@ -1605,7 +2025,7 @@
   <div class="modal case-modal">
     <div class="modal-header">
       <div>
-        <p class="modal-type">Robotics / Biomechanics · Nov 2025</p>
+        <p class="modal-type">Robotics / Biomechanics · Nov 2025, 4th Place</p>
         <h2 class="modal-title">EMG Robotic Hand</h2>
       </div>
       <button class="modal-close" id="emg-modal-close" aria-label="Close">✕</button>
@@ -1617,53 +2037,53 @@
       <div class="case-section">
         <p class="modal-section-label">Origins</p>
         <div class="case-img-single case-img-single--wide">
-          <video src="Assets/EMGHand/handdemo.mp4" autoplay loop muted playsinline></video>
+          <video data-src="Assets/EMGHand/handdemo.mp4" autoplay loop muted playsinline preload="none"></video>
           <p class="case-caption">The finished hand gripping on command</p>
         </div>
 
-        <p class="modal-desc">This one came together at a CWRU hackathon, where I met an <span class="kw">electrical engineering</span> student at the kickoff and we decided to team up on the spot. The whole build only had a two-day window to begin with, and we lost even more of it when a storm rolled through partway into the second day and the venue cut the event short — so whatever we had working by that point was what we were presenting, no extra runway to fix anything after.</p>
+        <p class="modal-desc">This one came together at a CWRU hackathon, where I met an <span class="kw">electrical engineering</span> student at the kickoff and we decided to team up on the spot. The whole build only had a two-day window to begin with, and we lost even more of it when a storm rolled through partway into the second day and the venue cut the event short, so whatever we had working by that point was what we were presenting, no extra runway to fix anything after.</p>
       </div>
 
       <!-- Mechanical Design -->
       <div class="case-section">
         <p class="modal-section-label">Mechanical Design</p>
-        <p class="modal-desc">We split the mechanical design down the middle — I took the fingers in <span class="kw">SolidWorks</span> while my teammate designed the palm. Working in parallel saved time, but it also meant our two halves didn't natively agree with each other: he'd modeled the palm in a different CAD package, and getting his file into something my assembly could actually reference took some back and forth exporting through a neutral format before the two parts would mate up cleanly instead of just sitting next to each other.</p>
+        <p class="modal-desc">We split the mechanical design down the middle. I took the fingers in <span class="kw">SolidWorks</span> while my teammate designed the palm. Working in parallel saved time, but it also meant our two halves didn't natively agree with each other: he'd modeled the palm in a different CAD package, and getting his file into something my assembly could actually reference took some back and forth exporting through a neutral format before the two parts would mate up cleanly instead of just sitting next to each other.</p>
 
         <p class="modal-desc">The fingers were also my first real exposure to SolidWorks's <span class="kw">mate</span> types beyond just holding parts rigidly in place. Each knuckle uses a <span class="kw">hinge mate</span>, which constrains the joint to rotate about a single axis instead of letting it float freely, and getting the fingers to curl the way an actual hand does meant learning how mates stack up to remove degrees of freedom one at a time rather than pinning a part down all at once. It was the first assembly I'd built where the parts were actually supposed to move relative to each other after going together, not just bolt on and stay put.</p>
 
         <div class="case-img-single">
-          <img src="Assets/EMGHand/fingercad.png" alt="SolidWorks CAD model of the robotic finger with hinge mate joints">
-          <p class="case-caption">Finger CAD — hinge-mated knuckle joints</p>
+          <img loading="lazy" decoding="async" data-src="Assets/EMGHand/fingercad.webp" alt="SolidWorks CAD model of the robotic finger with hinge mate joints">
+          <p class="case-caption">Finger CAD, hinge-mated knuckle joints</p>
         </div>
       </div>
 
       <!-- EMG Sensing -->
       <div class="case-section">
         <p class="modal-section-label">EMG Sensing</p>
-        <p class="modal-desc">For activation we went with <span class="kw">EMG</span> — electromyography — instead of a button or switch, since the point was to have the hand respond to an actual muscle contraction rather than a manual trigger. Flexing a muscle generates a small electrical signal as the muscle fibers fire, and a <span class="kw">MyoWare Muscle Sensor</span> picks that signal up through electrodes placed over the forearm and outputs it as an analog voltage that climbs the harder you flex.</p>
+        <p class="modal-desc">For activation we went with <span class="kw">EMG</span>, electromyography, instead of a button or switch, since the point was to have the hand respond to an actual muscle contraction rather than a manual trigger. Flexing a muscle generates a small electrical signal as the muscle fibers fire, and a <span class="kw">MyoWare Muscle Sensor</span> picks that signal up through electrodes placed over the forearm and outputs it as an analog voltage that climbs the harder you flex.</p>
 
         <div class="case-img-single">
-          <img src="Assets/EMGHand/sensor.jpg" alt="MyoWare EMG muscle sensor held in a hand">
+          <img loading="lazy" decoding="async" data-src="Assets/EMGHand/sensor.webp" alt="MyoWare EMG muscle sensor held in a hand">
           <p class="case-caption">MyoWare EMG sensor</p>
         </div>
 
-        <p class="modal-desc">I wrote the <span class="kw">Arduino</span> firmware to read that raw signal and compare it against a <span class="kw">threshold</span> value: cross above it and the hand closes, drop back below it and the hand releases. Getting that threshold right took some trial and error, since the raw signal is noisy and the right cutoff depends a lot on how the electrodes are sitting on the skin that day. That problem was made worse by the fact that we didn't have the proper adhesive gel electrode pads the sensor is meant to be used with — just the bare snap connectors — so getting a usable read meant pressing the sensor directly against the skin and holding it firmly in place, which made the signal noisier and far more sensitive to exact placement than it would've been with real pads.</p>
+        <p class="modal-desc">I wrote the <span class="kw">Arduino</span> firmware to read that raw signal and compare it against a <span class="kw">threshold</span> value: cross above it and the hand closes, drop back below it and the hand releases. Getting that threshold right took some trial and error, since the raw signal is noisy and the right cutoff depends a lot on how the electrodes are sitting on the skin that day. That problem was made worse by the fact that we didn't have the proper adhesive gel electrode pads the sensor is meant to be used with, just the bare snap connectors, so getting a usable read meant pressing the sensor directly against the skin and holding it firmly in place, which made the signal noisier and far more sensitive to exact placement than it would've been with real pads.</p>
       </div>
 
       <!-- Wireless Control -->
       <div class="case-section">
         <p class="modal-section-label">Wireless Control</p>
-        <p class="modal-desc">Once the sensor was reading cleanly, the next step was getting that signal over to the servos driving the hand without running a wire across the table between two separate boards. I'd already built this same kind of link a few months earlier on the <span class="kw">ESP32 Drone</span> project, so instead of re-solving the problem from scratch I reused that pattern here: one ESP32 read the EMG sensor and ran the threshold logic, then sent a simple open/close command over <span class="kw">ESP-NOW</span> to a second ESP32 wired to the servos. Testing mostly meant flexing the sensor over and over and watching the servos to make sure the hand opened and closed every single time, not just most of the time — a servo that occasionally missed the signal isn't something you can trust in a live demo.</p>
+        <p class="modal-desc">Once the sensor was reading cleanly, the next step was getting that signal over to the servos driving the hand without running a wire across the table between two separate boards. I'd already built this same kind of link a few months earlier on the <span class="kw">ESP32 Drone</span> project, so instead of re-solving the problem from scratch I reused that pattern here: one ESP32 read the EMG sensor and ran the threshold logic, then sent a simple open/close command over <span class="kw">ESP-NOW</span> to a second ESP32 wired to the servos. Testing mostly meant flexing the sensor over and over and watching the servos to make sure the hand opened and closed every single time, not just most of the time. A servo that occasionally missed the signal isn't something you can trust in a live demo.</p>
       </div>
 
       <!-- Presentation & Future -->
       <div class="case-section" style="border-bottom: none; padding-bottom: 0;">
         <p class="modal-section-label">Presentation &amp; Future</p>
-        <p class="modal-desc">We presented the finished hand to a panel of judges at the end of the hackathon, which given we'd lost part of our already-short build window to the storm meant demoing whatever state it was in the moment the event wrapped. What we built was really just an <span class="kw">MVP</span> meant to prove the core idea worked under a heavy time constraint, not a finished product, and there's a lot of room to build on it with more time. The biggest gap is <span class="kw">sensor feedback</span> — right now the hand just closes on command with no sense of how hard it's actually gripping, so it can't tell the difference between barely touching something and crushing it. Adding force sensing to the fingertips and feeding that back into the grip logic would be the next real step toward a hand that can actually interact with what it's holding instead of just closing blindly.</p>
+        <p class="modal-desc">We presented the finished hand to a panel of judges at the end of the hackathon, which given we'd lost part of our already-short build window to the storm meant demoing whatever state it was in the moment the event wrapped. We took fourth. What we built was really just an <span class="kw">MVP</span> meant to prove the core idea worked under a heavy time constraint, not a finished product, and there's a lot of room to build on it with more time. The biggest gap is <span class="kw">sensor feedback</span>. Right now the hand just closes on command with no sense of how hard it's actually gripping, so it can't tell the difference between barely touching something and crushing it. Adding force sensing to the fingertips and feeding that back into the grip logic would be the next real step toward a hand that can actually interact with what it's holding instead of just closing blindly.</p>
 
         <div class="case-img-single case-img-single--wide">
-          <img src="Assets/EMGHand/full.jpg" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
-          <p class="case-caption">The assembled hand — servos, ESP32, and breadboard wiring</p>
+          <img loading="lazy" decoding="async" data-src="Assets/EMGHand/full.webp" alt="Assembled EMG-controlled robotic hand with EMG sensor and ESP32 boards">
+          <p class="case-caption">The assembled hand, with servos, ESP32, and breadboard wiring</p>
         </div>
       </div>
 
@@ -1679,11 +2099,11 @@
      CONTACT FORM MODAL
      EMAILJS SETUP INSTRUCTIONS:
      1. Go to https://emailjs.com and create a free account
-     2. Add an Email Service (Gmail works great) — note your Service ID
+     2. Add an Email Service (Gmail works great), then note your Service ID
      3. Create an Email Template. Use these template variables:
-          {{from_name}}   — sender's name (not used here, but good to have)
-          {{reply_to}}    — sender's email address
-          {{message}}     — the message body
+          {{from_name}}   sender's name (not used here, but good to have)
+          {{reply_to}}    sender's email address
+          {{message}}     the message body
         Set the "To email" in the template to: chance.krenzer@gmail.com
      4. Note your Template ID
      5. Go to Account > API Keys and copy your Public Key
@@ -1719,6 +2139,30 @@
      SCRIPTS
 ══════════════════════════════════════════ -->
 <script>
+  /* ── Mobile nav drawer ───────────────
+     Below 980px the link row does not fit next to the logo, so it becomes a
+     panel under the bar that this button opens. Closes on a link tap, on a tap
+     anywhere outside the nav, on Escape, and on a resize back up to desktop. */
+  const NAV_BREAKPOINT = 980;   // must match the nav media query in the stylesheet
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks  = document.getElementById('nav-links');
+
+  function setNavOpen(open) {
+    navLinks.classList.toggle('open', open);
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  function closeNav() { setNavOpen(false); }
+
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setNavOpen(!navLinks.classList.contains('open'));
+  });
+  navLinks.addEventListener('click', (e) => { if (e.target.closest('a')) closeNav(); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('nav')) closeNav(); });
+  window.addEventListener('resize', () => { if (window.innerWidth > NAV_BREAKPOINT) closeNav(); });
+
   /* ── Scroll reveal ───────────────────────── */
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -1733,7 +2177,7 @@
   }
 
   /* ══════════════════════════════════════════
-     ANIMATED DOT GRID — flowing perlin-style waves
+     ANIMATED DOT GRID: flowing perlin-style waves
      Uses two slowly drifting sine waves layered
      together so the brightness shifts feel organic
      and continuous rather than discrete ripple
@@ -1748,13 +2192,21 @@
     const MAX_R   = 2.0;
 
     let W, H, cols, rows;
+    let running = false;
     let mouse  = { x: -9999, y: -9999 };
-    let clicks = [];   // { cx, cy, age }   — user click ripples
+    let clicks = [];   // { cx, cy, age }: user click ripples
     let t      = 0;   // global time counter
 
+    // The backing store is sized to the device's pixels so the dots stay crisp
+    // on a phone, while the drawing code below keeps working in CSS pixels.
+    // Capped at 2x: a 3x buffer costs memory for no visible gain at this size.
     function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width  = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(W / SPACING) + 2;
       rows = Math.ceil(H / SPACING) + 2;
     }
@@ -1762,11 +2214,11 @@
     /* Smooth value noise: two overlapping sine planes moving at different
        angles and speeds so the pattern never repeats visibly. */
     function flowBrightness(x, y, time) {
-      // Wave A — slow diagonal drift, large scale
+      // Wave A: slow diagonal drift, large scale
       const a = Math.sin((x * 0.009 + y * 0.006) + time * 0.28) * 0.5 + 0.5;
-      // Wave B — slightly different angle, medium scale
+      // Wave B: slightly different angle, medium scale
       const b = Math.sin((x * 0.013 - y * 0.010) + time * 0.19 + 1.4) * 0.5 + 0.5;
-      // Wave C — fast tiny ripple for life
+      // Wave C: fast tiny ripple for life
       const c = Math.sin((x * 0.022 + y * 0.018) + time * 0.41 + 2.8) * 0.5 + 0.5;
       // Blend: A drives the big shape, B + C add texture
       return a * 0.55 + b * 0.30 + c * 0.15;
@@ -1785,12 +2237,12 @@
           const x = c * SPACING;
           const y = r * SPACING;
 
-          // Base flowing brightness — range roughly 0.04–0.13
+          // Base flowing brightness, range roughly 0.04 to 0.13
           const flow = flowBrightness(x, y, t);
           let brightness = 0.04 + flow * 0.09;
           let extraR = flow * (MAX_R - BASE_R) * 0.35;
 
-          // Mouse proximity glow — subtle, soft falloff
+          // Mouse proximity glow, subtle soft falloff
           const mdx = x - mouse.x, mdy = y - mouse.y;
           const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
           if (mDist < 100) {
@@ -1800,7 +2252,7 @@
             extraR     += soft * 0.8;
           }
 
-          // Click ripples — a single outward ring, slow and dim
+          // Click ripples: a single outward ring, slow and dim
           clicks.forEach(rip => {
             const dx   = x - rip.cx, dy = y - rip.cy;
             const dist = Math.sqrt(dx * dx + dy * dy);
@@ -1823,11 +2275,32 @@
         }
       }
 
-      requestAnimationFrame(draw);
+      if (running) requestAnimationFrame(draw);
     }
 
     window.addEventListener('resize', resize);
     resize();
+
+    // Nothing below the hero needs this animating, and a background rAF loop on
+    // a phone is a real battery cost. Pause once the hero scrolls away, and
+    // honour prefers-reduced-motion by painting a single static frame.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    function startGrid() {
+      if (running || reduceMotion.matches) return;
+      running = true;
+      requestAnimationFrame(draw);
+    }
+    function stopGrid() { running = false; }
+
+    if (reduceMotion.matches) {
+      draw();               // one static frame; the guard above ends the loop
+    } else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(entries => {
+        if (entries.some(e => e.isIntersecting)) { startGrid(); } else { stopGrid(); }
+      }).observe(document.getElementById('hero'));
+    } else {
+      startGrid();
+    }
 
     const heroEl = document.getElementById('hero');
     heroEl.addEventListener('mousemove', (e) => {
@@ -1842,21 +2315,23 @@
       const rect = canvas.getBoundingClientRect();
       clicks.push({ cx: e.clientX - rect.left, cy: e.clientY - rect.top, age: 0 });
     });
-
-    draw();
   })();
 
   /* ══════════════════════════════════════════
      HERO CUBE SLIDESHOW
-     Auto-detects how many numbered PNGs exist in
-     Assets/Slideshow/ (1.png, 2.png, 3.png, ...) by
-     trying to load them one at a time until one is
-     missing. No manual list to maintain — just drop
-     files in named sequentially starting at 1.
+     Auto-detects how many numbered images exist in
+     Assets/Slideshow/ (1.webp, 2.webp, 3.webp, ...).
+     Files are probed a batch at a time in parallel
+     rather than one after another, so the slideshow
+     starts after roughly one round trip instead of
+     one per file. No manual list to maintain, just
+     drop files in named sequentially starting at 1.
   ══════════════════════════════════════════ */
   (function() {
     const FOLDER        = 'Assets/Slideshow/';
+    const EXT           = 'webp';
     const MAX_TO_CHECK  = 60;     // safety ceiling on how many files we probe for
+    const BATCH         = 12;     // how many files we probe at once
     const INTERVAL_MS   = 4200;   // time each photo stays on screen
     const TRANSITION_MS = 950;    // must match the CSS transition duration below
 
@@ -1867,7 +2342,14 @@
     const frontImg    = document.getElementById('cube-img-front');
     const rightImg    = document.getElementById('cube-img-right');
 
+    // HEAD asks whether the file is there without downloading it, so counting
+    // the slideshow costs headers and only the two faces currently on the cube
+    // are actually fetched. Over file:// there is no server to ask, so fall
+    // back to loading the image.
     function imageExists(url) {
+      if (location.protocol === 'http:' || location.protocol === 'https:') {
+        return fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+      }
       return new Promise(resolve => {
         const img = new Image();
         img.onload  = () => resolve(true);
@@ -1876,7 +2358,7 @@
       });
     }
 
-    // Fisher–Yates shuffle — randomizes order without ever dropping an image
+    // Fisher-Yates shuffle, randomizes order without ever dropping an image
     function shuffle(arr) {
       const a = arr.slice();
       for (let i = a.length - 1; i > 0; i--) {
@@ -1888,11 +2370,15 @@
 
     async function detectImages() {
       const found = [];
-      for (let i = 1; i <= MAX_TO_CHECK; i++) {
-        const url = `${FOLDER}${i}.png`;
-        const ok = await imageExists(url);
-        if (!ok) break;
-        found.push(url);
+      for (let start = 1; start <= MAX_TO_CHECK; start += BATCH) {
+        const batch = [];
+        for (let i = start; i < start + BATCH && i <= MAX_TO_CHECK; i++) {
+          batch.push(`${FOLDER}${i}.${EXT}`);
+        }
+        const results = await Promise.all(batch.map(imageExists));
+        const gap = results.indexOf(false);
+        found.push(...batch.slice(0, gap === -1 ? batch.length : gap));
+        if (gap !== -1) break;
       }
       return found;
     }
@@ -1911,7 +2397,7 @@
       const images = await detectImages();
 
       if (images.length === 0) {
-        wrap.innerHTML = '<p class="cube-empty-label">Add photos to Assets/Slideshow/ named 1.png, 2.png, 3.png, etc. to start the slideshow.</p>';
+        wrap.innerHTML = '<p class="cube-empty-label">Add photos to Assets/Slideshow/ named 1.webp, 2.webp, 3.webp, etc. to start the slideshow.</p>';
         return;
       }
 
@@ -1923,11 +2409,16 @@
 
       // order = current lap's random sequence; every image appears exactly
       // once per lap, then gets reshuffled for the next lap.
+      // The first slot is pinned to the preloaded 1.webp so the hero has a
+      // picture the instant the page paints; every lap after this reshuffles.
       let order = shuffle(images);
+      const firstIdx = order.indexOf(`${FOLDER}1.${EXT}`);
+      if (firstIdx > 0) { order.splice(firstIdx, 1); order.unshift(`${FOLDER}1.${EXT}`); }
       let index = 0;
       let rotating = false;
       frontImg.src = order[0];
       rightImg.src = order[1];
+      new Image().src = order[2 % order.length];
 
       cubeInner.style.transition = `transform ${TRANSITION_MS}ms cubic-bezier(.65,0,.35,1)`;
 
@@ -1947,6 +2438,7 @@
           cubeInner.style.transform = 'rotateY(0deg)';
           frontImg.src = order[index];
           rightImg.src = order[(index + 1) % order.length];
+          new Image().src = order[(index + 2) % order.length];
           // Force reflow so the browser registers the snap before re-enabling the transition
           void cubeInner.offsetWidth;
           cubeInner.style.transition = `transform ${TRANSITION_MS}ms cubic-bezier(.65,0,.35,1)`;
@@ -1960,28 +2452,50 @@
     init();
   })();
 
+  // First open of "More Photos" is when the overflow photos actually get
+  // fetched. Shared with the gallery builder below, which calls it if the
+  // grid somehow got opened before the items existed.
+  function hydrateGalleryOverflow() {
+    document.querySelectorAll('#gallery-grid-more img[data-src]').forEach(img => {
+      img.src = img.dataset.src;
+      img.srcset = img.dataset.srcset;
+      delete img.dataset.src;
+      delete img.dataset.srcset;
+    });
+  }
+
   /* ══════════════════════════════════════════
      GALLERY
-     Auto-detects how many numbered photos exist in
-     Assets/Gallery/ (PHOTO1.jpg, PHOTO2.jpg,
-     PHOTO3.jpg, ... — .jpeg and .png also work) by
-     trying to load them one at a time until one is
-     missing. The first 6 go in the main grid;
-     anything beyond that goes under the "More Photos"
-     toggle. No manual list to maintain — just drop
-     files in named sequentially starting at 1.
+     Each photo ships at two widths, PHOTO1-800.webp
+     for the grid and PHOTO1-1600.webp for high-DPR
+     screens, and the browser picks one via srcset.
+     Two things keep this off the critical path:
+     nothing runs until the section is within about
+     a screen of the viewport, and existence is
+     checked with HEAD requests a batch at a time in
+     parallel, so probing costs headers rather than
+     whole photos. The first 6 go in the main grid;
+     anything beyond that sits behind the "More
+     Photos" toggle and is not fetched until opened.
   ══════════════════════════════════════════ */
   (function() {
     const FOLDER       = 'Assets/Gallery/';
-    const EXTENSIONS   = ['jpg', 'jpeg', 'png'];
     const MAX_TO_CHECK = 60;
+    const BATCH        = 12;
     const MAIN_COUNT   = 6;
 
     const grid     = document.getElementById('gallery-grid');
     const moreGrid = document.getElementById('gallery-grid-more');
     const moreWrap = document.getElementById('more-photos-wrap');
+    const section  = document.getElementById('gallery');
 
+    // HEAD asks the server whether the file is there without downloading it.
+    // Over file:// there is no server to ask, so fall back to loading the
+    // image, which is slower but keeps the page working when opened directly.
     function imageExists(url) {
+      if (location.protocol === 'http:' || location.protocol === 'https:') {
+        return fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+      }
       return new Promise(resolve => {
         const img = new Image();
         img.onload  = () => resolve(true);
@@ -1990,29 +2504,40 @@
       });
     }
 
-    async function findImage(index) {
-      for (const ext of EXTENSIONS) {
-        const url = `${FOLDER}PHOTO${index}.${ext}`;
-        if (await imageExists(url)) return url;
-      }
-      return null;
-    }
-
     async function detectImages() {
       const found = [];
-      for (let i = 1; i <= MAX_TO_CHECK; i++) {
-        const url = await findImage(i);
-        if (!url) break;
-        found.push(url);
+      for (let start = 1; start <= MAX_TO_CHECK; start += BATCH) {
+        const batch = [];
+        for (let i = start; i < start + BATCH && i <= MAX_TO_CHECK; i++) batch.push(i);
+        const results = await Promise.all(batch.map(i => imageExists(`${FOLDER}PHOTO${i}-800.webp`)));
+        const gap = results.indexOf(false);
+        found.push(...batch.slice(0, gap === -1 ? batch.length : gap));
+        if (gap !== -1) break;
       }
       return found;
     }
 
-    function makeGalleryItem(url) {
+    // eager items are the six on screen and get their source immediately.
+    // The rest are parked in data attributes until "More Photos" is clicked,
+    // because a lazy image inside the closed (display:none) overflow grid
+    // would otherwise be fetched right away.
+    function makeGalleryItem(index, eager) {
       const item = document.createElement('div');
       item.className = 'gallery-item';
       const img = document.createElement('img');
-      img.src = url;
+      const src    = `${FOLDER}PHOTO${index}-800.webp`;
+      const srcset = `${FOLDER}PHOTO${index}-800.webp 800w, ${FOLDER}PHOTO${index}-1600.webp 1600w`;
+      if (eager) {
+        img.src = src;
+        img.srcset = srcset;
+      } else {
+        img.dataset.src = src;
+        img.dataset.srcset = srcset;
+      }
+      img.sizes  = '(max-width: 760px) 50vw, 33vw';
+      img.decoding = 'async';
+      img.width  = 800;
+      img.height = 600;
       img.alt = 'Chance Krenzer project photo';
       item.appendChild(img);
       return item;
@@ -2023,20 +2548,35 @@
       const images = await detectImages();
 
       if (images.length === 0) {
-        grid.innerHTML = '<div class="gallery-item"><p class="gallery-placeholder-label">Add photos to Assets/Gallery/ named PHOTO1.jpg, PHOTO2.jpg, PHOTO3.jpg, etc. to fill this section.</p></div>';
+        grid.innerHTML = '<div class="gallery-item"><p class="gallery-placeholder-label">Add photos to Assets/Gallery/ named PHOTO1-800.webp and PHOTO1-1600.webp, PHOTO2-800.webp and PHOTO2-1600.webp, etc. to fill this section.</p></div>';
         return;
       }
 
-      images.slice(0, MAIN_COUNT).forEach(url => grid.appendChild(makeGalleryItem(url)));
+      images.slice(0, MAIN_COUNT).forEach(i => grid.appendChild(makeGalleryItem(i, true)));
 
       const rest = images.slice(MAIN_COUNT);
       if (rest.length > 0) {
-        rest.forEach(url => moreGrid.appendChild(makeGalleryItem(url)));
+        rest.forEach(i => moreGrid.appendChild(makeGalleryItem(i, false)));
         moreWrap.style.display = '';
+        // The toggle is hidden until this point, so it is normally clicked
+        // after these exist. Cover the other order anyway.
+        if (moreGrid.classList.contains('open')) hydrateGalleryOverflow();
       }
     }
 
-    init();
+    // Hold everything until the gallery is nearly on screen. A visitor who
+    // only reads the top of the page never pays for any of it.
+    if (!grid) return;
+    if (!section || !('IntersectionObserver' in window)) {
+      init();
+    } else {
+      const observer = new IntersectionObserver((entries, obs) => {
+        if (!entries.some(e => e.isIntersecting)) return;
+        obs.disconnect();
+        init();
+      }, { rootMargin: '800px 0px' });
+      observer.observe(section);
+    }
   })();
 
   /* ── Project modal (generic) ─────────────── */
@@ -2066,7 +2606,7 @@
       imgWrap.appendChild(el);
     } else {
       imgPH.style.display = '';
-      imgPH.textContent = 'No image yet — set data-img="images/yourfile.jpg" on the project row.';
+      imgPH.textContent = 'No image yet. Set data-img="Assets/yourfile.webp" on the project row.';
     }
 
     const footerEl = document.getElementById('modal-footer');
@@ -2091,17 +2631,38 @@
     emg:   document.getElementById('emg-modal'),
   };
 
+  // Everything inside a case modal ships with data-src instead of src, so none
+  // of it downloads on page load. loading="lazy" is not enough on its own here:
+  // a closed modal is display:none, and Chrome fetches lazy images inside a
+  // display:none subtree immediately because it cannot measure them. The first
+  // time a modal opens we attach the real sources; closing only pauses video,
+  // so reopening is instant.
+  function hydrateMedia(el) {
+    el.querySelectorAll('img[data-src]').forEach(img => {
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    });
+    el.querySelectorAll('video[data-src]').forEach(v => {
+      v.src = v.dataset.src;
+      delete v.dataset.src;
+      v.load();
+    });
+    el.querySelectorAll('video').forEach(v => { const p = v.play(); if (p) p.catch(() => {}); });
+  }
+
   function openCaseModal(key) {
     const el = caseModals[key];
     if (!el) return;
     el.classList.add('open');
     document.body.style.overflow = 'hidden';
+    hydrateMedia(el);
   }
   function closeCaseModal(key) {
     const el = caseModals[key];
     if (!el) return;
     el.classList.remove('open');
     document.body.style.overflow = '';
+    el.querySelectorAll('video').forEach(v => v.pause());
   }
   function closeAllCaseModals() {
     Object.keys(caseModals).forEach(closeCaseModal);
@@ -2145,19 +2706,26 @@
   }
 
   /* ── Direct-open buttons on project cards (e.g. VTOL's "Payload Mechanism" / "Aluminum Landing Gear") ── */
-  document.querySelectorAll('.project-case-buttons .case-tab-btn[data-open-modal]').forEach(btn => {
+  // data-open-tab is optional; without it the modal opens on its first panel,
+  // which is what the "See the build" buttons in Experience rely on.
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const modalKey = btn.dataset.openModal;
       const tab      = btn.dataset.openTab;
       openCaseModal(modalKey);
-      activateCaseTab(modalKey, tab);
+      if (tab) activateCaseTab(modalKey, tab);
     });
   });
 
   /* ── More projects / more photos toggles ─── */
   const moreProjectsBtn  = document.getElementById('more-projects-btn');
   const moreProjectsList = document.getElementById('projects-list-more');
+  // Nothing has been pasted into the overflow list yet, so the button would
+  // toggle an empty container. Hide it until there is something to show.
+  if (!moreProjectsList.querySelector('.project-row')) {
+    moreProjectsBtn.closest('.more-btn-wrap').style.display = 'none';
+  }
   moreProjectsBtn.addEventListener('click', () => {
     const isOpen = moreProjectsList.classList.toggle('open');
     moreProjectsBtn.textContent = isOpen ? 'Show Less ↑' : 'More Projects ↓';
@@ -2167,6 +2735,7 @@
   const morePhotosGrid = document.getElementById('gallery-grid-more');
   morePhotosBtn.addEventListener('click', () => {
     const isOpen = morePhotosGrid.classList.toggle('open');
+    if (isOpen) hydrateGalleryOverflow();
     morePhotosBtn.textContent = isOpen ? 'Show Less ↑' : 'More Photos ↓';
   });
 
@@ -2181,6 +2750,8 @@
     document.getElementById('form-status').textContent = '';
     document.getElementById('form-status').className = 'form-status';
     document.getElementById('contact-send-btn').disabled = false;
+    // Start fetching the SDK now so it is ready by the time they hit Send.
+    loadEmailJS().catch(() => {});
   }
 
   function closeContactModal() {
@@ -2196,13 +2767,36 @@
   /* ── Close any modal with Escape ─────────── */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+      closeNav();
       closeModal();
       closeAllCaseModals();
       closeContactModal();
     }
   });
 
-  /* ── EmailJS send ────────────────────────── */
+  /* ── EmailJS send ──────────────────────────
+     The SDK is ~10 KB of third-party JavaScript that only matters once
+     somebody actually opens the contact form, so it is injected on first
+     open rather than on page load. loadEmailJS() resolves once the SDK is
+     on the page and initialised, and repeat calls reuse the same promise. */
+  const EMAILJS_SRC = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+  let emailjsPromise = null;
+
+  function loadEmailJS() {
+    if (emailjsPromise) return emailjsPromise;
+    emailjsPromise = new Promise((resolve, reject) => {
+      const tag = document.createElement('script');
+      tag.src = EMAILJS_SRC;
+      tag.onload = () => {
+        emailjs.init({ publicKey: 'U2F9KA8NrbCgg3Rku' });
+        resolve();
+      };
+      tag.onerror = reject;
+      document.head.appendChild(tag);
+    });
+    return emailjsPromise;
+  }
+
   document.getElementById('contact-send-btn').addEventListener('click', function() {
     const emailEl   = document.getElementById('contact-email');
     const messageEl = document.getElementById('contact-message');
@@ -2225,12 +2819,15 @@
     }
 
     sendBtn.disabled = true;
-    statusEl.textContent = 'Sending…';
+    statusEl.textContent = 'Sending...';
     statusEl.className = 'form-status';
 
-    emailjs.send('service_la6g9cm', 'template_iqdnhsk', {
-      reply_to: email,
-      message:  message,
+    loadEmailJS()
+    .then(function() {
+      return emailjs.send('service_la6g9cm', 'template_iqdnhsk', {
+        reply_to: email,
+        message:  message,
+      });
     })
     .then(function() {
       statusEl.textContent = 'Message sent! I\'ll get back to you soon.';
@@ -2240,7 +2837,7 @@
       setTimeout(closeContactModal, 2200);
     }, function(error) {
       console.error('EmailJS error:', error);
-      statusEl.textContent = 'Failed to send — try emailing directly.';
+      statusEl.textContent = 'Failed to send. Try emailing me directly.';
       statusEl.className = 'form-status error';
       sendBtn.disabled = false;
     });
