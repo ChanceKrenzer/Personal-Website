@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+  Link-preview card, 1200 x 630. tools/og/render.py screenshots this once per
+  page with headless Edge, passing the text and picture in the query string,
+  and writes the results to public/Assets/og/. Re-run it after changing a
+  project title or render. Fonts and colours come from the site's stylesheet.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../public/styles.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { display: grid; grid-template-columns: 1fr 540px; align-items: center; background: #fff; }
+  .text { padding: 0 0 0 80px; }
+  h1 { font-size: 66px; line-height: 1.08; letter-spacing: -0.02em; }
+  .sub { margin-top: 20px; font-size: 30px; line-height: 1.35; color: var(--muted); max-width: 540px; }
+  .site { margin-top: 40px; font-size: 24px; color: var(--accent); }
+  .art { height: 630px; padding: 56px 64px 56px 0; display: flex; align-items: center; justify-content: center; }
+  .art img { max-width: 100%; max-height: 100%; object-fit: contain; }
+</style>
+</head>
+<body>
+  <div class="text">
+    <h1 id="title"></h1>
+    <div class="sub" id="sub"></div>
+    <div class="site">chancekrenzer.com</div>
+  </div>
+  <div class="art"><img id="art" alt=""></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  for (const id of ['title', 'sub']) document.getElementById(id).textContent = q.get(id) || '';
+  document.getElementById('art').src = q.get('img');
+</script>
+</body>
+</html>

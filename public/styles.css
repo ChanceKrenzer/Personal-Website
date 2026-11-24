@@ -1,0 +1,181 @@
+/* chancekrenzer.com
+   One stylesheet for every page. Deliberately plain: one typeface, a few
+   sizes, white space instead of boxes and rules, and the CAD renders and
+   photos doing the visual work. The typeface is IBM Plex Sans, the same as
+   the PDF portfolio. */
+
+/* IBM Plex Sans (SIL Open Font License), served from this site so first paint
+   doesn't wait on another host and the pages still render properly when
+   opened straight from disk. One variable file covers weights 400 to 700. */
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("Assets/fonts/ibm-plex-sans-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --ink:    #16191c;
+  --text:   #33383e;
+  --muted:  #6b7178;
+  --line:   #e6e8ea;
+  --accent: #1d5ea8;
+
+  --sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wrap: 1180px;
+  --gutter: 32px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 24px; }
+body { margin: 0; background: #fff; color: var(--text); font: 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+img, video { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { color: var(--ink); margin: 0; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+p, ul, figure { margin: 0; }
+sub { line-height: 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+.skip { position: absolute; left: -9999px; top: 8px; background: var(--ink); color: #fff; padding: 8px 14px; z-index: 20; }
+.skip:focus { left: 8px; }
+.muted { color: var(--muted); }
+
+/* ── Header (every page) ────────────────── */
+.bar .wrap { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; padding-top: 24px; padding-bottom: 8px; }
+.bar-name { color: var(--ink); font-weight: 600; }
+.home .bar .wrap { align-items: center; padding-top: 28px; }
+.home .bar-name { font-size: clamp(28px, 3vw, 38px); letter-spacing: -0.02em; line-height: 1.1; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 4px 22px; font-size: 15.5px; }
+.bar nav a { color: var(--muted); }
+.bar nav a:hover { color: var(--ink); text-decoration: none; }
+
+/* ── Home: one screen, no scroll ────────── */
+/* The quadcopter as a live model in the middle, the other projects around it
+   at one shared image size. Every tile is a link to its write-up. */
+.home { height: 100vh; height: 100svh; display: grid; grid-template-rows: auto minmax(0, 1fr); overflow: hidden; }
+.catalog-page { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; width: 100%; padding-bottom: 20px; }
+.intro { text-align: center; color: var(--muted); padding: 10px 0 0; }
+.catalog {
+  --tile: clamp(80px, 22vh, 230px);
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1fr);
+  grid-template-areas: "a hero b" "c hero d";
+  gap: 16px 32px; align-content: center; align-items: center; min-height: 0;
+}
+.tile { display: flex; flex-direction: column; align-items: center; text-align: center; color: var(--ink); }
+.tile:hover { text-decoration: none; }
+.tile img { width: 100%; height: var(--tile); object-fit: contain; margin-bottom: 12px; transition: transform 200ms ease; }
+.tile:hover img { transform: translateY(-3px); }
+.tile strong { display: block; font-weight: 600; font-size: 16.5px; line-height: 1.3; }
+.tile small { display: block; margin-top: 2px; color: var(--muted); font-size: 14.5px; line-height: 1.35; }
+.tile:hover strong, .hero a:hover strong { color: var(--accent); }
+.tile-a { grid-area: a; } .tile-b { grid-area: b; } .tile-c { grid-area: c; } .tile-d { grid-area: d; }
+.hero { grid-area: hero; }
+.hero a { color: var(--ink); }
+.hero a:hover { text-decoration: none; }
+.hero model-viewer {
+  width: 100%; height: calc(2 * var(--tile) + 60px); cursor: pointer;
+  --poster-color: transparent; background: transparent;
+}
+
+/* ── Project pages ──────────────────────── */
+.overview { padding: 56px 0 24px; }
+.overview h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.1; letter-spacing: -0.02em; }
+.overview .meta { margin-top: 8px; color: var(--muted); }
+.lede { font-size: 18.5px; line-height: 1.6; color: var(--ink); }
+.lede + .lede { margin-top: 14px; }
+
+.facts { display: flex; flex-wrap: wrap; gap: 12px 36px; margin-top: 28px; padding: 0; list-style: none; color: var(--muted); font-size: 15px; line-height: 1.35; }
+.facts strong { display: block; color: var(--ink); font-size: 20px; font-weight: 600; }
+
+.part { padding: 72px 0 8px; }
+.part > h2 { font-size: 27px; }
+.part > .note { margin-top: 6px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: center; padding-top: 40px; }
+.row.flip > :first-child { order: 2; }
+.row.wide { grid-template-columns: 1fr; }
+.row.top { align-items: start; }
+.row h3 { font-size: 19px; margin-bottom: 8px; }
+.row p + p, .row p + ul, .row ul + p, .row table + p { margin-top: 14px; }
+.row p + h3, .row ul + h3, .row .table-scroll + h3 { margin-top: 28px; }
+.row ul:not(.facts) { padding-left: 1.2em; }
+.row li + li { margin-top: 6px; }
+.prose { max-width: 42em; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.cols.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cols.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cols h3 { font-size: 17px; margin-bottom: 6px; }
+.cols p { font-size: 16px; }
+.note { color: var(--muted); font-size: 15px; line-height: 1.55; }
+.row .note { margin-top: 14px; }
+
+/* Figures: photos get softly rounded corners, cut-outs and charts sit
+   straight on the page. Every image links to its own file. */
+.fig a { display: block; }
+.fig img, .fig video { width: 100%; }
+.fig.photo img, .fig.photo video { border-radius: 4px; }
+.fig.crop img { aspect-ratio: 4 / 3; object-fit: cover; }
+.fig.cutout img { max-height: 360px; width: auto; margin: 0 auto; }
+.fig figcaption { margin-top: 8px; color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.figs { display: grid; gap: 24px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.figs.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+table.data { border-collapse: collapse; width: 100%; font-size: 15.5px; }
+table.data th, table.data td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); text-align: right; }
+table.data th:first-child, table.data td:first-child { text-align: left; }
+table.data thead th { color: var(--ink); font-weight: 600; }
+table.data tfoot td { color: var(--ink); font-weight: 600; border-bottom: 0; }
+.table-scroll { overflow-x: auto; }
+.table-scroll .note { margin-top: 12px; }
+
+.pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 72px 0 24px; }
+.foot { border-top: 1px solid var(--line); margin-top: 24px; padding: 20px 0 36px; font-size: 15px; color: var(--muted); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 960px) {
+  .row { grid-template-columns: 1fr; gap: 24px; }
+  .row.flip > :first-child { order: 0; }
+  .cols, .cols.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Short laptop screens: smaller images so the home page still fits. */
+@media (min-width: 761px) and (max-height: 820px) {
+  .catalog { --tile: clamp(70px, 17vh, 150px); }
+}
+
+/* On a phone the home page stacks, still inside one screen. */
+@media (max-width: 760px) {
+  :root { --gutter: 18px; }
+  body { font-size: 16.5px; }
+  .bar .wrap { padding-top: 16px; }
+  .catalog {
+    --tile: clamp(44px, 10svh, 100px);
+    grid-template-columns: 1fr 1fr; grid-template-areas: "hero hero" "a b" "c d";
+    gap: 14px 16px; align-content: start;
+  }
+  .hero model-viewer { height: clamp(150px, 30svh, 280px); }
+  .tile img { margin-bottom: 6px; }
+  .tile strong { font-size: 15px; }
+  .tile small { font-size: 13px; }
+  .intro { font-size: 15px; }
+  .home .bar-name { font-size: 26px; }
+
+  .overview { padding-top: 36px; }
+  .part { padding-top: 56px; }
+  .row { padding-top: 28px; }
+  .lede { font-size: 17.5px; }
+  .figs.three, .cols, .cols.two, .cols.four { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) and (max-height: 700px) {
+  .tile small { display: none; }
+  .hero model-viewer { height: 26svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile img { transition: none; }
+  .tile:hover img { transform: none; }
+}

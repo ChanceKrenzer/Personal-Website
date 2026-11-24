@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESP32 Quadcopter | Chance Krenzer</title>
+<meta name="description" content="A quadcopter built from scratch for about $60 in parts, with a hand soldered MOSFET motor driver, an ESP-NOW wireless link and a hand tuned PID attitude loop.">
+<link rel="canonical" href="https://chancekrenzer.com/esp32-quadcopter/">
+<link rel="icon" type="image/png" sizes="64x64" href="../Assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../Assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Chance Krenzer">
+<meta property="og:url" content="https://chancekrenzer.com/esp32-quadcopter/">
+<meta property="og:title" content="ESP32 Quadcopter | Chance Krenzer">
+<meta property="og:description" content="A quadcopter built from scratch for about $60 in parts, from the frame to the flight software.">
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og/esp32-quadcopter.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../Assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="bar-name" href="../index.html">Chance Krenzer</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Projects</a>
+      <a href="mailto:chance.krenzer@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="../Chance-Krenzer-Portfolio.pdf">Portfolio PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+<section class="overview">
+  <h1>ESP32 Quadcopter</h1>
+  <p class="meta">Personal project, December 2025 to February 2026</p>
+  <div class="row">
+    <div>
+      <p class="lede">A small quadcopter built from scratch for about $60 in parts. I wanted to own every layer of it once, from the frame to the motor driver, the wireless link and the flight control code.</p>
+      <ul class="facts">
+        <li><strong>~$60</strong>in parts</li>
+        <li><strong>1S, 80 mAh</strong>battery</li>
+        <li><strong>0</strong>dropped packets on the first wireless test</li>
+      </ul>
+    </div>
+    <figure class="fig cutout">
+      <img src="../Assets/Cutouts/esp32-frame.webp" width="900" height="564"
+        alt="Render of the printed quadcopter frame from the CAD: a perforated center plate, four thin arms and a round motor mount at each corner.">
+    </figure>
+  </div>
+</section>
+
+<section class="part" id="frame">
+  <h2>Frame</h2>
+  <div class="row wide">
+    <p class="prose">This was the first part I modeled in SolidWorks from a blank file, without a tutorial telling me the next step. I learned to build the arms and body so one dimension could change without breaking the rest, and to work out clearance for the motors and wiring before modeling instead of after. I checked the frame with FEA and printed it in PETG, with settings tuned so the arms survive a rough landing without carrying extra material.</p>
+  </div>
+</section>
+
+<section class="part" id="electronics">
+  <h2>Motor driver and wireless link</h2>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Motor driver</h3>
+      <p>Each motor is switched by an AO3400 N-channel MOSFET driven by a PWM pin on the ESP32. The ESP32 drives the gate at only 3.3 V, so the MOSFET has to switch fully on at that voltage. A half-on MOSFET acts like a resistor and turns the motor current into heat.</p>
+      <p>The AO3400 starts to conduct at a gate voltage of about 1 V and is rated at under 48 mΩ with only 2.5 V on the gate, so 3.3 V turns it fully on. At 0.5 A per motor that resistance costs about 12 mW and drops about 24 mV, which is nothing next to the motor.</p>
+      <p>Each motor also has a flyback diode across it. A motor winding is an inductor, and an inductor resists any sudden change in current. When the MOSFET switches off, the current has to go somewhere, and without the diode the voltage spikes until something breaks. The diode gives that current a safe loop. Gate resistors slow the switching edges slightly so the gate doesn't ring.</p>
+      <p>I pulled the parts from the CWRU circuits lab bins and soldered the board by hand. I had only just learned to solder, and the surface mount MOSFETs took a lot of retries to get clean joints without bridging pins.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig photo crop">
+        <a href="../Assets/ESP32Drone/motor_driver_circuit.webp"><img src="../Assets/ESP32Drone/motor_driver_circuit.webp" width="734" height="614" loading="lazy" decoding="async"
+          alt="A small green perfboard with hand-soldered MOSFETs, diodes and resistors, with red and blue wires running off it."></a>
+        <figcaption>Hand soldered MOSFET driver</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO8-1600.webp"><img src="../Assets/Gallery/PHOTO8-800.webp" width="600" height="800" loading="lazy" decoding="async"
+          alt="Two tiny brushed coreless motors with thin red, blue and white leads resting in an open palm."></a>
+        <figcaption>The motors</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <h3>Wireless link</h3>
+      <p>The IMU data streams over ESP-NOW to a second ESP32 on the ground. ESP-NOW lets two ESP32s talk directly over the Wi-Fi radio without a router, using only the receiver's MAC address. I wrote the Arduino firmware to read the IMU, pack the data and send it, and the link worked on the first real test with no dropped packets.</p>
+      <p>I later reused the same link for the <a href="../emg-hand/index.html">EMG robotic hand</a>.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig photo crop">
+        <a href="../Assets/ESP32Drone/gyro_accel_circuit.webp"><img src="../Assets/Cards/esp32.webp" width="900" height="676" loading="lazy" decoding="async"
+          alt="An ESP32 development board on a breadboard, wired to an IMU breakout and a small adjustable DC-DC converter."></a>
+        <figcaption>ESP32, IMU and DC-DC converter</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO7-1600.webp"><img src="../Assets/Gallery/PHOTO7-800.webp" width="450" height="800" loading="lazy" decoding="async"
+          alt="A multimeter and a bench power supply reading about 3.7 volts, clipped to a small blue buck converter board."></a>
+        <figcaption>Bench testing the converter</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="testing">
+  <h2>Thrust and the battery</h2>
+  <p class="note">Measured on the bench.</p>
+  <div class="row">
+    <div class="prose">
+      <p>Before assembly I weighed every part and set a thrust to weight target of 2:1. Below about 2:1 a drone has too little margin to recover from a disturbance, because hover already takes half the throttle.</p>
+      <p>Each motor tested fine on its own. With all four running, the pack voltage sagged and the motors couldn't get the current they needed.</p>
+      <p>A LiPo can only deliver about its capacity times its C rating in amps before its internal resistance drags the voltage down. The pack is a single 80 mAh cell, so even at 25C it can supply only about 25 × 0.08 = 2 A, roughly 0.5 A per motor with all four running. One motor was inside the original pack's limit, but four at once went past it, which is why testing one motor at a time could never have shown the problem.</p>
+      <p>I traced it to the C rating, fitted a 25C pack and ran the test again, and four motor thrust then cleared the 2:1 target.</p>
+    </div>
+    <figure class="fig photo">
+      <video src="../Assets/ESP32Drone/propspin_mid.mp4" poster="../Assets/ESP32Drone/propspin_mid-poster.webp" width="640" height="378"
+             muted loop playsinline preload="none" controls aria-label="The small quadcopter held on a desk with all four propellers spinning."></video>
+      <figcaption>All four motors running after the pack change</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="part" id="control">
+  <h2>Attitude control</h2>
+  <div class="row wide">
+    <div class="prose">
+      <p>The flight controller is a PID loop I wrote in Arduino. It compares the attitude from the IMU with the attitude it should hold. The proportional term pushes back in proportion to the error, the integral term removes small errors that persist, and the derivative term damps the correction so it doesn't overshoot.</p>
+      <p>Before risking a free flight, I mounted the drone on a three axis gimbal and tuned the gains by hand while the loop drove it through real angles. A gimbal holds the drone in place and adds friction and inertia, so it shows the loop responding but doesn't prove free flight. Free flight is next.</p>
+    </div>
+  </div>
+</section>
+
+<nav class="pager" aria-label="More projects">
+  <p><span class="muted">Previous project</span><br><a href="../vtol/index.html">VTOL Payload and Landing Gear</a></p>
+  <p><span class="muted">Next project</span><br><a href="../emg-hand/index.html">EMG Robotic Hand</a></p>
+</nav>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Chance Krenzer, Case Western Reserve University</span>
+    <nav aria-label="Contact">
+      <a href="mailto:chance.krenzer@gmail.com">chance.krenzer@gmail.com</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="https://github.com/ChanceKrenzer">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../media.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- Render stage for tools/cad/render.py: shows one GLB on a transparent
+     background with the same lighting the live viewer on the home page uses.
+     Query string: src, orbit, fov. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+<style>
+  html, body { margin: 0; background: transparent; }
+  model-viewer { width: 100vw; height: 100vh; --poster-color: transparent; background: transparent; }
+</style>
+</head>
+<body>
+<model-viewer id="mv" tone-mapping="neutral" exposure="1.05" shadow-intensity="0" interaction-prompt="none"></model-viewer>
+<script>
+  const q = new URLSearchParams(location.search), mv = document.getElementById('mv');
+  mv.cameraOrbit = q.get('orbit') || '-35deg 65deg auto';
+  mv.fieldOfView = q.get('fov') || 'auto';
+  mv.addEventListener('load', () => requestAnimationFrame(() => requestAnimationFrame(() => document.body.dataset.ready = '1')));
+  mv.src = q.get('src');
+</script>
+</body>
+</html>

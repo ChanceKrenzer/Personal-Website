@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VTOL Payload and Landing Gear | Chance Krenzer</title>
+<meta name="description" content="Payload pickup and release and a landing gear redesign for the CWRU VTOL team, 3rd of 20 at the 2026 championship.">
+<link rel="canonical" href="https://chancekrenzer.com/vtol/">
+<link rel="icon" type="image/png" sizes="64x64" href="../Assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../Assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Chance Krenzer">
+<meta property="og:url" content="https://chancekrenzer.com/vtol/">
+<meta property="og:title" content="VTOL Payload and Landing Gear | Chance Krenzer">
+<meta property="og:description" content="A permanent magnet payload plate and a landing gear redesign for the CWRU VTOL team, 3rd of 20 at the 2026 championship.">
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og/vtol.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../Assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="bar-name" href="../index.html">Chance Krenzer</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Projects</a>
+      <a href="mailto:chance.krenzer@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="../Chance-Krenzer-Portfolio.pdf">Portfolio PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+<section class="overview">
+  <h1>VTOL Payload and Landing Gear</h1>
+  <p class="meta">CWRU VTOL Team, mechanical team specialist, August 2025 to present</p>
+  <div class="row">
+    <div>
+      <p class="lede">Mechanical work on the team's competition drone, which placed 3rd of 20 at the 2026 championship. I designed the payload pickup and release, and redesigned the landing gear after a printed bracket failed in flight.</p>
+      <ul class="facts">
+        <li><strong>3rd of 20</strong>at the 2026 championship</li>
+        <li><strong>20</strong>magnets installed, 7 required</li>
+        <li><strong>0</strong>landing gear failures at the championship</li>
+      </ul>
+    </div>
+    <figure class="fig cutout">
+      <img src="../Assets/Cutouts/pickup-assembly.webp" width="735" height="477"
+        alt="CAD render of the pickup assembly: a grey top plate carrying servos and electronics over the blue magnet plate, with guide posts at the corners.">
+    </figure>
+  </div>
+</section>
+
+<!-- Payload -->
+<section class="part" id="payload">
+  <h2>Payload pickup and release</h2>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Why permanent magnets</h3>
+      <p>The drone lands on a payload, picks it up, flies it and lets it go on command. I looked at what other teams used, including mechanical latches, servo hooks and several magnetic setups, then built and bench tested an electromagnet. It held well, but only while powered, so any brief power loss in flight would drop the payload.</p>
+      <p>The final design holds with permanent magnets, which need no power, and releases when a servo pulls the plate 15 mm away from them. I also looked at an electropermanent magnet, which does both jobs in one part, but decided the added complexity wasn't worth it.</p>
+    </div>
+    <figure class="fig photo">
+      <video src="../Assets/VTOL/demodrop.mp4" poster="../Assets/VTOL/demodrop-poster.webp" width="480" height="326"
+             muted loop playsinline preload="none" controls aria-label="The drone hovering low over a grass field and releasing its payload."></video>
+      <figcaption>Release in flight</figcaption>
+    </figure>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <h3>Sizing the magnet array</h3>
+      <p>At least 7 magnets had to stay engaged wherever the drone sets down on the plate. I set that minimum from the payload weight and the pull force per magnet, then installed 20 and left spare pockets for retuning. A plate between the magnets and the payload spreads the contact so it stays even when the pickup is off angle.</p>
+      <p>I calculated the holding force and then tested it on the bench, and the two agreed.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig cutout">
+        <a href="../Assets/Portfolio/plate-underside.webp"><img src="../Assets/Cutouts/plate-underside.webp" width="680" height="649" loading="lazy" decoding="async"
+          alt="CAD view of the underside of the blue pickup plate, with rectangular magnet pockets spread in a grid across its face."></a>
+        <figcaption>Underside of the pickup plate</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/VTOL/dropper.webp"><img src="../Assets/Cards/vtol.webp" width="900" height="676" loading="lazy" decoding="async"
+          alt="The printed pink magnet plate held over a workbench, with red guide pins and empty magnet pockets."></a>
+        <figcaption>Printed plate before the magnets</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Numbers for the electrical team</h3>
+      <p>Bench firmware cycled the release while I checked that the servo still had torque to spare. I measured current with the motion blocked. That is a stall reading for sizing the power system, not a normal release, and a meter misses the short peaks.</p>
+      <p>Passive holding removes the risk of a drop from power loss. It doesn't protect against the servo failing to release, or an impact hard enough to shear the plate off.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Portfolio/dropper-closed.webp"><img src="../Assets/Portfolio/dropper-closed.webp" width="840" height="300" loading="lazy" decoding="async"
+          alt="Side view of the mechanism closed, with the magnet plate held against the top plate."></a>
+        <figcaption>Closed and holding</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Portfolio/dropper-open.webp"><img src="../Assets/Portfolio/dropper-open.webp" width="840" height="300" loading="lazy" decoding="async"
+          alt="Side view of the mechanism open, with the plate pulled 15 mm away by the servos."></a>
+        <figcaption>Open, with 15 mm of travel</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Loads -->
+<section class="part" id="loads">
+  <h2>Loads on the payload</h2>
+  <p class="note">Hand calculations with estimated accelerations, not measurements.</p>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>Pulling the payload off</h3>
+      <p>The payload is 6 lb, 2.72 kg, so it weighs 26.7 N. In flight the magnets also have to accelerate it, so the force pulling it off the plate is m(g&nbsp;+&nbsp;a).</p>
+      <p>A multirotor can't push the payload harder than its own thrust allows. The largest upward acceleration it can produce is about (T/W&nbsp;−&nbsp;1)g, so with a thrust to weight near 2 the payload sees at most about 2g. That puts the worst pull-off load at about 53 N.</p>
+      <p>Spread over the 7 magnets that are always engaged, each one has to hold about 7.6 N, or about 11.4 N with a factor of safety of 1.5.</p>
+    </div>
+    <div class="prose">
+      <h3>Sideways load</h3>
+      <p>Tilting to fly forward doesn't load the plate sideways much. The thrust tilts with the drone, so the payload's apparent weight stays roughly along the drone's own vertical axis. Sideways load comes from quick attitude changes, gusts on the payload and touching down off level. I estimated 0.5g, about 13 N.</p>
+      <p>Magnets are weak in that direction. Against shear they only hold through friction, and with a friction coefficient around 0.25 a magnet resists about a quarter of its pull. Carrying 13 N by friction alone would take about 53 N of extra clamping force, as much again as the pull-off case. Anything that locates the payload mechanically takes that load off the magnets.</p>
+    </div>
+  </div>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>Servo</h3>
+      <p>The release uses Flite Test 42 g ES3005 high torque servos, rated at about 10 kg·cm at 4.8 V and 12 kg·cm at 6 V, or 0.98 to 1.18 N·m. Force at the horn is torque over arm length, so at a 10 mm arm each servo can push about 98 to 118 N. A shorter arm gives more force and less travel, so the arm length sets the trade between breaking the magnets free and moving the plate the full 15 mm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Landing gear -->
+<section class="part" id="landing-gear">
+  <h2>Landing gear redesign</h2>
+
+  <div class="row">
+    <div class="figs">
+      <figure class="fig photo">
+        <video src="../Assets/VTOL/wobbles.mp4" poster="../Assets/VTOL/wobbles-poster.webp" width="468" height="542"
+               muted loop playsinline preload="none" controls aria-label="A hand rocking one of the drone's legs, which wobbles loosely in its printed bracket."></video>
+        <figcaption>The printed joint working loose</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Portfolio/failed-bracket.webp"><img src="../Assets/Portfolio/failed-bracket.webp" width="840" height="424" loading="lazy" decoding="async"
+          alt="A hand holding an orange 3D-printed bracket next to the carbon-fiber arm it used to clamp onto."></a>
+        <figcaption>The printed bracket that failed</figcaption>
+      </figure>
+    </div>
+    <div class="prose">
+      <h3>What failed</h3>
+      <p>Vibration backed the screws out of the printed leg brackets, and a leg came off in flight. The brackets also cracked on angled touchdowns.</p>
+      <h3>Why screws in plastic loosen</h3>
+      <p>A bolted joint holds because the tightened screw clamps the parts together, and friction from that clamp carries the load. Printed plastic is soft and creeps under a steady load, so the clamp force slowly bleeds away. Once it does, the joint slips, the screw carries the load directly, the hole wears oval, and vibration does the rest.</p>
+      <p>Aluminum is roughly 20 to 30 times stiffer than printed plastic and doesn't creep at room temperature, so a tapped aluminum joint keeps its clamp force.</p>
+      <p>Each leg also acts as a cantilever, so the bending moment is largest at its root, which is the bracket. That is where the printed part cracked.</p>
+    </div>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <h3>The new brackets</h3>
+      <p>Carbon fiber legs on aluminum brackets cut on the CNC waterjet. The waterjet leaves a tapered, rough wall, so I milled the bolt holes to size afterwards and tapped the threaded ones. Every joint is now a bolt into metal threads.</p>
+      <p>Stiffer isn't automatically better on landing. A landing is an energy problem, and a stiffer leg stops the aircraft over a shorter distance, which raises the peak force. I didn't measure stiffness, so what I can point to is zero gear failures across the championship.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig cutout">
+        <a href="../Assets/VTOL/ldgcad.webp"><img src="../Assets/Cutouts/leg-bracket.webp" width="533" height="706" loading="lazy" decoding="async"
+          alt="CAD render of the aluminum bracket that joins a landing leg to the arm, with two ring clamps on top and a tube socket below."></a>
+        <figcaption>Aluminum leg bracket</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO6-1600.webp"><img src="../Assets/Gallery/PHOTO6-800.webp" width="750" height="800" loading="lazy" decoding="async"
+          alt="An aluminum sheet on the slatted bed of a CNC waterjet, with rows of bracket shapes cut out of it."></a>
+        <figcaption>Cutting the brackets on the waterjet</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="prose">
+      <h3>One jig for every leg</h3>
+      <p>Each leg was epoxied to its arm in a jig that holds it square, so all three came out at the same angle and position. I also co-designed a second jig that bonds the four motor mounts to the X8 arms for a senior design project.</p>
+      <p>The new gear is 10% lighter than the printed version, by SolidWorks mass properties with an estimate for the epoxy.</p>
+    </div>
+    <figure class="fig">
+      <a href="../Assets/VTOL/ldgassem.webp"><img src="../Assets/VTOL/ldgassem.webp" width="467" height="470" loading="lazy" decoding="async"
+        alt="CAD render of the bonding jig holding a vertical leg square to a horizontal arm tube."></a>
+      <figcaption>The bonding jig</figcaption>
+    </figure>
+  </div>
+</section>
+
+<nav class="pager" aria-label="More projects">
+  <p><span class="muted">Previous project</span><br><a href="../quadcopter/index.html">High-Speed Quadcopter</a></p>
+  <p><span class="muted">Next project</span><br><a href="../esp32-quadcopter/index.html">ESP32 Quadcopter</a></p>
+</nav>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Chance Krenzer, Case Western Reserve University</span>
+    <nav aria-label="Contact">
+      <a href="mailto:chance.krenzer@gmail.com">chance.krenzer@gmail.com</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="https://github.com/ChanceKrenzer">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../media.js" defer></script>
+</body>
+</html>

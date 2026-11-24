@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMG Robotic Hand | Chance Krenzer</title>
+<meta name="description" content="A tendon driven robotic hand that opens and closes on a forearm muscle signal, built in two days at the CWRU hackathon, 4th of 12 teams.">
+<link rel="canonical" href="https://chancekrenzer.com/emg-hand/">
+<link rel="icon" type="image/png" sizes="64x64" href="../Assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../Assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Chance Krenzer">
+<meta property="og:url" content="https://chancekrenzer.com/emg-hand/">
+<meta property="og:title" content="EMG Robotic Hand | Chance Krenzer">
+<meta property="og:description" content="A tendon driven robotic hand that opens and closes on a muscle signal. Built in two days, 4th of 12 teams.">
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og/emg-hand.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../Assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="bar-name" href="../index.html">Chance Krenzer</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Projects</a>
+      <a href="mailto:chance.krenzer@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="../Chance-Krenzer-Portfolio.pdf">Portfolio PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+<section class="overview">
+  <h1>EMG Robotic Hand</h1>
+  <p class="meta">CWRU Hackathon, November 2025, 4th of 12 teams</p>
+  <div class="row">
+    <div>
+      <p class="lede">A robotic hand that opens and closes on a forearm muscle signal. I built it over one weekend with an electrical engineering teammate, and we demonstrated it live to the judges.</p>
+      <ul class="facts">
+        <li><strong>2 days</strong>from start to demo</li>
+        <li><strong>4th of 12</strong>teams</li>
+      </ul>
+    </div>
+    <figure class="fig photo">
+      <video src="../Assets/EMGHand/handdemo.mp4" poster="../Assets/EMGHand/handdemo-poster.webp" width="640" height="360"
+             muted loop playsinline preload="none" controls aria-label="A person with a sensor on their forearm opens and closes their hand, and the robotic hand on the table opens and closes with it."></video>
+      <figcaption>The hand following a muscle signal</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="part" id="build">
+  <h2>The build</h2>
+  <div class="row wide">
+    <div class="prose">
+      <p>I met my teammate at the kickoff and we decided to build together on the spot. I did the finger design and the firmware. My teammate built the sensing hardware and modeled the palm in a different CAD package, which I brought into my SolidWorks assembly through a neutral file format.</p>
+      <p>A storm cut the second day short, so what worked when the venue closed was what we demonstrated. We placed 4th of 12.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="fingers">
+  <h2>Fingers</h2>
+  <div class="row">
+    <div class="prose">
+      <p>Each finger is three hinged links with a cable running through them. A servo per finger pulls its cable, which works like a tendon, to close the finger. When the tension comes off, an elastic element pulls the finger straight again, and stops on the hinges limit the travel.</p>
+      <p>This was the first assembly I built where the parts were meant to move after they went together. Each knuckle uses a hinge mate, which leaves the joint free to rotate about one axis, and getting the fingers to curl like a real hand meant learning how mates remove degrees of freedom one at a time.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig cutout">
+        <a href="../Assets/EMGHand/fingercad.webp"><img src="../Assets/Cutouts/finger.webp" width="900" height="428" loading="lazy" decoding="async"
+          alt="Render of two grey finger links from the CAD, with bosses for the hinge pins and a channel for the tendon cable."></a>
+        <figcaption>Finger links in CAD</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/EMGHand/full.webp"><img src="../Assets/EMGHand/full.webp" width="900" height="1600" loading="lazy" decoding="async"
+          alt="The robotic hand's black printed fingers and servos mounted on a cardboard box, wired to an ESP32 on a breadboard."></a>
+        <figcaption>The assembled hand</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="signal">
+  <h2>From muscle signal to motion</h2>
+  <div class="row">
+    <div class="prose">
+      <p>A contracting muscle produces a small electrical signal as its fibers fire. A MyoWare sensor picks it up through electrodes on the forearm and outputs an envelope voltage that rises the harder you flex. The ESP32 firmware compares that voltage against a threshold. Above it the hand closes, and below it the hand opens. The command goes over ESP-NOW to a second ESP32 driving the servos, reusing the link from my <a href="../esp32-quadcopter/index.html">ESP32 quadcopter</a>.</p>
+      <p>We only had bare snap connectors, not the adhesive gel electrodes the sensor is meant for, so the sensor had to be pressed against the skin and the signal changed with placement. I set the threshold by hand against a live trace, then flexed over and over to make sure the hand responded every time.</p>
+    </div>
+    <figure class="fig photo crop">
+      <a href="../Assets/EMGHand/sensor.webp"><img src="../Assets/EMGHand/sensor.webp" width="900" height="1600" loading="lazy" decoding="async"
+        alt="A red triangular MyoWare muscle sensor with three snap connectors, held in an open palm."></a>
+      <figcaption>MyoWare EMG sensor</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="part" id="next">
+  <h2>Next</h2>
+  <div class="row wide">
+    <p class="prose">Add force sensing to the fingertips and feed it back into the grip. Right now the hand closes with no sense of how hard it is squeezing, so it can't tell barely touching something from crushing it.</p>
+  </div>
+</section>
+
+<nav class="pager" aria-label="More projects">
+  <p><span class="muted">Previous project</span><br><a href="../esp32-quadcopter/index.html">ESP32 Quadcopter</a></p>
+  <p><span class="muted">Also</span><br><a href="../shop/index.html">Making the Parts</a></p>
+</nav>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Chance Krenzer, Case Western Reserve University</span>
+    <nav aria-label="Contact">
+      <a href="mailto:chance.krenzer@gmail.com">chance.krenzer@gmail.com</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="https://github.com/ChanceKrenzer">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../media.js" defer></script>
+</body>
+</html>

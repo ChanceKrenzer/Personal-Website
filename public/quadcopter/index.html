@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>High-Speed Quadcopter | Chance Krenzer</title>
+<meta name="description" content="A 3D printed quadcopter designed for a 500 km/h level pass. Electronics selection from first principles, a 243 setup powertrain trade study, CFD, shell FEA and flight log analysis.">
+<link rel="canonical" href="https://chancekrenzer.com/quadcopter/">
+<link rel="icon" type="image/png" sizes="64x64" href="../Assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../Assets/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Chance Krenzer">
+<meta property="og:url" content="https://chancekrenzer.com/quadcopter/">
+<meta property="og:title" content="High-Speed Quadcopter | Chance Krenzer">
+<meta property="og:description" content="A 3D printed quadcopter designed for a 500 km/h level pass.">
+<meta property="og:image" content="https://chancekrenzer.com/Assets/og/quadcopter.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../Assets/fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="bar-name" href="../index.html">Chance Krenzer</a>
+    <nav aria-label="Main">
+      <a href="../index.html">Projects</a>
+      <a href="mailto:chance.krenzer@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="../Chance-Krenzer-Portfolio.pdf">Portfolio PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+<section class="overview">
+  <h1>High-Speed Quadcopter</h1>
+  <p class="meta">CWRU design team, mechanical design lead, December 2025 to present</p>
+  <div class="row">
+    <div>
+      <p class="lede">A six person team at CWRU building a 3D printed quadcopter to fly a level pass at 500 km/h. I lead the mechanical design and the electronics, and I run the powertrain trade study, the CFD and the FEA.</p>
+      <p class="lede">500 km/h is our design target, not a record attempt. The Guinness record for a battery powered quadcopter is 657.59 km/h, set by Luke and Mike Bell in December 2025.</p>
+      <ul class="facts">
+        <li><strong>567 km/h</strong>predicted top speed</li>
+        <li><strong>243</strong>powertrains evaluated</li>
+        <li><strong>2.49 kg</strong>modeled weight</li>
+        <li><strong>16</strong>printed parts</li>
+      </ul>
+    </div>
+    <figure class="fig cutout">
+      <img src="../Assets/Cutouts/quadcopter.webp" width="1079" height="642"
+        alt="Render of the quadcopter airframe from the CAD: a long red printed body with four black arms ending in motor nacelles.">
+    </figure>
+  </div>
+  <div class="row wide">
+    <div class="cols">
+      <div><h3>Built</h3><p>Version 2, the 12S speed aircraft, has its printed shell, arms and nacelles assembled. Version 1 is a 6S quadcopter with 7 in props that the flight controller setup and tuning get proven on first.</p></div>
+      <div><h3>Flown</h3><p>Version 1, for about an hour in total. Version 2 has only made an attempted hover, so every speed and structural number for it on this page comes from a model.</p></div>
+      <div><h3>Next</h3><p>Move the electronics into the shell, and fly a notch filter for the vibration the version 1 logs turned up.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Printed airframe -->
+<section class="part" id="airframe">
+  <h2>Printed airframe</h2>
+
+  <div class="row">
+    <div class="prose">
+      <p>The airframe is sixteen printed parts joined with heat set inserts and screws. I kept the number of different screw sizes low, weighed against how hard each part is to print.</p>
+      <p>Packaging decided the body size. Putting the ESCs in a ring around the body axis saved 64 mm of length and 36 g in CAD. Even then, the original 88 mm body only fit the battery at 652 mm long. Parametric studies showed that added length costs more drag than added diameter, so I widened the body to 93 mm instead.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig photo">
+        <a href="../Assets/image-dronev1.webp"><img src="../Assets/image-dronev1.webp" width="540" height="462" loading="lazy" decoding="async"
+          alt="Translucent CAD render of the quadcopter showing the battery, the ring of ESCs and the wire runs inside the body."></a>
+        <figcaption>Battery, ESC ring and wire runs in CAD</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO4-1600.webp"><img src="../Assets/Gallery/PHOTO4-800.webp" width="800" height="568" loading="lazy" decoding="async"
+          alt="The red printed shell lying open on a workbench with a battery pack and wiring laid inside it and black arms and motors attached."></a>
+        <figcaption>Electronics laid into the printed shell</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <p>I printed four arm prototypes before the final one. The first pinched the motor wires, let the rotor rub, and left screw holes exposed to the flow. The final arm has a wider wire slot, a recess for the rotor and a cap that covers the screws.</p>
+      <p>Because I settled the arm first, the full shell printed once with no changes.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig photo crop">
+        <a href="../Assets/Drone/image10.webp"><img src="../Assets/Drone/image10.webp" width="433" height="578" loading="lazy" decoding="async"
+          alt="A pink first-version printed arm and nacelle held in a hand."></a>
+        <figcaption>First arm</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Drone/image3.webp"><img src="../Assets/Drone/image3.webp" width="433" height="578" loading="lazy" decoding="async"
+          alt="The final black printed arm and nacelle with a blue brushless motor mounted on top and wires running out of the slot."></a>
+        <figcaption>Final arm</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="prose">
+      <p>The nose cone is thermoformed from clear sheet over a mold I printed, so the camera can see out of the front.</p>
+    </div>
+    <figure class="fig photo crop">
+      <a href="../Assets/Gallery/PHOTO3-1600.webp"><img src="../Assets/Gallery/PHOTO3-800.webp" width="600" height="800" loading="lazy" decoding="async"
+        alt="A tabletop vacuum former with a dark printed cone-shaped mold on its perforated plate."></a>
+      <figcaption>Thermoforming the nose cone</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Electronics from first principles -->
+<section class="part" id="electronics">
+  <h2>Electronics from first principles</h2>
+  <p class="note">Version 2, the 12S speed aircraft. Model numbers at the 550 km/h design point in 30 °C air. None of this has been measured in flight yet.</p>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>The propeller sets top speed</h3>
+      <p>A propeller works like a screw. Each revolution moves it forward by its pitch, so the fastest it can pull the aircraft is pitch times revolutions per second.</p>
+      <p>APC rates its E series props to a structural limit of 145,000 RPM divided by the diameter in inches. Cut to 5.5 in, that is 26,364 RPM. I hold 95% of it, 25,045 RPM, or 417 revolutions per second. With a fitted pitch of 0.402 m, the pitch speed is 168 m/s, or 604 km/h.</p>
+      <p>The model reaches about 567 km/h, 94% of pitch speed. The 6% slip is small because the airframe is clean, so each prop only has to make about 5 N at the pass.</p>
+      <p>So the prop's RPM limit binds before motor power does. A 5 in cut would allow about 27,550 RPM and a 6 in cut about 22,960 RPM, and top speed would move with it.</p>
+    </div>
+    <div class="prose">
+      <h3>Tip speed</h3>
+      <p>The blade tip sees its own rotation and the forward speed at the same time. At the RPM cap the tip turns at 183 m/s while the aircraft moves at 158 m/s, so the tip meets the air at 242 m/s. The speed of sound at 30 °C is 349 m/s, which puts the tip at Mach 0.69.</p>
+      <p>Compressibility losses start to grow around Mach 0.7, so this is close to the edge. A cold day makes it worse, because the speed of sound drops with temperature.</p>
+      <h3>Why 12S</h3>
+      <p>A brushless motor turns voltage into speed and current into torque. No load speed is Kv times voltage, and the torque constant is Kt = 9.55 / Kv in N·m per amp. The two are reciprocal, so a motor can't have high speed per volt and high torque per amp at once.</p>
+      <p>The prop needs about 25,000 RPM. On 12S the pack holds about 42.8 V under load, so a 700 KV motor spins about 30,000 RPM unloaded, which leaves room for the drop under load. On 6S the voltage halves, so the motor would need about twice the Kv. That halves Kt, so every N·m of torque costs twice the current. Resistive loss goes as current squared, so the same wiring, connector and ESC would waste about four times the power.</p>
+    </div>
+  </div>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>Voltage sag</h3>
+      <p>The pack reads 50.4 V fully charged with no load. At about 190 A it sags to about 42.8 V, and that is the voltage I size to. Sizing to 50.4 V would overpredict RPM by 18%.</p>
+      <p>Every milliohm in series counts at that current. One milliohm drops 0.19 V and wastes 36 W, so short, thick battery leads and a low resistance connector are worth real speed.</p>
+      <h3>Battery</h3>
+      <p>190 A from a 2800 mAh pack is about 68C. A 10 second pass only uses about 0.53 Ah, roughly 19% of the pack, so capacity isn't the limit during the pass. The limit is landing reserve after the cruise out and back, which is where the 1600 mAh packs failed in the trade study below.</p>
+    </div>
+    <div class="prose">
+      <h3>Where the power goes</h3>
+      <p>About 8.1 kW comes out of the pack (190 A at 42.8 V). About 3.1 kW leaves as drag power (20.5 N at 153 m/s). That is roughly 39% end to end. ESC, motor and prop losses multiply, and the prop is still accelerating the aircraft during the pass, so not all of the input goes into holding speed.</p>
+      <p>Drag grows with speed squared, so the power to overcome it grows with speed cubed. Going 10% faster takes 33% more power. On this aircraft that matters less than it sounds, because the prop limit binds first. In the model, a 16% drag increase only costs about 7 km/h.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Powertrain trade study -->
+<section class="part" id="powertrain">
+  <h2>Powertrain trade study</h2>
+  <p class="note">Model results.</p>
+
+  <div class="row wide">
+    <p class="prose">I wrote a mission model in MATLAB and ran every combination of the candidate motors, ESCs, batteries and props through it, 243 in all. Each setup gets a predicted speed and a risk score based on how hard each part runs against its own ratings. The code and data are on GitHub at <a href="https://github.com/ChanceKrenzer/HSD-Mission-Model">ChanceKrenzer/HSD-Mission-Model</a>.</p>
+    <figure class="fig">
+      <a href="../Assets/Portfolio/trade-study-chart.webp"><img src="../Assets/Portfolio/trade-study-chart.webp" width="1600" height="1000" loading="lazy" decoding="async"
+        alt="Scatter plot of predicted speed after 10 seconds at full throttle against powertrain cost for 243 configurations. A dashed line marks a 550 km/h design gate and a solid line the 500 km/h goal. The recommended setup is circled at about 567 km/h and $1,292."></a>
+      <figcaption>Each point is one combination of motor, ESC, battery and prop. The circled point is the selected setup.</figcaption>
+    </figure>
+  </div>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>How setups are ranked</h3>
+      <p>The pick is the setup with the lowest combined risk and cost that clears 550 km/h, passes every hard constraint, and still clears 500 km/h with 50% more drag than modeled. Running a motor above its rated cell count adds risk instead of ruling the setup out.</p>
+    </div>
+    <div class="prose">
+      <h3>It overruled my first pick</h3>
+      <p>My first choice of motor was $201 cheaper, but it ran at 90% of its current rating, 1.5 times its rated cell count and 128% of its peak rating at launch. The motor the model picked runs at 64% of its current rating and 50% of its power rating. The extra $201 buys that margin.</p>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <figure class="fig">
+      <a href="../Assets/Portfolio/battery-feasibility.webp"><img src="../Assets/Portfolio/battery-feasibility.webp" width="1600" height="470" loading="lazy" decoding="async"
+        alt="Stacked bar chart of 81 configurations per battery option. One 12S 2800 mAh pack: 45 pass with no limit exceeded and 36 pass with the motor above its rated cell count. Each two-6S-1600 mAh option: 16 pass, and 61 or 64 break a mission limit."></a>
+      <figcaption>Which setups were feasible with each battery</figcaption>
+    </figure>
+  </div>
+
+  <div class="row wide">
+    <div class="prose">
+      <h3>Still open</h3>
+      <p>The motor's 12S rating comes from a vendor listing, not a datasheet, so the maker needs to confirm it before we buy. The ESC choice is my judgment, not a test result. I gave the cheaper Sequre ESC a 1.5 point risk penalty because I couldn't find a flight record for it, and that penalty, worth $375 at my own exchange rate between risk and cost, is what puts it behind. Neither ESC has been run yet.</p>
+      <p class="note">The prop data comes from APC's published performance file, which is computed rather than measured in a wind tunnel. The trade study still uses the 88 mm body, so its speed and mass figures predate the resize to 93 mm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Aerodynamics -->
+<section class="part" id="aero">
+  <h2>Aerodynamics</h2>
+  <p class="note">Model results.</p>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Capping the motors</h3>
+      <p>I hadn't used SolidWorks Flow Simulation before this project, so I started by learning to set up a domain and mesh I could trust. One of the first changes it led to was capping the motors, because the bare motor cans were causing separated flow.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Drone/image1.webp"><img src="../Assets/Drone/image1.webp" width="435" height="246" loading="lazy" decoding="async"
+          alt="Top-down CFD velocity plot of the quadcopter with bare motor cans, showing disturbed flow behind each motor."></a>
+        <figcaption>Bare motors</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Drone/image6.webp"><img src="../Assets/Drone/image6.webp" width="422" height="258" loading="lazy" decoding="async"
+          alt="The same CFD velocity plot with streamlined caps on the motors, showing a smaller disturbed region."></a>
+        <figcaption>Motor caps</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>Where the drag is</h3>
+      <p>At 550 km/h the dynamic pressure is about 13,600 Pa, close to 2 psi on every forward facing surface. Total drag in the model is 20.5 N, an equivalent drag area of 15.1 cm².</p>
+      <p>The four motor nacelles make more drag than the whole body. That is why so much of the design work went into their shape.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="data">
+        <thead><tr><th scope="col">Source</th><th scope="col">Drag at 550 km/h</th><th scope="col">Share</th></tr></thead>
+        <tbody>
+          <tr><td>Motor nacelles (4)</td><td>8.69 N</td><td>42%</td></tr>
+          <tr><td>Body skin friction</td><td>5.96 N</td><td>29%</td></tr>
+          <tr><td>Arms (4)</td><td>3.45 N</td><td>17%</td></tr>
+          <tr><td>Fins (4)</td><td>1.27 N</td><td>6%</td></tr>
+          <tr><td>Lift induced and prop normal force</td><td>1.19 N</td><td>6%</td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td>20.5 N</td><td></td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <h3>Body shape</h3>
+      <p>For the second version I rebuilt the CAD around parametric curves and global variables, so I could test many shapes without remodeling. The body is a NACA 00XX profile spun into a body of revolution, and the arms use the same profile family in cross section.</p>
+      <p>I compared it against my original hand drawn spline and against a Sears-Haack body. The Sears-Haack body had more skin friction drag. It minimizes wave drag, which only matters near the speed of sound, so it has no advantage at this speed.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Drone/image2.webp"><img src="../Assets/Drone/image2.webp" width="519" height="238" loading="lazy" decoding="async"
+          alt="CFD plot of a Sears-Haack body, pointed at both ends, in a blue flow field."></a>
+        <figcaption>Sears-Haack body</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Drone/image16.webp"><img src="../Assets/Drone/image16.webp" width="427" height="222" loading="lazy" decoding="async"
+          alt="CFD plot of the NACA 00XX body of revolution, rounded at the nose and tapering to the tail."></a>
+        <figcaption>NACA 00XX body</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Arm geometry</h3>
+      <p>I ran an 80 case Flow Simulation sweep over arm chord, thickness and velocity and analyzed it in MATLAB. Over the tested ranges, chord accounts for 62% of the variation in force along the flow direction and thickness for 38%.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Portfolio/cfd-sweep.webp"><img src="../Assets/Portfolio/cfd-sweep.webp" width="756" height="576" loading="lazy" decoding="async"
+          alt="Line chart of force against thickness ratio at 150 m/s for four chord lengths from 375 to 475 mm. Force rises with both chord and thickness."></a>
+        <figcaption>Force against thickness ratio at 150 m/s</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Drone/image11.webp"><img src="../Assets/Drone/image11.webp" width="1400" height="934" loading="lazy" decoding="async"
+          alt="3D response surface of force against chord length and velocity at a thickness ratio of 0.18."></a>
+        <figcaption>Response surface at thickness ratio 0.18</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row flip">
+    <div class="prose">
+      <h3>Stability and trim</h3>
+      <p>Passive stability needs the center of pressure behind the center of mass. Moving the arms forward moved the center of pressure back by 3%, and small tail fins added another 2.2%. Angle of attack also moves the center of pressure, so I aimed for stability across the whole range instead of at one point.</p>
+      <p>A fin sizing run predicted that the trim moment needed at top speed drops from 1.81 N·m to about 0.04 N·m, with 0.95 N·m available from the props. That is one trim point, not a full stability study.</p>
+      <p>I first tried to make the body lift enough to hold altitude on its own. I dropped that goal, because losing some height on the pass is fine as long as the aircraft stays controllable.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Drone/image8.webp"><img src="../Assets/Drone/image8.webp" width="512" height="236" loading="lazy" decoding="async"
+          alt="Black CAD render of the quadcopter from the side, showing the arms moved forward and small fins at the tail."></a>
+        <figcaption>Arms moved forward, tail fins added</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Drone/image15.webp"><img src="../Assets/Drone/image15.webp" width="922" height="512" loading="lazy" decoding="async"
+          alt="Chart of center-of-pressure position against velocity from 50 to 120 m/s, one line per angle of attack from minus 5 to plus 5 degrees."></a>
+        <figcaption>Center of pressure by angle of attack</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="prose">
+      <h3>Cooling the ESCs</h3>
+      <p>A NACA duct in the shell brings air past the ESCs and vents it out of the tail. I derived a parametric equation for the duct outline in Desmos so it scales with one width variable, then ran CFD to check that the cooling was worth its drag.</p>
+    </div>
+    <figure class="fig">
+      <a href="../Assets/Drone/image12.webp"><img src="../Assets/Drone/image12.webp" width="1332" height="522" loading="lazy" decoding="async"
+        alt="Desmos graph of the parametric NACA duct outline, with the equations scaled by a single width variable."></a>
+      <figcaption>Parametric NACA duct outline</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Shell material -->
+<section class="part" id="fea">
+  <h2>Shell material</h2>
+  <p class="note">Model results.</p>
+
+  <div class="row top">
+    <div class="prose">
+      <p>I compared carbon fiber nylon (PA6-CF) against PETG in a linear static FEA with the same mesh, changing only the material. Printed parts are weakest across their layers, so I compared the materials in that direction. PA6-CF screens at 3.3 across the layers against 1.5 for PETG, and it is 5% lighter.</p>
+      <h3>Load case</h3>
+      <p>68.65 N per motor along each motor axis, about 11 times the aircraft's weight in total, or 2.8 times per motor. The fuselage is fixed and the nacelles are bonded, which makes the model stiffer than the real part.</p>
+      <h3>How the last row is reached</h3>
+      <p>Nominal strength across the layers gives 5.9 and 2.88. The datasheet low bound gives 5.2 and 2.38. An assumed factor of 0.64 for infill, humidity and temperature brings that to 3.3 and 1.5. Dividing a directional strength by a peak von Mises stress screens materials. It doesn't analyze the layer interface itself.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="data">
+        <thead><tr><th scope="col"></th><th scope="col">PA6-CF</th><th scope="col">PETG HF</th></tr></thead>
+        <tbody>
+          <tr><td>Peak von Mises stress</td><td>8.13 MPa</td><td>8.00 MPa</td></tr>
+          <tr><td>Maximum displacement</td><td>0.093 mm</td><td>0.226 mm</td></tr>
+          <tr><td>Factor of safety, in plane</td><td>12.6</td><td>4.25</td></tr>
+          <tr><td>Across layers, nominal</td><td>5.9</td><td>2.88</td></tr>
+          <tr><td>Across layers, low bound</td><td>5.2</td><td>2.38</td></tr>
+        </tbody>
+        <tfoot><tr><td>Low bound after knockdown</td><td>3.3</td><td>1.5</td></tr></tfoot>
+      </table>
+      <p class="note">A ratio of 3 to 5 across the layers is my own screening target, not a standard. Nothing has been physically tested against this model, and there's no mesh convergence study at the wing root yet.</p>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <div class="figs three">
+      <figure class="fig">
+        <a href="../Assets/Portfolio/fea-pa6cf.webp"><img src="../Assets/Portfolio/fea-pa6cf.webp" width="909" height="488" loading="lazy" decoding="async"
+          alt="Displacement plot of the shell in PA6-CF, mostly blue with green at the nacelle tips."></a>
+        <figcaption>PA6-CF, 0.093 mm peak displacement</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Portfolio/fea-petg.webp"><img src="../Assets/Portfolio/fea-petg.webp" width="909" height="488" loading="lazy" decoding="async"
+          alt="Displacement plot of the shell in PETG on the same scale, with the arms and nacelles shading through yellow to red."></a>
+        <figcaption>PETG HF on the same scale, 0.226 mm peak</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Portfolio/fea-load-case.webp"><img src="../Assets/Portfolio/fea-load-case.webp" width="928" height="432" loading="lazy" decoding="async"
+          alt="Side-elevation sketch of the load case: the fuselage is fixed and 68.65 N acts on each nacelle along the motor axis."></a>
+        <figcaption>The load case, side view</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Version 1 -->
+<section class="part" id="version-1">
+  <h2>Version 1</h2>
+  <p class="note">Model results. The weight is assumed at 1.2 kg until I weigh the aircraft.</p>
+
+  <div class="row top">
+    <div class="prose">
+      <p>Version 1 is the quadcopter that has flown. It runs a 6S 4000 mAh pack, 2807 1400 KV motors and 7×4 props, and it is built for efficiency and endurance rather than speed. The same physics governs both versions, but the limit that matters moves.</p>
+      <h3>The prop still sets top speed</h3>
+      <p>A 7×4 prop has a low pitch, so pitch speed caps the aircraft long before power does. In the model, sweeping the weight from 1.0 to 1.5 kg and the drag area from 0.008 to 0.013 m² only moves top speed between about 132 and 145 km/h. On version 2 the limit is the prop's RPM rating. On version 1 it is pitch, then tip Mach, then motor heat.</p>
+      <h3>Hover power and disc area</h3>
+      <p>In hover each prop pushes air down, and conservation of momentum gives the ideal power as thrust to the 3/2 divided by the square root of 2ρA, where A is the disc area. Power falls as the disc gets bigger, so going from 5 in to 7 in props cuts ideal hover power by about 29% at the same weight.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="data">
+        <thead><tr><th scope="col">Hover at 1.2 kg</th><th scope="col">5 in props</th><th scope="col">7 in props</th></tr></thead>
+        <tbody>
+          <tr><td>Total disc area</td><td>0.051 m²</td><td>0.099 m²</td></tr>
+          <tr><td>Induced velocity</td><td>9.7 m/s</td><td>7.0 m/s</td></tr>
+          <tr><td>Ideal power</td><td>115 W</td><td>82 W</td></tr>
+          <tr><td>Electrical power</td><td>255 W</td><td>182 W</td></tr>
+          <tr><td>Current at 22.2 V</td><td>11.5 A</td><td>8.2 A</td></tr>
+        </tbody>
+        <tfoot><tr><td>Hover time on 71 Wh usable</td><td>17 min</td><td>23 min</td></tr></tfoot>
+      </table>
+      <p class="note">Sea level air, a figure of merit of 0.6 for the props and 75% for the motor and ESC together.</p>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <div class="prose">
+      <h3>Why bigger props make hotter motors</h3>
+      <p>Thrust goes as RPM squared times diameter to the fourth, so at the same thrust a 7 in prop spins about 49% slower than a 5 in prop. Torque goes up by the diameter ratio, about 40%, and motor current goes up with torque. Resistive loss in the windings goes as current squared, so it almost doubles, at half the RPM, where the motor's spinning bell cools it least. The bigger props save power overall and still put more heat into the motor.</p>
+      <p>The same reasoning is why version 2 runs 12S. Higher voltage lets a lower KV motor reach the RPM, which means more torque per amp, less current, and a quarter of the resistive loss for every halving of current.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Flight logs -->
+<section class="part" id="flight-test">
+  <h2>Flight logs from version 1</h2>
+  <p class="note">Measured, from ArduPilot log 83.</p>
+
+  <div class="row">
+    <div class="prose">
+      <p>Nothing goes into the printed shell until it has flown on version 1. I built and wired it, set up ArduPilot on a Pixhawk, and added a Walksnail FPV camera on its own power supply with its RX and TX lines run to the Pixhawk on a common ground. It has about an hour of flights so far.</p>
+    </div>
+    <div class="figs">
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO1-1600.webp"><img src="../Assets/Gallery/PHOTO1-800.webp" width="800" height="486" loading="lazy" decoding="async"
+          alt="Two LiPo battery packs, a brushless motor, a flight controller, a four-in-one ESC board, a voltage regulator and a small receiver laid out on a grey bench."></a>
+        <figcaption>Version 1 electronics</figcaption>
+      </figure>
+      <figure class="fig photo crop">
+        <a href="../Assets/Gallery/PHOTO2-1600.webp"><img src="../Assets/Gallery/PHOTO2-800.webp" width="600" height="800" loading="lazy" decoding="async"
+          alt="A monitor in the shop showing a live first-person video feed, with teammates visible on the screen."></a>
+        <figcaption>FPV video working</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <div class="cols four">
+      <div><h3>1. The symptom</h3><p>A 12 Hz roll oscillation blocked two AutoTune attempts.</p></div>
+      <div><h3>2. Seeing it</h3><p>The default log rate was far too slow to resolve 12 Hz, so the oscillation folded down to a lower apparent frequency. I turned on rate logging at 400 Hz, about 33 samples per cycle.</p></div>
+      <div><h3>3. The cause</h3><p>The gyro low pass filter defaulted to 20 Hz. A two pole Butterworth filter at 20 Hz adds 53° of phase lag at 12 Hz. That is a calculated filter response, not a measured phase margin.</p></div>
+      <div><h3>4. The change</h3><p>I raised the cutoff to 80 Hz, which cuts the lag at 12 Hz to 12°, and retuned the rate gains. I changed both at once, so this log can't separate their effects.</p></div>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <p class="prose">In a feedback loop, lag turns a correction into an overshoot. When the total lag around the loop reaches 180° at a frequency where the loop still has a gain above one, the loop oscillates at that frequency.</p>
+    <figure class="fig">
+      <a href="../Assets/Portfolio/roll-psd.webp"><img src="../Assets/Portfolio/roll-psd.webp" width="1360" height="696" loading="lazy" decoding="async"
+        alt="Power spectral density of the roll-axis control output from 0 to 200 Hz on a log scale. The flight-control band below 20 Hz is low and flat; a large hump between 120 and 160 Hz peaks sharply at 157 Hz and holds 94 percent of the variance."></a>
+      <figcaption>Spectrum of the roll control output, log 83</figcaption>
+    </figure>
+  </div>
+
+  <div class="row top">
+    <div class="prose">
+      <h3>What the log shows</h3>
+      <p>At the 80 Hz setting, the 9 to 16 Hz band holds 0.25% of the roll control output variance. That comes from one log, not a before and after pair. AutoTune still didn't finish. There were 162 pilot overrides across the 174 second attempt, and no progress on the roll rate D gain.</p>
+    </div>
+    <div class="prose">
+      <h3>What is still in the way</h3>
+      <p>The 120 to 160 Hz band holds 94% of the roll control output variance, peaking at 157 Hz. The log has no motor speed telemetry, so I can't yet say what drives it. Median vertical vibration was 38 m/s², above the 30 m/s² where ArduPilot flags a concern. I've specified a harmonic notch filter but haven't flown it yet.</p>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <div class="figs">
+      <figure class="fig">
+        <a href="../Assets/Portfolio/phase-lag.webp"><img src="../Assets/Portfolio/phase-lag.webp" width="1248" height="636" loading="lazy" decoding="async"
+          alt="Calculated phase lag against frequency for the gyro low-pass filter. At 12 Hz the 20 Hz default gives 53 degrees and the 80 Hz setting gives 12 degrees."></a>
+        <figcaption>Calculated phase lag of the gyro filter, default and as flown</figcaption>
+      </figure>
+      <figure class="fig">
+        <a href="../Assets/Portfolio/vibration.webp"><img src="../Assets/Portfolio/vibration.webp" width="1416" height="636" loading="lazy" decoding="async"
+          alt="Vibration on the X, Y and Z axes over about 230 seconds of flight, with the vertical axis running mostly above ArduPilot's 30 m/s² concern line and sometimes near the 60 severe line."></a>
+        <figcaption>Vibration over the flight against ArduPilot's thresholds</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="row wide">
+    <div class="prose">
+      <h3>No before and after number yet</h3>
+      <p>I haven't compared this log against the pre-fix log to a stated method, so I'm not claiming an improvement percentage. A fair comparison needs both logs, matched time windows and flight modes, the filter and gain settings in each, and one stated metric. Down sampling the new log to the old rate doesn't count, because it can't recover what the old log missed.</p>
+      <p class="note">Log 83 runs 393 s with two armed intervals. The spectrum uses the first, 37.9 to 270.2 s. Control rates were logged at 400 Hz and gyro batches at 2,013 Hz. Band figures are Welch power spectral density with a Hann window, 8192 sample segments, 50% overlap and the mean removed. Each percentage is the band integral over the whole spectrum.</p>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="next">
+  <h2>Next</h2>
+  <div class="row wide">
+    <p class="prose">Fly the notch filter on version 1 and record a proper before and after pair. Then move the electronics into the shell, confirm the motor's 12S rating with the manufacturer, and look at heat sinking the ESCs, since better cooling would let the duct and the shell around it get smaller.</p>
+  </div>
+</section>
+
+<nav class="pager" aria-label="More projects">
+  <p><span class="muted">All projects</span><br><a href="../index.html">Home</a></p>
+  <p><span class="muted">Next project</span><br><a href="../vtol/index.html">VTOL Payload and Landing Gear</a></p>
+</nav>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Chance Krenzer, Case Western Reserve University</span>
+    <nav aria-label="Contact">
+      <a href="mailto:chance.krenzer@gmail.com">chance.krenzer@gmail.com</a>
+      <a href="https://www.linkedin.com/in/chance-krenzer">LinkedIn</a>
+      <a href="https://github.com/ChanceKrenzer">GitHub</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
